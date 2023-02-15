@@ -77,17 +77,17 @@ CREATE TABLE Collection (
   'Description' VARCHAR(255) BINARY,
   Email VARCHAR(255) BINARY,
   BookshelfName VARCHAR(255) BINARY,
+  StatsID INT NOT NULL UNSIGNED,
+  FOREIGN KEY (StatsID) REFERENCES Statistics(ID),
   FOREIGN KEY (Email) REFERENCES User (Email),
   FOREIGN KEY (BookshelfName, Email) REFERENCES Bookshelf (Name, Email),
   PRIMARY KEY (Name, Email)
 );
 
 CREATE TABLE Statistics (
-  ID INT UNSIGNED,
-  'Name' VARCHAR(255) BINARY,
+  ID INT NOT NULL AUTO_INCREMENT UNSIGNED,
   Email VARCHAR(255) BINARY,
   TotalPagesRead INT UNSIGNED,
-  FOREIGN KEY (Name, Email) REFERENCES Collection (Name, Email),
   PRIMARY KEY (ID, Name, Email)
 );
 
