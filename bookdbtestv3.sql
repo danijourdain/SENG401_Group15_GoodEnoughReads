@@ -2,17 +2,17 @@
 
 CREATE TABLE User (
   Email VARCHAR(255) BINARY PRIMARY KEY,
-  'Name' VARCHAR(255),
+  `Name` VARCHAR(255),
   ProfilePictureURL VARCHAR(255),
-  'Password' VARCHAR(255),
+  `Password` VARCHAR(255),
   XP INT NOT NULL,
   AwardProfile INT NOT NULL,
-  FOREIGN KEY (AwardProfile) REFERENCES Awards('Level')
+  FOREIGN KEY (AwardProfile) REFERENCES Awards(`Level`)
 );
 
 CREATE TABLE Awards (
-  'Level' INT NOT NULL,
-  'Image' VARCHAR(255),
+  `Level` INT NOT NULL,
+  `Image` VARCHAR(255),
   Email VARCHAR(255) BINARY,
   Required_XP INT NOT NULL,
   FOREIGN KEY (Email) REFERENCES User (Email),
@@ -20,7 +20,7 @@ CREATE TABLE Awards (
 );
 
 CREATE TABLE Author (
-  'Name' VARCHAR(255),
+  `Name` VARCHAR(255),
   Genre VARCHAR(255),
   A_ID INT NOT NULL AUTO_INCREMENT UNSIGNED PRIMARY KEY,
   PRIMARY KEY (A_ID)
@@ -30,7 +30,7 @@ CREATE TABLE Book (
   ISBN VARCHAR(255) PRIMARY KEY,
   ImageURL VARCHAR(255),
   Genre VARCHAR(255),
-  'Type' VARCHAR(255),
+  `Type` VARCHAR(255),
   Pages INT NOT NULL,
   Title VARCHAR(255),
 );
@@ -60,7 +60,7 @@ CREATE TABLE BookCase (
 );
 
 CREATE TABLE Bookshelf (
-  'Name' VARCHAR(255) BINARY,
+  `Name` VARCHAR(255) BINARY,
   Visibility VARCHAR(255) BINARY,
   Colour VARCHAR(255) BINARY,
   PinnedShelfPosition INT UNSIGNED,
@@ -72,9 +72,9 @@ CREATE TABLE Bookshelf (
 );
 
 CREATE TABLE Collection (
-  'Name' VARCHAR(255) BINARY,
+  `Name` VARCHAR(255) BINARY,
   DateCreated DATE,
-  'Description' VARCHAR(255) BINARY,
+  `Description` VARCHAR(255) BINARY,
   Email VARCHAR(255) BINARY,
   BookshelfName VARCHAR(255) BINARY,
   StatsID INT NOT NULL UNSIGNED,
