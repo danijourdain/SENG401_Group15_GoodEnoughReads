@@ -1,0 +1,9 @@
+/GoodEnoughReads/Lib/
+/GoodEnoughReads/Scripts/
+GoodEnoughReads/pyvenv.cfg
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class

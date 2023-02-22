@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %} - GoodEnoughReads</title>
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'gersiteapp/css/style.css' %}">
+    </head>
+    <body style="background-color: #EDD0B1;">
+
+        <nav class="navbar navbar-expand-md navbar-dark"
+            style="background-color: #84A98C; height: 70px;">
+            <a class="navbar-brand" href="{% url 'welcome' %}" style="height:
+                50px; border: 1px solid black;">
+                <img src="{% static 'gersiteapp/img/logo.png' %}" width="50"
+                    height="50" class="d-inline-block align-top mr-2">
+                GoodEnoughReads
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbar" aria-controls="navbar"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'read' %}"
+                            style="color: #004643; font-size: 18px;">Read</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'to_read' %}"
+                            style="color: #004643; font-size: 18px;">To Read</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'shelf' %}"
+                            style="color: #004643; font-size: 18px;">Shelf</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'bookshelf' %}"
+                            style="color: #004643; font-size: 18px;">Bookshelf</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'search' %}"
+                            style="color: #004643; font-size: 18px;">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'collection' %}"
+                            style="color: #004643; font-size: 18px;">Collection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recommendations' %}"
+                            style="color: #004643;
+                            font-size: 18px;">Recommendations</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#"
+                            id="account-dropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" style="color: #004643;
+                            font-size: 18px;">Account</a>
+                        <div class="dropdown-menu"
+                            aria-labelledby="account-dropdown">
+                            <a class="dropdown-item" href="{% url 'account'%}">My
+                                Account</a>
+                            <a class="dropdown-item" href="{% url 'statistics'
+                                %}">Statistics</a>
+                            <a class="dropdown-item" href="{% url 'settings'
+                                %}">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </body>
+</html>
