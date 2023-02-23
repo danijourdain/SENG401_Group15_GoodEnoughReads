@@ -35,6 +35,16 @@ def recommendations(request):
     return render(request, 'gersiteapp/recommendations.html')
 
 def logout_view(request):
-    logout(request)
-    return redirect('welcome')
+    # logout(request)
+    return redirect('login')
+    # not sure why these are here - dani
+    # return render(request, 'gersiteapp/login.html')
 
+def login(request):
+    return render(request, 'gersiteapp/login.html')
+
+def signup(request):
+    return render(request, 'gersiteapp/signup.html')
+
+def reset_password(request):
+    return render(request, 'gersiteapp/reset_password.html')

@@ -34,7 +34,7 @@
 }
 /*body style*/
 body {
-  background-color: #EDD0B1;
+  background-color: #FAEAD9;
 }
 
 /*heading style*/
@@ -84,6 +84,7 @@ a:hover {
 
 .form-control:focus {
   border-color: #004643;
+  background-color: #FAEAD9;
   box-shadow: none;
 }
 
