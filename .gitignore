@@ -1,7 +1,7 @@
 /GoodEnoughReads/Lib/
 /GoodEnoughReads/Scripts/
 GoodEnoughReads/pyvenv.cfg
-
+/env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
