@@ -13,12 +13,12 @@
     <body style="background-color: #FAEAD9;">
 
         <nav class="navbar navbar-expand-md navbar-dark"
-            style="background-color: #84A98C; height: 70px;">
+            style="background-color: #84A98C; height: 100px;">
             <a class="navbar-brand" href="{% url 'welcome' %}" style="height:
-                50px; border: 1px solid black;">
+                50px; line-height: 20px">
                 <img src="{% static 'gersiteapp/img/logo.png' %}" width="50"
                     height="50" class="d-inline-block align-top mr-2">
-                GoodEnoughReads
+                Good<br>Enough<br>Reads
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbar" aria-controls="navbar"
@@ -27,14 +27,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'read' %}"
-                            style="color: #004643; font-size: 18px;">Read</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'to_read' %}"
-                            style="color: #004643; font-size: 18px;">To Read</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'shelf' %}"
                             style="color: #004643; font-size: 18px;">Shelf</a>
@@ -47,10 +39,24 @@
                         <a class="nav-link" href="{% url 'search' %}"
                             style="color: #004643; font-size: 18px;">Search</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'collection' %}"
-                            style="color: #004643; font-size: 18px;">Collection</a>
-                    </li>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                                id="collection-dropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" style="color: #004643;;
+                                font-size: 18px;">Collections</a>
+                            <div class="dropdown-menu"
+                                aria-labelledby="collection-dropdown">
+                                <a class="dropdown-item" href="{% url 'collection'%}">Collection: All</a>
+                                <a class="dropdown-item" href="{% url 'read'%}">Read</a>
+                                <a class="dropdown-item" href="{% url 'to_read'%}">To Read</a>
+                                <a class="dropdown-item" href="{% url 'read'%}">Currently Reading</a>
+                                <a class="dropdown-item" href="{% url 'read'%}">Did Not Finish</a>
+                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
+                    </ul>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'recommendations' %}"
                             style="color: #004643;
