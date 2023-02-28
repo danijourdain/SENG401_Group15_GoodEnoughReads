@@ -1,10 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 import django
 
 class StatisticsModel:
     def __init__(self, email):
         self.email = email
+        self.font = FontProperties()
+        self.font.set_family('serif')
+        self.font.set_name('Times New Roman')
+
 
     def CalculateBooksPerMonth(self):
         # dictionary with key value pairs: key- month, value - number of books read that month
@@ -34,27 +39,66 @@ class StatisticsModel:
         pass
 
     def CreateBarGraph(self, x, y, x_label, y_label, title):
-        plt.bar(x, y)
-        plt.title(title)
-        plt.xlabel(x_label)
-        plt.ylabel(y_label)
+        fig, ax = plt.subplots()
+
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+
+        plt.bar(x, y, color = "#004643")
+        plt.title(title, fontproperties = self.font, fontsize = 20)
+        plt.xlabel(x_label, fontproperties = self.font, fontsize = 15)
+        plt.xticks(rotation = 45, fontproperties = self.font, fontsize = 10)
+        plt.ylabel(y_label, fontproperties = self.font, fontsize = 15)
+        plt.yticks(fontproperties = self.font, fontsize = 10)
+        
         plt.show()
 
-    def CreateLineGraph(self, x, y):
-        pass
+    def CreateLineGraph(self, x, y, x_label, y_label, title):
+        fig, ax = plt.subplots()
 
-    def CreatePieChart(self):
-        pass
+        plt.plot(x, y, color = "#004643", linewidth = 5.0, marker = 'o', markersize = 10.0, markerfacecolor = "#84A98C")
+        plt.title(title, fontproperties = self.font, fontsize = 20)
+        plt.xlabel(x_label, fontproperties = self.font, fontsize = 15)
+        plt.xticks(rotation = 45, fontproperties = self.font, fontsize = 10)
+        plt.ylabel(y_label, fontproperties = self.font, fontsize = 15)
+        plt.yticks(fontproperties = self.font, fontsize = 10)
+
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        
+        plt.show()
+
+    def CreatePieChart(self, x, y, title):
+        fig, ax = plt.subplots()
+        PieColors = ["#84A98C"]
+        PieExplode = []
+
+        i = 0
+        while i < len(x):
+            if y[i] == 0:
+                y.pop(i)
+                x.pop(i)
+            else:
+                PieColors.append("#" + (str(hex(int((PieColors[i])[1:], 16) + 20)))[2:])
+                PieExplode.append(0.03)
+                i += 1
+
+        plt.pie(y, labels = x, startangle = 90, colors = PieColors, pctdistance = 0.85, explode = PieExplode)
+        plt.title(title, fontproperties = self.font, fontsize = 20)
+        
+        plt.show()
+
+        
 
 
 if __name__ == '__main__':
     books_per_month = {"January":5, "February": 7, "March": 10, "April": 10, "May": 0,
         "June": 1, "July":4, "August": 8, "September": 1, "October": 0,
         "November": 9, "December": 10}
-    x = books_per_month.keys()
-    y = books_per_month.values()
+    x = list(books_per_month.keys())
+    y = list(books_per_month.values())
     x_label = "Months"
     y_label = "Number of Books read"
     title = "Number of Books read each Month"
     s = StatisticsModel("email")
-    s.CreateBarGraph(x, y, x_label, y_label, title)
+    s.CreatePieChart(x, y, title)
