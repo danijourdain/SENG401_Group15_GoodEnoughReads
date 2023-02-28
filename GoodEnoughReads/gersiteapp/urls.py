@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from search import viewsSearch
 
 urlpatterns = [
     path('', views.login, name='login'),
@@ -8,7 +9,7 @@ urlpatterns = [
     path('to_read/', views.to_read, name='to_read'),
     path('shelf/', views.shelf, name='shelf'),
     path('bookshelf/', views.bookshelf, name='bookshelf'),
-    path('search/', views.search, name='search'),
+    path('search/', viewsSearch.search, name='search'),
     path('collection/', views.collection, name='collection'),
     path('account/', views.account, name = 'account'),   
     path('statistics/', views.statistics, name='statistics'),
