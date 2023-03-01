@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'GER_DB',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'USER': 'ger@localhost',
+        'USER': 'ger',
         'PASSWORD': 'seng',
     }
 }
