@@ -1,17 +1,9 @@
 -- Good Enough Reads :)
-DROP TABLE IF EXISTS `BookInUserCollection`;
-DROP TABLE IF EXISTS `IsAPartOf`;
-DROP TABLE IF EXISTS `Collection`;
-DROP TABLE IF EXISTS `Shelf`;
-DROP TABLE IF EXISTS `BookCase`;
-DROP TABLE IF EXISTS `Statistics`;
-DROP TABLE IF EXISTS `User`;
+DROP DATABASE IF EXISTS GER_DB;
+CREATE DATABASE GER_DB;
+USE GER_DB;
+
 DROP TABLE IF EXISTS `Awards`;
-DROP TABLE IF EXISTS `WrittenBy`;
-DROP TABLE IF EXISTS `Author`;
-DROP TABLE IF EXISTS `Book`;
-
-
 CREATE TABLE Awards (
   `Level` INT NOT NULL,
   `Image` VARCHAR(255),
@@ -19,7 +11,7 @@ CREATE TABLE Awards (
   PRIMARY KEY (Level)
 );
 
-
+DROP TABLE IF EXISTS `User`;
 CREATE TABLE User (
   Email VARCHAR(255) BINARY,
   `Name` VARCHAR(255),
@@ -31,7 +23,7 @@ CREATE TABLE User (
   PRIMARY KEY (Email)
 );
 
-
+DROP TABLE IF EXISTS `Author`;
 CREATE TABLE Author (
   `Name` VARCHAR(255),
   Genre VARCHAR(255),
@@ -39,7 +31,7 @@ CREATE TABLE Author (
   PRIMARY KEY (A_ID)
 );
 
-
+DROP TABLE IF EXISTS `Book`;
 CREATE TABLE Book (
   ISBN VARCHAR(255),
   ImageURL VARCHAR(255),
@@ -51,7 +43,7 @@ CREATE TABLE Book (
   PRIMARY KEY (ISBN)
 );
 
-
+DROP TABLE IF EXISTS `WrittenBy`;
 CREATE TABLE WrittenBy (
   BookISBN VARCHAR(255),
   AuthorID INT UNSIGNED NOT NULL,
@@ -60,7 +52,7 @@ CREATE TABLE WrittenBy (
   PRIMARY KEY (AuthorID, BookISBN)
 );
 
-
+DROP TABLE IF EXISTS `BookCase`;
 CREATE TABLE BookCase (
   ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
   Colour VARCHAR(255),
@@ -70,7 +62,8 @@ CREATE TABLE BookCase (
 );
 
 
-#Was previously called Bookshelf
+-- Was previously called Bookshelf
+DROP TABLE IF EXISTS `Shelf`;
 CREATE TABLE Shelf (
   `Name` VARCHAR(255) BINARY,
   Colour VARCHAR(255) BINARY,
@@ -83,7 +76,7 @@ CREATE TABLE Shelf (
   PRIMARY KEY (Name, Email, BookCaseID)
 );
 
-
+DROP TABLE IF EXISTS `IsAPartOf`;
 CREATE TABLE IsAPartOf (
   Position VARCHAR(255),
   BookISBN VARCHAR(255),
@@ -93,7 +86,7 @@ CREATE TABLE IsAPartOf (
   PRIMARY KEY (BookISBN, ShelfName)
 );
 
-
+DROP TABLE IF EXISTS `Statistics`;
 CREATE TABLE Statistics (
   ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
   Email VARCHAR(255) BINARY,
@@ -102,7 +95,7 @@ CREATE TABLE Statistics (
   PRIMARY KEY (ID, Email)
 );
 
-
+DROP TABLE IF EXISTS `Collection`;
 CREATE TABLE Collection (
   ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(255) BINARY, 
@@ -120,10 +113,10 @@ CREATE TABLE Collection (
   #FOREIGN KEY (BookshelfName, Email) REFERENCES Bookshelf (Name, Email),
 );
 
-
+DROP TABLE IF EXISTS `BookInUserCollection`;
 CREATE TABLE BookInUserCollection (
   UserRating INT,
-  #Format, unsure of variable type here
+  -- Format, unsure of variable type here
   NewestReadingStartDate DATE,
   NewestReadingEndDate DATE,
   NumberOfTimesReread INT UNSIGNED,
