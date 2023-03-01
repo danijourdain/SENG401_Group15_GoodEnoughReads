@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('gersiteapp.urls')),
     path('', include('search.urls')),
     path('', include('Collections.urls')),
+    path('', include('Statistics.urls')),
 ]
