@@ -26,6 +26,7 @@ def logout_view(request):
     # logout(request)
     return redirect('login')
     # not sure why these are here - dani
+    # no reason anymore :P
     # return render(request, 'gersiteapp/login.html')
 
 def login(request):
