@@ -1,5 +1,3 @@
-import numpy 
-import matplotlib
 import django
 
 

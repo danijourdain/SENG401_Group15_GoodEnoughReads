@@ -101,4 +101,5 @@ if __name__ == '__main__':
     y_label = "Number of Books read"
     title = "Number of Books read each Month"
     s = StatisticsModel("email")
+    # s.CreateBarGraph(x, y, x_label, y_label, title)
     s.CreatePieChart(x, y, title)
