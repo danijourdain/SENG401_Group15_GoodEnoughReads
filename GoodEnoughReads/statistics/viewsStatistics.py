@@ -1,4 +1,4 @@
 from django.shortcuts import render, redirect
 
 def statistics(request):
-    return render(request, 'statistics/statistics.html',{})
+    return render(request, 'Statistics/statistics.html')

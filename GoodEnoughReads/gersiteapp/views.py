@@ -13,8 +13,8 @@ def bookshelf(request):
 def account(request):
     return render(request, 'gersiteapp/account.html')
 
-def statistics(request):
-    return render(request, 'gersiteapp/statistics.html')
+# def statistics(request):
+#     return render(request, 'gersiteapp/statistics.html')
 
 def settings(request):
     return render(request, 'gersiteapp/settings.html')
