@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from search import viewsSearch
-from statistics import viewsStatistics
+from Statistics import viewsStatistics
 
 urlpatterns = [
     path('', views.login, name='login'),

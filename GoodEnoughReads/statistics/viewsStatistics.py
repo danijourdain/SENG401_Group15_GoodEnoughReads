@@ -1,9 +1,4 @@
-import django
+from django.shortcuts import render, redirect
 
-
-class StatisticsView:
-    def __init__(self):
-        pass
-
-    def StatisticsGraph(self):
-        pass
+def statistics(request):
+    return render(request, 'statistics/statistics.html',{})

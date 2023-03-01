@@ -20,5 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('gersiteapp.urls')),
     path('', include('search.urls')),
-    path('', include('statistics.urls')),
+    path('', include('Statistics.urls')),
 ]
