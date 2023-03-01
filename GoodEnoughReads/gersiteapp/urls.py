@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from search import viewsSearch
 from Statistics import viewsStatistics
@@ -6,12 +6,9 @@ from Statistics import viewsStatistics
 urlpatterns = [
     path('', views.login, name='login'),
     path('welcome/', views.welcome, name='welcome'),
-    path('read/', views.read, name='read'),
-    path('to_read/', views.to_read, name='to_read'),
     path('shelf/', views.shelf, name='shelf'),
     path('bookshelf/', views.bookshelf, name='bookshelf'),
-    path('search/', viewsSearch.search, name='search'),
-    path('collection/', views.collection, name='collection'),
+    #path('search/', viewsSearch.search, name='search'),
     path('account/', views.account, name = 'account'),   
     path('statistics/', viewsStatistics.statistics, name='statistics'),
     path('settings/', views.settings, name='settings'),
@@ -20,5 +17,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
     path('reset-password/', views.reset_password, name='reset_password'),
+
 ]
 
