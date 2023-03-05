@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
-from django import models
+from django.db import models
 
 class StatisticsModel:
     def __init__(self, email):
@@ -9,12 +9,10 @@ class StatisticsModel:
         self.font = FontProperties()
         self.font.set_family('serif')
         self.font.set_name('Times New Roman')
+        self.pages = 0
 
-    def NumPagesThisWeek(self):
-        pages = 0
-        
-        return pages
-        pass
+    def NumPagesThisWeek(self):  
+        return self.pages
 
     def CalculateBooksPerMonth(self):
         # dictionary with key value pairs: key- month, value - number of books read that month
