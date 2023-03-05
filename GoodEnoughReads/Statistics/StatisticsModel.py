@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
-import django
+from django import models
 
 class StatisticsModel:
     def __init__(self, email):
@@ -10,6 +10,11 @@ class StatisticsModel:
         self.font.set_family('serif')
         self.font.set_name('Times New Roman')
 
+    def NumPagesThisWeek(self):
+        pages = 0
+        
+        return pages
+        pass
 
     def CalculateBooksPerMonth(self):
         # dictionary with key value pairs: key- month, value - number of books read that month
@@ -51,7 +56,8 @@ class StatisticsModel:
         plt.ylabel(y_label, fontproperties = self.font, fontsize = 15)
         plt.yticks(fontproperties = self.font, fontsize = 10)
         
-        plt.show()
+        fig.savefig('images/BarGraph' + title.replace(' ', '') + '.png')
+        # plt.show()
 
     def CreateLineGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
@@ -66,7 +72,8 @@ class StatisticsModel:
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         
-        plt.show()
+        fig.savefig('images/LineGraph' + title.replace(' ', '') + '.png')
+        # plt.show()
 
     def CreatePieChart(self, x, y, title):
         fig, ax = plt.subplots()
@@ -86,7 +93,9 @@ class StatisticsModel:
         plt.pie(y, labels = x, startangle = 90, colors = PieColors, pctdistance = 0.85, explode = PieExplode)
         plt.title(title, fontproperties = self.font, fontsize = 20)
         
-        plt.show()
+        fig.savefig('images/PieChart' + title.replace(' ','') + '.png')
+
+        # plt.show()
 
         
 
@@ -101,5 +110,5 @@ if __name__ == '__main__':
     y_label = "Number of Books read"
     title = "Number of Books read each Month"
     s = StatisticsModel("email")
-    # s.CreateBarGraph(x, y, x_label, y_label, title)
-    s.CreatePieChart(x, y, title)
+    s.CreateBarGraph(x, y, x_label, y_label, title)
+    # s.CreatePieChart(x, y, title)
