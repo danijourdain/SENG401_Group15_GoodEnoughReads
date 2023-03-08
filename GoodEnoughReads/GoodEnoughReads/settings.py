@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     "gersiteapp",
     "search",
     "Collections",
-    "Statistics"
-
+    "Statistics",
+    "ManageAccount",
 ]
 
 MIDDLEWARE = [

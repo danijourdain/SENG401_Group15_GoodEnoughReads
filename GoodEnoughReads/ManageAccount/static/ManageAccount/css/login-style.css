@@ -1,11 +1,4 @@
-.container {
-    background-color: #84A98C;
-    height: 60%;
-    width: 30%;
-
-    min-width: 300px;
-    min-height: 500px;
-
+.container { 
     position: absolute;
     top: 0;
     bottom: 0;
@@ -13,12 +6,19 @@
     right: 0;
     margin: auto;
     vertical-align: middle;
-
-    border-radius: 10px;
 }
 
 .row {
-    height: min-content;
+    background-color: #84A98C;
+    height: 60%;
+    width: 30%;
+
+    min-width: 300px;
+    min-height: 500px;
+
+    aspect-ratio: 3 / 4;
+
+    border-radius: 10px;
 
     position: absolute;
     top: 0;
@@ -33,6 +33,7 @@
 }
 
 .btn-primary {
+    margin-top: 20px;
     background-color: #004643;
     color: #FAEAD9;
     border: none;
@@ -50,4 +51,8 @@
 
 .display-6 {
     text-align: center;
+}
+
+.display-6 {
+    padding-top: 15px;
 }
