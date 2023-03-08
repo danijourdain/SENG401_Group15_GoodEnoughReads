@@ -10,48 +10,49 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'gersiteapp/css/style.css' %}">
         <link rel="stylesheet" href="{% static 'ManageAccount/css/login-style.css' %}">
-        <link rel="icon" href="../static/gersiteapp/img/logo_nobg.png">
+        <link rel="icon" href="/static/gersiteapp/img/logo_nobg.png">
     </head>
 
     <body>
         <div class="container">
             <div class="row" style="width: 50%; min-width: 500px;">
                 <div class="col display-6">Sign Up</div>
-                <form>
+                <form method="POST">
+                    {% csrf_token %}
                     <div style="display: grid; grid-template-columns: auto auto;">
                         <div class="form-row" style="padding-right: 5px;">
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
                                 <label for="email">Email Address</label>
                             </div>
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="fname" placeholder="First Name">
+                                <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
                                 <label for="fname">First Name</label>
                             </div>
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="lname" placeholder="Last Name">
+                                <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name"required>
                                 <label for="lname">Last Name</label>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="username" placeholder="Username">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
                                 <label for="username">Username</label>
                             </div>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                 <label for="password">Password</label>
                             </div>
                             <div class="form-floating">
-                                <input type="password" class="form-control" id="password2" placeholder="Confirm Password">
+                                <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" required>
                                 <label for="password2">Confirm Password</label>
                             </div>
                         </div>
                     </div>
                     
-                    <button class="btn-primary rounded-pill">
-                        <a class="nav-link" href="{% url 'welcome' %}"
-                            style="font-size: 16px; color: #FAEAD9;">SIGN UP</a>
+                    <button class="btn-primary rounded-pill"  type="submit">SIGN UP
+                        <!-- <a class="nav-link" href="{% url 'welcome' %}"
+                            style="font-size: 16px; color: #FAEAD9;">SIGN UP</a> -->
                             <!-- i really don't think that nav-link class is needed but if i remove it stuff breaks ;-; -dani -->
                     </button>
                 </form>

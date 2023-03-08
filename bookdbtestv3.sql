@@ -20,7 +20,6 @@ CREATE TABLE User (
   Email VARCHAR(255) BINARY,
   `Name` VARCHAR(255),
   ProfilePictureURL VARCHAR(255),
-  `Password` VARCHAR(255),
   XP INT NOT NULL,
   AwardProfile INT NOT NULL,
   FOREIGN KEY (AwardProfile) REFERENCES Awards(`Level`),
