@@ -10,7 +10,8 @@ function bookSearch(){
         dataType: "json",
         type: 'get',
         success: function(data){
-            for(i = 0; i < data.items.length; i++){
+          console.log(data);  
+          for(i = 0; i < data.items.length; i++){
                 item = data.items[i];
                 title1 = item.volumeInfo.title;
                 author1 = item.volumeInfo.authors;
@@ -30,6 +31,12 @@ function bookSearch(){
 }
 
 document.getElementById("search-button").addEventListener('click', bookSearch, false)
+// document.addEventListener('keypress', function(e){
+//   if (e.key === 'Enter')
+//   {
+//     bookSearch()
+//   }
+// });
 
 
 function formatOutput(bookImg, title, author, publisher, bookLink, bookIsbn) {
