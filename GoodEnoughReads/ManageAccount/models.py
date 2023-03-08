@@ -22,7 +22,6 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser):
-    print("USER BEING CREATED!!!")
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,

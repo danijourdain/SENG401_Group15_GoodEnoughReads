@@ -35,14 +35,12 @@ def reset_password(request):
 
 def login(request):
     if request.method == 'POST':
-        print("HERE!!!")
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
         user = authenticate(request, username=username, password=password)
-        print(user.get_username)
         if user is not None:
             context = {'username': username}
-            return redirect('/welcome/', context)
+            return render(request, 'gersiteapp/welcome.html', context)
         else:
             error_message = "Invalid login credentials"
             return render(request, 'ManageAccount/registration/login.html', {'error_message': error_message})
