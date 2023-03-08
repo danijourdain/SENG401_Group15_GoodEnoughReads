@@ -49,18 +49,23 @@ VALUES ("2023-03-05", "2023-03-02", 10, "000000001",
         
 INSERT INTO BookInUserCollection(NewestReadingStartDate, 
 			NewestReadingEndDate, PagesRead, ISBN, email)
-VALUES ("2023-03-01", "2023-03-01", 100, "000000002", 
+VALUES ("2023-03-01", "2023-03-08", 100, "000000002", 
 		"a@gmail.com");
         
 INSERT INTO BookInUserCollection(NewestReadingStartDate, 
 			NewestReadingEndDate, PagesRead, ISBN, email)
-VALUES ("2021-03-01", "2021-03-01", 50, "000000004", 
+VALUES ("2021-03-01", "2021-03-08", 50, "000000004", 
 		"a@gmail.com");
         
 INSERT INTO BookInUserCollection(NewestReadingStartDate, 
 			NewestReadingEndDate, PagesRead, ISBN, email)
-VALUES ("2021-03-01", "2021-03-01", 50, "000000005", 
+VALUES ("2021-03-01", "2021-03-08", 50, "000000005", 
 		"a@gmail.com");
         
 SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead 
 	FROM BookInUserCollection WHERE email = "a@gmail.com";
+    
+SELECT C.NewestReadingEndDate, B.Genre 
+FROM BookInUserCollection AS C, Book AS B 
+WHERE C.email = "a@gmail.com"
+AND B.ISBN = C.ISBN;

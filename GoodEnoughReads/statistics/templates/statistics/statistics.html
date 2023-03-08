@@ -1,5 +1,5 @@
 {% extends 'gersiteapp/base.html' %}
-
+{% load static %}
 {% block title %}Statistics{% endblock %}
 
 {% block content %}
@@ -23,11 +23,11 @@
       </div>
     </div>
 
-
     <div class="container">
       <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
         <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "margin-bottom: 0px;"> Number of Books you Read this Month</p>
+          <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> You read {{books_this_month}} books this month! </p>
         </div>
       </div>
     </div>
@@ -36,6 +36,18 @@
       <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
         <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "margin-bottom: 0px;"> Books You Read this Year</p>
+          <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> You read {{books_this_year}} books this year! </p>
+          <img src= "{% static 'gersiteapp/img/stats/BarGraphNumberofBooksyouReadperMonththisYear.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
+        <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+          <p style = "margin-bottom: 0px;"> Books you Read since the Beginning of Time</p>
+          <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> You read {{books_this_year}} books this year! </p>
+          <img src= "{% static 'gersiteapp/img/stats/LineGraphAllTimeNumberofBooksyouRead.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
         </div>
       </div>
     </div>

@@ -51,17 +51,12 @@ class StatisticsModel:
         i = 0
         while i < len(MonthlyBooksRead):
             current_year = datetime.date.today().year
-            # print(current_year)
-            # print(MonthlyBooksRead[i][0].year)
             if (MonthlyBooksRead[i][0].year == current_year):
-                # print(MonthlyBooksRead[i][0].month)
                 self.num_books_read_per_month[months[MonthlyBooksRead[i][0].month - 1]] += 1
             i += 1
 
-        # print(self.num_books_read_per_month)
-        return self.num_books_read_per_month
-
-
+        this_month = datetime.date.today().month
+        return self.num_books_read_per_month[months[this_month-1]], self.num_books_read_per_month
 
     def CalculateBooksPerYear(self):
         self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = '" + self.email + "' ;")
@@ -82,15 +77,28 @@ class StatisticsModel:
                 self.num_books_read_per_year[str(YearlyBooksRead[i][0].year)] = 1
             i += 1
         
-        # print(self.num_books_read_per_year)
-        return self.num_books_read_per_year
+        this_year = datetime.date.today().year
+        
+        return self.num_books_read_per_year[str(this_year)], self.num_books_read_per_year
 
     def CalculateGenresPerYear(self): 
-        self.num_genres_per_year = {}   #Add genres as keys as searching through database
-        pass
+        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN;")
+        YearlyGenresRead = self.cursor.fetchall()
 
-    def CalculatePagesPerWeek(self):    #per 1 months, per year
-        pass
+        this_year = datetime.date.today().year
+
+        self.num_genres_per_year = {}   #Add genres as keys as searching through database
+
+        i = 0
+        while i < len(YearlyGenresRead):
+            if(YearlyGenresRead[i][0].year == this_year):
+                if(YearlyGenresRead[i][1] in self.num_genres_per_year):
+                    self.num_genres_per_year[YearlyGenresRead[i][1]] += 1
+                else:
+                    self.num_genres_per_year[YearlyGenresRead[i][1]] = 1
+            i += 1
+
+        return self.num_genres_per_year
 
     def CreateBarGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
@@ -105,8 +113,7 @@ class StatisticsModel:
         plt.ylabel(y_label, fontproperties = self.font, fontsize = 15)
         plt.yticks(fontproperties = self.font, fontsize = 10)
         
-        fig.savefig('images/BarGraph' + title.replace(' ', '') + '.png')
-        # plt.show()
+        fig.savefig('gersiteapp/static/gersiteapp/img/stats/BarGraph' + title.replace(' ', '') + '.png', bbox_inches='tight', transparent=True)
 
     def CreateLineGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
@@ -121,8 +128,7 @@ class StatisticsModel:
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         
-        fig.savefig('images/LineGraph' + title.replace(' ', '') + '.png')
-        # plt.show()
+        fig.savefig('gersiteapp/static/gersiteapp/img/stats/LineGraph' + title.replace(' ', '') + '.png', transparent=True)
 
     def CreatePieChart(self, x, y, title):
         fig, ax = plt.subplots()
@@ -142,12 +148,7 @@ class StatisticsModel:
         plt.pie(y, labels = x, startangle = 90, colors = PieColors, pctdistance = 0.85, explode = PieExplode)
         plt.title(title, fontproperties = self.font, fontsize = 20)
         
-        fig.savefig('images/PieChart' + title.replace(' ','') + '.png')
-
-        # plt.show()
-
-        
-
+        fig.savefig('gersiteapp/static/gersiteapp/img/stats/PieChart' + title.replace(' ','') + '.png', transparent=True)
 
 if __name__ == '__main__':
     books_per_month = {"January":5, "February": 7, "March": 10, "April": 10, "May": 0,
@@ -159,6 +160,6 @@ if __name__ == '__main__':
     y_label = "Number of Books read"
     title = "Number of Books read each Month"
     s = StatisticsModel("a@gmail.com")
-    # s.CreateBarGraph(x, y, x_label, y_label, title)
-    # s.CreatePieChart(x, y, title)
-    s.NumPagesThisWeek()
+    s.CreateBarGraph(x, y, x_label, y_label, title)
+    s.CreatePieChart(x, y, title)
+    # s.NumPagesThisWeek()
