@@ -17,3 +17,14 @@ class CollectionModel:
     def getName(self):
         self.cursor.execute("SELECT Name FROM Collection WHERE Email = '" + self.email + "' ;")
         return self.cursor.fetchall()[0]
+    
+    def getBooksInCollection(self, shelfName):
+        self.cursor.execute("SELECT ISBN FROM BookInUserCollection WHERE Email = '"+self.email+"';")
+        bookList = self.cursor.fetchall()
+        return bookList
+    
+    # user passes in a book, gets every collection of theirs with said book
+    def collectionsWithBook(self, bookisbn):
+        self.cursor.execute("SELECT ShelfName FROM BookInUserCollection WHERE Email = '"+self.email+"' AND ISBN = "+bookisbn+";")
+        cols = self.cursor.fetchall()
+        return cols

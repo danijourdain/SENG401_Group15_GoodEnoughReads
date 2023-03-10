@@ -11,6 +11,6 @@ class CollectionModel:
         self.cursor = connection.cursor()
 
     def retrieveAccountInfo(self, email):
-        self.cursor.execute("SELECT * FROM User WHERE email ="+email+";")
+        self.cursor.execute("SELECT * FROM User WHERE email = '"+email+"';")
         accInfo = self.cursor.fetchall()
         return accInfo
