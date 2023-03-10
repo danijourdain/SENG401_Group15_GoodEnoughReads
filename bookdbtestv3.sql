@@ -110,10 +110,10 @@ CREATE TABLE Collection (
   FOREIGN KEY (ShelfName, Email) REFERENCES Shelf (Name, Email),
   PRIMARY KEY (ID, Shelfname)
   
-  ##From previous version of Collection
-  #DateCreated DATE,
-  #`Description` VARCHAR(255) BINARY,
-  #FOREIGN KEY (BookshelfName, Email) REFERENCES Bookshelf (Name, Email),
+  --From previous version of Collection
+  --DateCreated DATE,
+  --`Description` VARCHAR(255) BINARY,
+  --FOREIGN KEY (BookshelfName, Email) REFERENCES Bookshelf (Name, Email),
 );
 
 DROP TABLE IF EXISTS `BookInUserCollection`;
@@ -123,7 +123,7 @@ CREATE TABLE BookInUserCollection (
   NewestReadingStartDate DATE,
   NewestReadingEndDate DATE,
   NumberOfTimesReread INT UNSIGNED,
-  PagesRead INT UNSIGNED, #Needs to be in ERD
+  PagesRead INT UNSIGNED, --Needs to be in ERD
   ISBN VARCHAR(255),
   Email VARCHAR(255) BINARY,
   
@@ -131,7 +131,7 @@ CREATE TABLE BookInUserCollection (
   CollectionID INT UNSIGNED,
   
   FOREIGN KEY (ISBN) REFERENCES Book (ISBN),
-  #FOREIGN KEY (ShelfName, Email) REFERENCES Shelf (Name, Email),
+  --FOREIGN KEY (ShelfName, Email) REFERENCES Shelf (Name, Email),
   FOREIGN KEY (CollectionID, ShelfName) REFERENCES Collection(ID, Shelfname),
   FOREIGN KEY (Email) REFERENCES User (Email),
   PRIMARY KEY (ISBN, ShelfName, Email)
