@@ -152,5 +152,6 @@ table td {
   align-items: center;
 }
 .navbar {
+  background-color: #87CEFA;
   height: 70px;
 }

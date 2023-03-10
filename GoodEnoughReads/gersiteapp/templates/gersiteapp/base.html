@@ -10,10 +10,32 @@
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'gersiteapp/css/style.css' %}">
         <link rel="icon" href="../static/gersiteapp/img/logo_nobg.png">
-    </head>
-    <body style="background-color: #FAEAD9;">
-
-        <nav class="navbar navbar-expand-md navbar-dark"
+        <style>
+            .navbar-collapse {
+                z-index: 9989;
+                background-color: #84A98C;
+            }
+            .dropdown-menu {
+                padding: 0.5rem;
+            }
+            @media (max-width: 767px) {
+                .navbar-nav.ml-auto {
+                    margin-left: auto !important;
+                }
+                .navbar-collapse {
+                    position: fixed;
+                    top: 80px;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #84A98C;
+                    padding: 1rem;
+                    width: 100%;
+                }
+                
+            }
+        </style>
+        <nav class="navbar navbar-expand-md navbar-dark sticky-top"
             style="background-color: #84A98C; height: 100px;">
             <a class="navbar-brand" href="{% url 'welcome' %}" style="height:
                 50px; line-height: 20px">
@@ -40,28 +62,28 @@
                         <a class="nav-link" href="{% url 'search' %}"
                             style="color: #004643; font-size: 18px;">Search</a>
                     </li>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"
-                                id="collection-dropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" style="color: #004643;;
-                                font-size: 18px;">Collections</a>
-                            <div class="dropdown-menu"
-                                aria-labelledby="collection-dropdown">
-                                <a class="dropdown-item" href="{% url 'collection'%}">Collection: All</a>
-                                <a class="dropdown-item" href="{% url 'read'%}">Read</a>
-                                <a class="dropdown-item" href="{% url 'toRead'%}">To Read</a>
-                                <a class="dropdown-item" href="{% url 'read'%}">Currently Reading</a>
-                                <a class="dropdown-item" href="{% url 'read'%}">Did Not Finish</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </li>
-                    </ul>
+                    <li class="nav-item order-md-last">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"
+                                    id="collection-dropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" style="color: #004643;
+                                    font-size: 18px;">Collections</a>
+                                <div class="dropdown-menu"
+                                    aria-labelledby="collection-dropdown">
+                                    <a class="dropdown-item" href="{% url 'collection'%}">Collection: All</a>
+                                    <a class="dropdown-item" href="{% url 'read'%}">Read</a>    
+                                    <a class="dropdown-item" href="{% url 'toRead'%}">To Read</a>
+                                    <a class="dropdown-item" href="{% url 'read'%}">Currently Reading</a>
+                                    <a class="dropdown-item" href="{% url 'read'%}">Did Not Finish</a> 
+                                    <div class="dropdown-divider"></div></div>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'recommendations' %}"
-                            style="color: #004643;
-                            font-size: 18px;">Recommendations</a>
+                            style="color: #004643; font-size: 18px;">Recommendations</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -69,7 +91,7 @@
                         <a class="nav-link dropdown-toggle" href="#"
                             id="account-dropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" style="color: #004643;;
+                            aria-expanded="false" style="color: #004643;
                             font-size: 18px;">Account</a>
                         <div class="dropdown-menu"
                             aria-labelledby="account-dropdown">
@@ -81,13 +103,12 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-
-        </nav>
+            </div></nav>
         <div class="container">
             {% block content %}{% endblock %}
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script
