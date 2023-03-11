@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
+from matplotlib.ticker import MaxNLocator
 from django.db import models
 from django.db import connection, transaction
 import datetime
@@ -63,7 +64,7 @@ class StatisticsModel:
         YearlyBooksRead = self.cursor.fetchall()
 
         # dictionary with key value pairs: key - year, value - number of books read that year 
-        self.num_books_read_per_year = {"2023": 0}  # Add years as keys as searching through database
+        self.num_books_read_per_year = {2023: 0}  # Add years as keys as searching through database
         # get pages read of books with newest reading end date in the current year
         # compare to total pages in that book
         # if total pages = number of pages read
@@ -71,15 +72,35 @@ class StatisticsModel:
 
         i = 0
         while i < len(YearlyBooksRead):
-            if (str(YearlyBooksRead[i][0].year) in self.num_books_read_per_year):
-                self.num_books_read_per_year[str(YearlyBooksRead[i][0].year)] += 1
+            if (YearlyBooksRead[i][0].year in self.num_books_read_per_year):
+                self.num_books_read_per_year[YearlyBooksRead[i][0].year] += 1
             else:
-                self.num_books_read_per_year[str(YearlyBooksRead[i][0].year)] = 1
+                self.num_books_read_per_year[YearlyBooksRead[i][0].year] = 1
             i += 1
         
+        year_keys = list(self.num_books_read_per_year.keys())
+        year_keys.sort()
+
+        # Fill in any missing years
+        # Ex. year_keys = 2020, 2022, 2023 - adds 2021
+        self.sorted_num_books_read_per_year = {}
+        i = 0
+        while i < len(year_keys):
+            if ((i + 1) < len(year_keys) and year_keys[i] + 1 != year_keys[i + 1]):
+                year_keys.insert(i + 1, year_keys[i] + 1)
+            if (year_keys[i] in self.num_books_read_per_year):
+                self.sorted_num_books_read_per_year[year_keys[i]] = self.num_books_read_per_year[year_keys[i]]
+            else:
+                self.sorted_num_books_read_per_year[year_keys[i]] = 0
+            i += 1
+
+
         this_year = datetime.date.today().year
         
-        return self.num_books_read_per_year[str(this_year)], self.num_books_read_per_year
+        return self.num_books_read_per_year[this_year], self.sorted_num_books_read_per_year
+
+    def CalculateBookPagesPerYear():
+        pass
 
     def CalculateGenresPerYear(self): 
         self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN;")
@@ -127,8 +148,10 @@ class StatisticsModel:
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        
-        fig.savefig('gersiteapp/static/gersiteapp/img/stats/LineGraph' + title.replace(' ', '') + '.png', transparent=True)
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+        fig.savefig('gersiteapp/static/gersiteapp/img/stats/LineGraph' + title.replace(' ', '') + '.png', bbox_inches='tight', transparent=True)
 
     def CreatePieChart(self, x, y, title):
         fig, ax = plt.subplots()
@@ -148,7 +171,7 @@ class StatisticsModel:
         plt.pie(y, labels = x, startangle = 90, colors = PieColors, pctdistance = 0.85, explode = PieExplode)
         plt.title(title, fontproperties = self.font, fontsize = 20)
         
-        fig.savefig('gersiteapp/static/gersiteapp/img/stats/PieChart' + title.replace(' ','') + '.png', transparent=True)
+        fig.savefig('gersiteapp/static/gersiteapp/img/stats/PieChart' + title.replace(' ','') + '.png', bbox_inches='tight', transparent=True)
 
 if __name__ == '__main__':
     books_per_month = {"January":5, "February": 7, "March": 10, "April": 10, "May": 0,
