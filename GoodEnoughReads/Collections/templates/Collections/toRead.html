@@ -4,17 +4,18 @@
 {% block title %}Books{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
 
   </head>
-<body>
+<body> -->
   <h1> Book Information </h1>
+  <text id="bookID"hidden>{{ bookID }}</text>
   <div class="container">
     <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px;">
       <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
-        <p style = "margin-bottom: 0px;"> Book (load the title here) </p>
+        <p style = "margin-bottom: 0px;">Book ID: {{ bookID }} </p>
       </div>
 
       <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
@@ -35,8 +36,8 @@
 
     </div>
 
-    <div class="media">
-        <img class= "align-self-start mr-3" src="{% static 'gersiteapp/img/test.jpg' %}" style= "width: 30%; height: 100%; border-style: solid; 
+    <div class="media" id="bookRead">
+        <!-- <img class= "align-self-start mr-3" src="{% static 'gersiteapp/img/test.jpg' %}" style= "width: 30%; height: 100%; border-style: solid; 
               border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px;">
       <div class="media-body" style="background-color: #84A98C; color:#004643; border-radius: 10px;
           border-style: solid; border-color:#004643; 
@@ -68,10 +69,12 @@
                 Tags
               </div>
           </div>
-      </div>
+      </div> -->
     </div>
 
   </div>
-</body>
-</html>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script type="text/javascript" src="{% static 'collections/js/toRead.js' %}"></script>
+<!-- </body>
+</html> -->
 {% endblock %}

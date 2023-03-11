@@ -1,5 +1,7 @@
 from django.urls import path
 from . import viewsSearch
+from Collections import views
 urlpatterns = [
     path('search/', viewsSearch.search, name = "search"),
+    path('toRead/<bookID>', views.toRead, name = "toRead"),
 ]

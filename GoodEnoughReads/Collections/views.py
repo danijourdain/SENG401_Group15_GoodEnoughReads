@@ -7,8 +7,9 @@ def collection(request):
 def read(request):
     return render(request, 'Collections/read.html')
 
-def toRead(request):
-    return render(request, 'Collections/toRead.html')
+def toRead(request, bookID = "default"):
+    context = {"bookID": bookID}
+    return render(request, 'Collections/toRead.html', context)
 
 def currentlyReading(request):
     return render(request, 'Collections/collection.html')

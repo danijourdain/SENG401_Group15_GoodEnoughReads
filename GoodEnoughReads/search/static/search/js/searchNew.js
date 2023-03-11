@@ -3,10 +3,12 @@ const search_box = document.querySelector("#search-box"); // This is the referen
 function bookSearch(){
     var search = search_box.value;
     var cardResults = document.getElementById("results");
+    var placeHldr = "{% static 'gersiteapp/img/placeholder.png' %}"; // Placeholder image
+    search = search.replaceAll("/\s", "_");
     console.log(search);
     cardResults.innerHTML = "";
     $.ajax({
-        url: "https://www.googleapis.com/books/v1/volumes?q=" + search, 
+        url: "https://www.googleapis.com/books/v1/volumes?q=-collection+intitle:" + search + "&printType=books&maxResults=20", 
         dataType: "json",
         type: 'get',
         success: function(data){
@@ -16,12 +18,15 @@ function bookSearch(){
                 title1 = item.volumeInfo.title;
                 author1 = item.volumeInfo.authors;
                 publisher1 = item.volumeInfo.publisher;
-                bookLink1 = item.volumeInfo.previewLink;
-                bookIsbn = item.volumeInfo.industryIdentifiers[1].identifier
+                pageCount1 = item.volumeInfo.pageCount;
+                bookID = item.id;
+                console.log(pageCount1);
+                // bookLink1 = item.volumeInfo.previewLink;
+                // bookIsbn = item.volumeInfo.industryIdentifiers[1].identifier
                 bookImg1 = (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : placeHldr ;
 
                 cardResults.innerHTML += '<div class="row mt-4">' +
-                                        formatOutput(bookImg1, title1, author1, publisher1, bookLink1, bookIsbn) +
+                                        formatOutput(bookImg1, title1, author1, publisher1, pageCount1) +
                                         '</div>';
 
             }
@@ -39,7 +44,7 @@ document.getElementById("search-button").addEventListener('click', bookSearch, f
 // });
 
 
-function formatOutput(bookImg, title, author, publisher, bookLink, bookIsbn) {
+function formatOutput(bookImg, title, author, publisher, pageCount) {
     // console.log(title + ""+ author +" "+ publisher +" "+ bookLink+" "+ bookImg)
     var htmlCard = `
     <div class="col-md-3">
@@ -55,6 +60,7 @@ function formatOutput(bookImg, title, author, publisher, bookLink, bookIsbn) {
               <h5 class="card-title">${title}</h5>
               <p class="card-text">Author: ${author}</p>
               <p class="card-text">Publisher: ${publisher}</p>
+              <p class="card-text">Page Count: ${pageCount}</p>
             </div>
           </div>
         </div>
@@ -65,3 +71,9 @@ function formatOutput(bookImg, title, author, publisher, bookLink, bookIsbn) {
     `
     return htmlCard;
 }
+
+
+
+
+
+
