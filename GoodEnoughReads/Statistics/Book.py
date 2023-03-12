@@ -1,9 +1,16 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+from django.db import models
+from django.db import connection, transaction
+import datetime
+
 class Book:
     def __init__(self):
-        pass
+        self.cursor = connection.cursor()
 
     def getISBN():
-        pass    #perform query to get ISBN 
+        pass
         
     def getTitle():
         pass

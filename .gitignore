@@ -3,6 +3,7 @@
 GoodEnoughReads/pyvenv.cfg
 /env
 /.venv
+/ger
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
