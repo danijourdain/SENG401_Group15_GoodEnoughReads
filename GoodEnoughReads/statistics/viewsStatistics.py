@@ -18,6 +18,9 @@ def statistics(request):
     book_pages_this_year = stats.CalculateBookPagesPerYear()
     stats.CreatePieChart(list(book_pages_this_year.keys()), list(book_pages_this_year.values()), "Book Pages you Read this year")
 
+    books_reread_the_most = stats.CalcBookReread()
+
     return render(request, 'Statistics/statistics.html', {'pages_this_week': pages_this_week, 
                                                           'books_this_month': books_this_month,
-                                                          'books_this_year': books_this_year})
+                                                          'books_this_year': books_this_year,
+                                                          'books_reread': books_reread_the_most})

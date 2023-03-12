@@ -142,12 +142,29 @@ class StatisticsModel:
             i += 1
 
         return self.num_genres_per_year
+    
+    def CalcBookReread(self):
+        self.cursor.execute("SELECT B.Title, C.NumberOfTimesReread FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN AND C.NumberOfTimesReread > 1;")
+        BooksReread = self.cursor.fetchall()
+
+        BookTitle = ""
+        mostTimes = 0
+
+        i = 0
+        while(i < len(BooksReread)):
+            if(mostTimes < BooksReread[i][1]):
+                mostTimes = BooksReread[i][1]
+                BookTitle = BooksReread[i][0]
+            i += 1
+
+        return BookTitle
 
     def CreateBarGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
+        ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
         plt.bar(x, y, color = "#84A98C")
         # plt.title(title, fontproperties = self.font, fontsize = 20)

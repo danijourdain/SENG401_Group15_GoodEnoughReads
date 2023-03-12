@@ -62,6 +62,11 @@ INSERT INTO BookInUserCollection(NewestReadingStartDate,
 VALUES ("2021-03-01", "2021-03-08", 50, "000000005", 
 		"a@gmail.com");
         
+INSERT INTO BookInUserCollection(NewestReadingStartDate, 
+			NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, email)
+VALUES ("2023-04-01", "2023-04-19", 5, 50, "000000003", 
+		"a@gmail.com");
+        
 SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead 
 	FROM BookInUserCollection WHERE email = "a@gmail.com";
     
@@ -69,3 +74,9 @@ SELECT C.NewestReadingEndDate, B.Genre
 FROM BookInUserCollection AS C, Book AS B 
 WHERE C.email = "a@gmail.com"
 AND B.ISBN = C.ISBN;
+
+SELECT B.Title 
+FROM BookInUserCollection AS C, Book AS B 
+WHERE C.email = "a@gmail.com" 
+AND B.ISBN = C.ISBN 
+AND MAX(C.NumberOfTimesReread);
