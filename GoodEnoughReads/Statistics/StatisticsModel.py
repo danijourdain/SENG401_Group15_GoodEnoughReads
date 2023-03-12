@@ -99,8 +99,30 @@ class StatisticsModel:
         
         return self.num_books_read_per_year[this_year], self.sorted_num_books_read_per_year
 
-    def CalculateBookPagesPerYear():
-        pass
+    def CalculateBookPagesPerYear(self):
+        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Pages FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN;")
+        YearlyBooksPagesRead = self.cursor.fetchall()
+
+        this_year = datetime.date.today().year
+        self.book_pages_year = {"< 100": 0, "100-200": 0, "200-400": 0, "400-600": 0, "> 600": 0}
+
+        i = 0
+        while i < len(YearlyBooksPagesRead):
+            if YearlyBooksPagesRead[i][0].year == this_year:
+                if YearlyBooksPagesRead[i][1] < 100:
+                    self.book_pages_year["< 100"] += 1
+                elif YearlyBooksPagesRead[i][1] < 200:
+                    self.book_pages_year["100-200"] += 1
+                elif YearlyBooksPagesRead[i][1] < 400:   
+                    self.book_pages_year["200-400"] += 1 
+                elif YearlyBooksPagesRead[i][1] < 600:   
+                    self.book_pages_year["400-600"] += 1
+                else:   
+                    self.book_pages_year["> 600"] += 1  
+            
+            i += 1
+
+        return self.book_pages_year
 
     def CalculateGenresPerYear(self): 
         self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN;")
@@ -127,8 +149,8 @@ class StatisticsModel:
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
 
-        plt.bar(x, y, color = "#004643")
-        plt.title(title, fontproperties = self.font, fontsize = 20)
+        plt.bar(x, y, color = "#84A98C")
+        # plt.title(title, fontproperties = self.font, fontsize = 20)
         plt.xlabel(x_label, fontproperties = self.font, fontsize = 15)
         plt.xticks(rotation = 45, fontproperties = self.font, fontsize = 10)
         plt.ylabel(y_label, fontproperties = self.font, fontsize = 15)
@@ -139,8 +161,8 @@ class StatisticsModel:
     def CreateLineGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
 
-        plt.plot(x, y, color = "#004643", linewidth = 5.0, marker = 'o', markersize = 10.0, markerfacecolor = "#84A98C")
-        plt.title(title, fontproperties = self.font, fontsize = 20)
+        plt.plot(x, y, color = "#84A98C", linewidth = 5.0, marker = 'o', markersize = 10.0, markerfacecolor = "#004643")
+        # plt.title(title, fontproperties = self.font, fontsize = 20)
         plt.xlabel(x_label, fontproperties = self.font, fontsize = 15)
         plt.xticks(rotation = 45, fontproperties = self.font, fontsize = 10)
         plt.ylabel(y_label, fontproperties = self.font, fontsize = 15)
@@ -168,21 +190,21 @@ class StatisticsModel:
                 PieExplode.append(0.03)
                 i += 1
 
-        plt.pie(y, labels = x, startangle = 90, colors = PieColors, pctdistance = 0.85, explode = PieExplode)
-        plt.title(title, fontproperties = self.font, fontsize = 20)
+        plt.pie(y, labels = x, startangle = 90, colors = PieColors, labeldistance = 1.05, explode = PieExplode, autopct='%1.1f%%', pctdistance=1.25)
+        # plt.title(title, fontproperties = self.font, fontsize = 20)
         
         fig.savefig('gersiteapp/static/gersiteapp/img/stats/PieChart' + title.replace(' ','') + '.png', bbox_inches='tight', transparent=True)
 
-if __name__ == '__main__':
-    books_per_month = {"January":5, "February": 7, "March": 10, "April": 10, "May": 0,
-        "June": 1, "July":4, "August": 8, "September": 1, "October": 0,
-        "November": 9, "December": 10}
-    x = list(books_per_month.keys())
-    y = list(books_per_month.values())
-    x_label = "Months"
-    y_label = "Number of Books read"
-    title = "Number of Books read each Month"
-    s = StatisticsModel("a@gmail.com")
-    s.CreateBarGraph(x, y, x_label, y_label, title)
-    s.CreatePieChart(x, y, title)
-    # s.NumPagesThisWeek()
+# if __name__ == '__main__':
+#     books_per_month = {"January":5, "February": 7, "March": 10, "April": 10, "May": 0,
+#         "June": 1, "July":4, "August": 8, "September": 1, "October": 0,
+#         "November": 9, "December": 10}
+#     x = list(books_per_month.keys())
+#     y = list(books_per_month.values())
+#     x_label = "Months"
+#     y_label = "Number of Books read"
+#     title = "Number of Books read each Month"
+#     s = StatisticsModel("a@gmail.com")
+#     s.CreateBarGraph(x, y, x_label, y_label, title)
+#     s.CreatePieChart(x, y, title)
+#     # s.NumPagesThisWeek()

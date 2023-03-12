@@ -13,18 +13,21 @@
       My Stats
     </h1>
 
+    <div class = "container">
+      <p style = "text-align:center; color: #84A98C; font-size: 40px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> <Strong> Congratulations! </Strong> </p>
+    </div>
+
     <div class="container">
-      <div class ="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
+      <div class ="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 5px;">
         <div class ="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Number of Pages you Read this Week</Strong></p>
-          <p style = "text-align:center; color: #FFFFFF; font-size: 20px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> <Strong> Congratulations! </Strong> </p>
           <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> You read {{pages_this_week}} pages this week! </p>
         </div>
       </div>
     </div>
 
     <div class="container">
-      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
+      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 30px;">
         <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Number of Books you Read this Month</Strong></p>
           <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> You read {{books_this_month}} books this month! </p>
@@ -33,7 +36,7 @@
     </div>
 
     <div class="container">
-      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
+      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 30px;">
         <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Books You Read this Year</Strong></p>
           </p>
@@ -45,7 +48,7 @@
     </div>
 
     <div class="container">
-      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
+      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 30px;">
         <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Books you Read since the Beginning of Time</Strong></p>
           </p>
@@ -55,11 +58,21 @@
     </div>
 
     <div class="container">
-      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 50px;">
+      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 30px;">
         <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Genres you read this year</Strong></p>
           </p>
           <img src= "{% static 'gersiteapp/img/stats/PieChartGenresyouReadthisyear.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 30px;">
+        <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+          <p style = "text-align:center; margin-bottom: 0px;"> <Strong>How long were the books you read this year?</Strong></p>
+          </p>
+          <img src= "{% static 'gersiteapp/img/stats/PieChartBookPagesyouReadthisyear.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
         </div>
       </div>
     </div>

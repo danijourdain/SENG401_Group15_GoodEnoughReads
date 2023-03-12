@@ -15,6 +15,9 @@ def statistics(request):
     genres_this_year = stats.CalculateGenresPerYear()
     stats.CreatePieChart(list(genres_this_year.keys()), list(genres_this_year.values()), "Genres you Read this year")
 
+    book_pages_this_year = stats.CalculateBookPagesPerYear()
+    stats.CreatePieChart(list(book_pages_this_year.keys()), list(book_pages_this_year.values()), "Book Pages you Read this year")
+
     return render(request, 'Statistics/statistics.html', {'pages_this_week': pages_this_week, 
                                                           'books_this_month': books_this_month,
                                                           'books_this_year': books_this_year})
