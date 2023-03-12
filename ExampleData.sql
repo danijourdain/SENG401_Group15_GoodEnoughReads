@@ -75,8 +75,8 @@ FROM BookInUserCollection AS C, Book AS B
 WHERE C.email = "a@gmail.com"
 AND B.ISBN = C.ISBN;
 
-SELECT B.Title 
+SELECT B.Title, C.NumberOfTimesReread
 FROM BookInUserCollection AS C, Book AS B 
 WHERE C.email = "a@gmail.com" 
-AND B.ISBN = C.ISBN 
-AND MAX(C.NumberOfTimesReread);
+AND B.ISBN = C.ISBN
+AND C.NumberOfTimesReread > 1;
