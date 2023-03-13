@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
+from gersiteapp import LoginModel
+
 def logout_view(request):
     return redirect('login')
 
@@ -17,12 +19,20 @@ def signup(request):
         pw1 = request.POST.get('password', '')
         pw2 = request.POST.get('password2', '')
         user = authenticate(request, email=email, password=pw1)
+        
+        login = LoginModel.LoginModel(email)
+        uniqueEmail = login.signupUser()
+        if not uniqueEmail:
+            error_message = "That email is already signed up!"
+            # template currently not made
+            return render(request, 'ManageAccount/registration/signup.html', {'error_message': error_message})
 
         if user is None and pw1 == pw2:
             user = User.objects.create_user(username=uname, password=pw1, email=email)
             user.first_name = fname
             user.last_name = lname
             user.save()
+            
             return redirect('/welcome/')
         else:
             error_message = "Invalid login credentials"
