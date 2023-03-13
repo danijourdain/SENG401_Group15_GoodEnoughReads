@@ -4,4 +4,5 @@ from Collections import views
 urlpatterns = [
     path('search/', viewsSearch.search, name = "search"),
     path('toRead/<bookID>', views.toRead, name = "toRead"),
+    path('bookDisplay/', viewsSearch.bookDisplay, name = "bookDisplay")
 ]

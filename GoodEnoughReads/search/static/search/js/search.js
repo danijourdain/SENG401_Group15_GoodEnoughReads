@@ -39,7 +39,15 @@ document.getElementById("search-button").addEventListener('click', bookSearch, f
 // document.addEventListener('keypress', function(e){
 //   if (e.key === 'Enter')
 //   {
+
+
+    // 
+
+//     <form action="bookDisplay" method="post">
+
 //     bookSearch()
+
+// </form>
 //   }
 // });
 
@@ -47,27 +55,38 @@ document.getElementById("search-button").addEventListener('click', bookSearch, f
 function formatOutput(bookImg, title, author, publisher, pageCount) {
     // console.log(title + ""+ author +" "+ publisher +" "+ bookLink+" "+ bookImg)
     var htmlCard = `
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="row no-gutters">
-          <div class="col-sm-4">
-            <img src="${bookImg}" class="card-img" alt="${title}" width="120" height="200"></img>
-          </div>
-          <div class="col-sm-8">
-            <div class="card-body">
-              <h5 class="card-title">${title}</h5>
-              <p class="card-text">Author: ${author}</p>
-              <p class="card-text">Publisher: ${publisher}</p>
-              <p class="card-text">Page Count: ${pageCount}</p>
+  
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="row no-gutters">
+              <div class="col-sm-4">
+                <img src="${bookImg}" class="card-img" alt="${title}" width="120" height="200"></img>
+              </div>
+              <div class="col-sm-8">
+                <div class="card-body">
+                  <form action="/bookDisplay/" method="post">
+                    <input type="text" name="title" value="${title}" hidden>
+                    <input type="text" name="author" value="${author}" hidden>
+                    <input type="text" name="publisher" value="${publisher}" hidden>
+                    <input type="text" name="bookImg" value="${bookImg}" hidden>
+                    <input type="text" name="pageCount" value="${pageCount}" hidden>
+                    <h5 class="card-title">${title}</h5>
+                    <p class="card-text">Author: ${author}</p>
+                    <p class="card-text">Publisher: ${publisher}</p>
+                    <p class="card-text">Page Count: ${pageCount}</p>
+                    <input type="submit" value="View Book">
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-    </div>
+        <div class="col-md-3">
+        </div>
+
+    
     `
     return htmlCard;
 }
