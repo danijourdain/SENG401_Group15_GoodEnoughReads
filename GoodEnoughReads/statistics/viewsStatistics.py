@@ -3,6 +3,7 @@ from . import StatisticsModel
 
 def statistics(request):
 
+    # hard coded email (for now)
     stats = StatisticsModel.StatisticsModel("a@gmail.com")
     pages_this_week = stats.NumPagesThisWeek()
     

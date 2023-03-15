@@ -15,16 +15,19 @@ class LoginModel:
         accInfo = self.cursor.fetchall()[0]
         return accInfo
     
-    # returns false if it no worky
-    def signupUser(self):
-        self.cursor.execute("SELECT first_name, last_name FROM auth_user WHERE email = '"+self.email+"';")
-        accInfo = self.cursor.fetchall()[0]
-        name = accInfo[0] + " " + accInfo[1]
-        
+    # returns false if the user already exists
+    def verifyUser(self):
         self.cursor.execute("SELECT COUNT(1) FROM User WHERE email = '"+self.email+"';")
         result = self.cursor.fetchone()[0]
         if(result == 1):
             return False
+        
+        return True        
+    
+    def signupUser(self):
+        self.cursor.execute("SELECT first_name, last_name FROM auth_user WHERE email = '"+self.email+"';")
+        accInfo = self.cursor.fetchall()[0]
+        name = accInfo[0] + " " + accInfo[1]
         
         # set default xp to 0 and default level to 1 -- null pfp?
         self.cursor.execute("INSERT INTO User(email, `Name`, ProfilePictureURL, XP, AwardProfile) VALUES (\""+self.email+"\", \""+name+"\", NULL, 0, 1);")
