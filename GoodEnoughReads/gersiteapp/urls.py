@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 from search import viewsSearch
 from Statistics import viewsStatistics
+from Statistics import viewsAwards
 from ManageAccount import viewsManageAccount
 
 urlpatterns = [
@@ -14,6 +15,6 @@ urlpatterns = [
     path('Statistics/', viewsStatistics.statistics, name='statistics'),
     path('settings/', views.settings, name='settings'),
     path('recommendations/', views.recommendations, name='recommendations'),
-
+    path('Awards/', viewsAwards.awards, name='awards')
 ]
 
