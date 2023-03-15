@@ -4,8 +4,11 @@ SELECT * FROM Statistics;
 
 SELECT * FROM BookInUserCollection;
 
-INSERT INTO User(email, `Name`, `Password`) 
-VALUES ("a@gmail.com", "a", "b");
+INSERT INTO Awards(`Level`, Required_XP)
+VALUES (0, 0);
+
+INSERT INTO User(email, `Name`, XP, AwardProfile) 
+VALUES ("a@gmail.com", "a", 0, 0);
 
 INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
 VALUES("000000000", "ebook", "The Candle and the Flame", 
