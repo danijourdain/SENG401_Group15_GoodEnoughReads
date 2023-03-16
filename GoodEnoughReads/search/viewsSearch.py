@@ -11,12 +11,16 @@ def bookDisplay(request):
     publisher = request.POST.get('publisher', '')
     bookImg = request.POST.get('bookImg', '')
     pageCount = request.POST.get('pageCount', '')
+    desc = request.POST.get('desc', '')
+    rating = request.POST.get('rating', '')
 
     context = {
         "title": title,
         "author": author,
         "publisher": publisher,
         "bookImg": bookImg,
-        "pageCount": pageCount
+        "pageCount": pageCount,
+        "desc": desc,
+        "rating": rating
     }
     return render(request, 'search/bookDisplay.html', context)

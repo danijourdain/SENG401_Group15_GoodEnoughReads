@@ -1,14 +1,16 @@
 const search_box = document.querySelector("#search-box"); // This is the reference to the search box id tag in the HTML
 
 function bookSearch(){
+    // This function uses the google books API to search for books. What we have found is this information tends to be extremely unreliable
+    // There is alot of fun and interesting things we need to do when it comes to dealing with this information.
     var search = search_box.value;
     var cardResults = document.getElementById("results");
     var placeHldr = "{% static 'gersiteapp/img/placeholder.png' %}"; // Placeholder image
-    search = search.replaceAll("/\s", "_");
-    console.log(search);
+    var parsed = search.replace(" ", "-");
+    console.log(parsed);
     cardResults.innerHTML = "";
     $.ajax({
-        url: "https://www.googleapis.com/books/v1/volumes?q=-collection+intitle:" + search + "&printType=books&maxResults=20", 
+        url: "https://www.googleapis.com/books/v1/volumes?q=" + parsed + "&printType=books&maxResults=20", 
         dataType: "json",
         type: 'get',
         success: function(data){
@@ -20,13 +22,20 @@ function bookSearch(){
                 publisher1 = item.volumeInfo.publisher;
                 pageCount1 = item.volumeInfo.pageCount;
                 bookID = item.id;
-                console.log(pageCount1);
-                // bookLink1 = item.volumeInfo.previewLink;
-                // bookIsbn = item.volumeInfo.industryIdentifiers[1].identifier
+                desc = item.volumeInfo.description;
+                rating = item.volumeInfo.averageRating;
+
+                if (pageCount1 === undefined || pageCount1 === 0) {
+                    continue;
+                }
+                if (rating === undefined){
+                    rating = "unavailable"
+                }
+
                 bookImg1 = (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : placeHldr ;
 
                 cardResults.innerHTML += '<div class="row mt-4">' +
-                                        formatOutput(bookImg1, title1, author1, publisher1, pageCount1) +
+                                        formatOutput(bookImg1, title1, author1, publisher1, pageCount1, desc, rating) +
                                         '</div>';
 
             }
@@ -36,23 +45,8 @@ function bookSearch(){
 }
 
 document.getElementById("search-button").addEventListener('click', bookSearch, false)
-// document.addEventListener('keypress', function(e){
-//   if (e.key === 'Enter')
-//   {
 
-
-    // 
-
-//     <form action="bookDisplay" method="post">
-
-//     bookSearch()
-
-// </form>
-//   }
-// });
-
-
-function formatOutput(bookImg, title, author, publisher, pageCount) {
+function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating) {
     // console.log(title + ""+ author +" "+ publisher +" "+ bookLink+" "+ bookImg)
     var htmlCard = `
   
@@ -72,6 +66,8 @@ function formatOutput(bookImg, title, author, publisher, pageCount) {
                     <input type="text" name="publisher" value="${publisher}" hidden>
                     <input type="text" name="bookImg" value="${bookImg}" hidden>
                     <input type="text" name="pageCount" value="${pageCount}" hidden>
+                    <input type="text" name="desc" value="${desc}" hidden>
+                    <input type="text" name="rating" value="${rating}" hidden>
                     <h5 class="card-title">${title}</h5>
                     <p class="card-text">Author: ${author}</p>
                     <p class="card-text">Publisher: ${publisher}</p>
