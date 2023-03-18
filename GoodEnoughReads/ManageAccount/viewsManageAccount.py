@@ -58,4 +58,6 @@ def login(request):
             return render(request, 'ManageAccount/registration/login.html', {'error_message': error_message})
     else:
         return render(request, 'ManageAccount/registration/login.html')
-    
+
+def account(request):
+    return render(request, 'ManageAccount/account.html')

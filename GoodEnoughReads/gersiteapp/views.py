@@ -11,14 +11,14 @@ def shelf(request):
 def bookshelf(request):
     return render(request, 'gersiteapp/bookshelf.html')
 
-def account(request):
-    return render(request, 'gersiteapp/account.html')
+# def account(request):
+#     return render(request, 'gersiteapp/account.html')
 
 # def statistics(request):
 #     return render(request, 'gersiteapp/statistics.html')
 
-def settings(request):
-    return render(request, 'gersiteapp/settings.html')
+# def settings(request):
+#     return render(request, 'gersiteapp/settings.html')
 
 def recommendations(request):
     return render(request, 'gersiteapp/recommendations.html')

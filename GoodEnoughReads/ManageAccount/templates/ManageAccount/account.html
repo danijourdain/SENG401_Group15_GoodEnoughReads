@@ -1,0 +1,71 @@
+{% extends 'gersiteapp/base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>Manage Account</h1>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            Profile Information
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="class-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="class-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="class-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 10px">Update Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                          Account Settings
+                        </div>
+                        <div class="card-body">
+                          <form>
+                            <div class="form-group">
+                              <label for="currentPassword">Current Password</label>
+                              <input type="password" class="form-control" id="currentPassword">
+                            </div>
+                            <div class="form-group">
+                              <label for="newPassword">New Password</label>
+                              <input type="password" class="form-control" id="newPassword">
+                            </div>
+                            <div class="form-group">
+                              <label for="confirmPassword">Confirm New Password</label>
+                              <input type="password" class="form-control" id="confirmPassword">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                          </form>
+                        </div>
+                    </div>
+                    <div class="card">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}
