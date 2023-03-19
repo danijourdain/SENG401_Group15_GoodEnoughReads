@@ -4,5 +4,20 @@
 
 {% block content %}
   <p>Hi {{ username }}!</p>
-  <h1 class="text-center mt-4">Welcome to GoodEnoughReads Landing Page (Already Logged in)</h1>
+  <h1 class="text-center mt-4">Welcome to GoodEnoughReads</h1>
+
+  <div class="row mt-4">
+    {% for book in books %}
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          <img class="card-img-top" src="{{ book.cover }}" alt="{{ book.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text">{{ book.author }}</p>
+            <a href="{% url 'search' %}?q={{ book.title }}" class="btn btn-primary">Search for this book</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
