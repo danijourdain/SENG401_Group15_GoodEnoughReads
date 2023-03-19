@@ -27,7 +27,21 @@
         
     </div> -->
     <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <script type="text/javascript">
+        const searchBox = document.getElementById('search-box');
+        const params = new URLSearchParams(window.location.search);
+        const title = params.get('q');
+        searchBox.value = title;
+
+        window.onload = () => {
+            if (title) {
+                document.getElementById('search-button').click();
+            }
+        };
+    </script>
     <script type="text/javascript" src="{% static 'search/js/search.js' %}"></script>
+
+    
 
 
     

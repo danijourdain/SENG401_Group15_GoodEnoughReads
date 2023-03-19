@@ -1,10 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib import auth
 
 from gersiteapp import LoginModel
 
 def logout_view(request):
+    auth.logout(request)
     return redirect('login')
 
 # def login(request):
@@ -52,7 +54,8 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             context = {'username': username}
-            return render(request, 'gersiteapp/welcome.html', context)
+            request.session['username'] = username
+            return redirect('welcome')
         else:
             error_message = "Invalid login credentials"
             return render(request, 'ManageAccount/registration/login.html', {'error_message': error_message})

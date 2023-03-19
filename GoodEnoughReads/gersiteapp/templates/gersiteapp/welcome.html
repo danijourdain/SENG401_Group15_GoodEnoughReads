@@ -3,21 +3,133 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-  <p>Hi {{ username }}!</p>
-  <h1 class="text-center mt-4">Welcome to GoodEnoughReads</h1>
+<div class="text-center mt-4">
+  {% if request.session.username %}
+  <h1>{{ greeting }} {{ request.session.username }}.</h1>
+  {% else %}
+  <h1>{{ greeting }}, !</h1>
+  {% endif %}
+  <h2 class="text-center mt-4">Welcome to GoodEnoughReads.</h2>
+  <hr>
+</div>
 
-  <div class="row mt-4">
-    {% for book in books %}
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img class="card-img-top" src="{{ book.cover }}" alt="{{ book.title }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ book.title }}</h5>
-            <p class="card-text">{{ book.author }}</p>
-            <a href="{% url 'search' %}?q={{ book.title }}" class="btn btn-primary">Search for this book</a>
-          </div>
-        </div>
+<div class="text-center mt-4">
+  <h4>Book Drought? 😔 Look out for some of these classics:</h4>
+</div>
+
+<div class="row justify-content-center mt-4">
+  {% for book in books %}
+  <div class="col-md-3 mb-4">
+    <div class="card book-card">
+      <img class="card-img-top" src="{{ book.cover }}" alt="{{ book.title }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text">{{ book.author }}</p>
+        <p class="card-text"><em>{{ book.genre }}</em></p>
+        <a href="{% url 'search' %}?q={{ book.title }}" class="btn btn-primary search-button">Search for this book</a>
       </div>
-    {% endfor %}
+    </div>
   </div>
+  {% endfor %}
+</div>
+
+<nav aria-label="Book pagination">
+  <ul class="pagination justify-content-center mt-4">
+    {% if books.has_previous %}
+    <li class="page-item">
+      <a class="page-link page-link-green" href="?page={{ books.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    {% for page in books.paginator.page_range %}
+    {% if books.number == page %}
+    <li class="page-item active current-page"><a class="page-link page-link-green" href="#">{{ page }}</a></li>
+    {% else %}
+    <li class="page-item"><a class="page-link page-link-green" href="?page={{ page }}">{{ page }}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if books.has_next %}
+    <li class="page-item">
+      <a class="page-link page-link-green" href="?page={{ books.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+
+<style>
+  .book-card {
+    height: 636px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-body {
+    flex-grow: 0.1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-img-top {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+
+  .current-page .page-link {
+    background-color: #05371b !important;
+    border-color: #05371b !important;
+  }
+
+  .page-link-green {
+    color: #fff;
+    background-color: #84A98C;
+    border-color: #84A98C;
+  }
+
+  .page-link-green:hover {
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+
+  .search-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 10px;
+  }
+
+
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f2f2f2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 20px;
+    border: 3px solid #f2f2f2;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+  }
+
+  /* Add this media query */
+  @media (max-width: 767px) {
+    .col-md-3 {
+      width: 50%;
+    }
+  }
+</style>
 {% endblock %}
