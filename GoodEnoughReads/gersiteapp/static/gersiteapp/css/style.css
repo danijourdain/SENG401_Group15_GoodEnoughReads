@@ -155,3 +155,16 @@ table td {
   background-color: #87CEFA;
   height: 70px;
 }
+
+/* Card styles */
+
+.card {
+  background-color: #FAEAD9;
+  border-color: #EDD0B1;
+  border-width: 2px;
+  color: #004643;
+}
+
+.card-header {
+  background-color: #EDD0B1;
+}

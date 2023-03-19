@@ -33,7 +33,12 @@ class LoginModel:
         self.cursor.execute("INSERT INTO User(email, `Name`, ProfilePictureURL, XP, AwardProfile) VALUES (\""+self.email+"\", \""+name+"\", NULL, 0, 1);")
         return True
         
-        
+    def updateUser(self, name):
+        self.cursor.execute("Update `User` SET Name=\'"+name+"\' WHERE Email=\'"+self.email+"\';")
+
+        self.name = name
+        #someone pls send help i can't figure out how to update ;-; -dani
+
         
         
         
