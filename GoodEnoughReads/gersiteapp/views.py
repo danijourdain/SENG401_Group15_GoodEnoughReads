@@ -32,7 +32,7 @@ def welcome(request):
 
     now = datetime.now()
     time_of_day = ''
-    if now.hour < 12:
+    if 5 <= now.hour < 12:
         time_of_day = 'Good morning,'
     elif 12 <= now.hour < 18:
         time_of_day = 'Good afternoon, '
