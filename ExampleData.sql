@@ -1,14 +1,18 @@
 SELECT * FROM Book;
-SELECT * FROM USER;
+SELECT *  FROM USER;
 SELECT * FROM Statistics;
 
 SELECT * FROM BookInUserCollection;
 
-INSERT INTO Awards(`Level`, Required_XP)
-VALUES (0, 0);
+-- INSERT INTO Awards(`Level`, Required_XP)
+-- VALUES (0, 0);
 
 INSERT INTO User(email, `Name`, XP, AwardProfile) 
 VALUES ("a@gmail.com", "a", 0, 0);
+
+UPDATE User 
+SET XP = 450, AwardProfile = 3
+WHERE Email = "a@gmail.com";
 
 INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
 VALUES("000000000", "ebook", "The Candle and the Flame", 
@@ -73,13 +77,13 @@ VALUES ("2023-04-01", "2023-04-19", 5, 50, "000000003",
 SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead 
 	FROM BookInUserCollection WHERE email = "a@gmail.com";
     
-SELECT C.NewestReadingEndDate, B.Genre 
-FROM BookInUserCollection AS C, Book AS B 
-WHERE C.email = "a@gmail.com"
-AND B.ISBN = C.ISBN;
+-- SELECT C.NewestReadingEndDate, B.Genre 
+-- FROM BookInUserCollection AS C, Book AS B 
+-- WHERE C.email = "a@gmail.com"
+-- AND B.ISBN = C.ISBN;
 
-SELECT B.Title, C.NumberOfTimesReread
-FROM BookInUserCollection AS C, Book AS B 
-WHERE C.email = "a@gmail.com" 
-AND B.ISBN = C.ISBN
-AND C.NumberOfTimesReread > 1;
+-- SELECT B.Title, C.NumberOfTimesReread
+-- FROM BookInUserCollection AS C, Book AS B 
+-- WHERE C.email = "a@gmail.com" 
+-- AND B.ISBN = C.ISBN
+-- AND C.NumberOfTimesReread > 1;

@@ -13,4 +13,28 @@
       My Awards
     </h1>
 
+    <div class = "container">
+      <p style = "text-align:center; color: #84A98C; font-size: 40px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> <Strong> Here are your Awards! </Strong> </p>
+    </div>
+
+    <div class="container">
+      <div class ="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 30px;">
+        <div class ="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+          <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Current XP</Strong></p>
+          <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> XP: <Strong>{{Current_XP}}</Strong></p>
+          <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> You need <Strong>{{LevelUp_XP}}</Strong> to move to the next level</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px; margin-top: 30px;">
+        <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+          <p style = "text-align:center; margin-bottom: 0px;"> <Strong>My Awards</Strong></p>
+          </p>
+          <img src = "{% static 'gersiteapp/img/Awards/Award_image.png' %}" alt = "My Award" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
+        </div>
+      </div>
+    </div>
+
 {% endblock %}
