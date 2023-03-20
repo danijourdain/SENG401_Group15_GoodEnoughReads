@@ -34,11 +34,7 @@ class LoginModel:
         return True
         
     def updateUser(self, name):
-        self.cursor.execute("Update `User` SET Name=\'"+name+"\' WHERE Email=\'"+self.email+"\';")
+        self.cursor.execute("UPDATE `User` SET `Name`='"+name+"' WHERE Email='"+self.email+"';")
 
         self.name = name
         #someone pls send help i can't figure out how to update ;-; -dani
-
-        
-        
-        
