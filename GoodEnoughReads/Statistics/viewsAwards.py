@@ -5,7 +5,8 @@ import PIL
 def awards(request):
 
     #Hardcoded email for now
-    email = "a@gmail.com"
+    # email = "a@gmail.com"
+    email = request.session['email']
     awd = Awards.Awards(email)
     Userlevel = awd.getUserLevel()
     UserXP = awd.getUserXP()

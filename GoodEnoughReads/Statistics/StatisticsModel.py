@@ -101,7 +101,7 @@ class StatisticsModel:
         return self.num_books_read_per_year[this_year], self.sorted_num_books_read_per_year
 
     def CalculateBookPagesPerYear(self):
-        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Pages FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN;")
+        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Pages FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.APIid = C.ISBN;")
         YearlyBooksPagesRead = self.cursor.fetchall()
 
         this_year = datetime.date.today().year
@@ -126,7 +126,7 @@ class StatisticsModel:
         return self.book_pages_year
 
     def CalculateGenresPerYear(self): 
-        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN;")
+        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.APIid = C.ISBN;")
         YearlyGenresRead = self.cursor.fetchall()
 
         this_year = datetime.date.today().year
@@ -145,7 +145,7 @@ class StatisticsModel:
         return self.num_genres_per_year
     
     def CalcBookReread(self):
-        self.cursor.execute("SELECT B.Title, C.NumberOfTimesReread FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.ISBN = C.ISBN AND C.NumberOfTimesReread > 1;")
+        self.cursor.execute("SELECT B.Title, C.NumberOfTimesReread FROM BookInUserCollection AS C, Book AS B WHERE C.email = '" + self.email + "' AND B.APIid = C.ISBN AND C.NumberOfTimesReread > 1;")
         BooksReread = self.cursor.fetchall()
 
         BookTitle = ""
