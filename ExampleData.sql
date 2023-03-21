@@ -28,7 +28,9 @@ VALUES("000000002", "The Elite",
 INSERT INTO Book(APIid,  Title, Genre, Pages)
 VALUES("000000003",  "The One", 
 		"Dystopian", 336);
-        
+
+DELETE FROM BookInUserCollection WHERE ISBN = "000000003";
+
 INSERT INTO Book(APIid, Title, Genre, Pages)
 VALUES("000000004", "The Heir", 
 		"Dystopian", 336);
@@ -94,4 +96,4 @@ VALUES ("2023-04-01", "2023-04-19", 5, 50, "000000003",
 
 
 SELECT * FROM `User`;
--- SELECT * FROM auth_user; 
+SELECT * FROM auth_user; 

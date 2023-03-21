@@ -29,7 +29,9 @@ def bookDisplay(request, ):
         "rating": rating,
         "bookID": bookID
     }
+
     book.set(title, author, publisher, bookImg, pageCount, desc, rating, bookID)
+    book.addBooktoBooks()
     return render(request, 'search/bookDisplay.html', context)
 
 def bookInfo(request):
@@ -46,11 +48,11 @@ def bookSubmission(request):
     ratingUser = request.POST.get("rating", "")
     reread = request.POST.get("reread","")
 
-    print(shelf)
-    print(startDate)
-    print(endDate)
-    print(ratingUser)
-    print(reread)
+    # print(shelf)
+    # print(startDate)
+    # print(endDate)
+    # print(ratingUser)
+    # print(reread)
     
     book.setInfo(startDate, endDate, ratingUser, reread, shelf)
     book.addBooktoBooksinUserCollection()

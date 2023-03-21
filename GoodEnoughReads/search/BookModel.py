@@ -33,6 +33,7 @@ class BookModel():
         self.desc = desc
         self.rating = rating
         self.bookID = bookID
+        print(bookID)
 
     def setInfo(self, startDate, endDate, rating, reread, shelf):
         self.shelf = shelf
@@ -42,16 +43,19 @@ class BookModel():
         self.reread = reread
 
     def addBooktoBooks(self):
-        self.cursor.execute('INSERT INTO Book(ISBN, Title, Genre, Pages, Rating) VALUES(?,?,?,?,?)', (self.bookID, self.title, self.genre, self.pageCount, self.rating))
+        self.cursor.execute('INSERT INTO Book(APIid, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s)', (self.bookID, self.title, self.genre, self.pageCount, self.rating))
     
     def addBooktoBooksinUserCollection(self):
         start = datetime.strptime(self.startDate,'%Y-%m-%d').date()
         end = datetime.strptime(self.endDate,'%Y-%m-%d').date()
-        email = "maitry@gmail.com"
-        ISBN = 100012013000
-        self.cursor.execute("""INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, 
-                            NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, CollectionID) VALUES(%s,'%s','%s',%s, %s, %s,%s, %s)""", 
+        email = "sobia.khan1@ucalgary.ca"
+        ISBN = self.bookID
+        # print(ISBN)
+        # self.cursor.execute("""INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, 
+        #                     NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, CollectionID) VALUES(%s,'%s','%s',%s, %s, %s,%s, %s)""", 
+        #                     (int(self.userRating), start, end, int(self.reread), int(self.pageCount), ISBN, email, 1,))
+
+        self.cursor.execute("INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, CollectionID) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", 
                             (int(self.userRating), start, end, int(self.reread), int(self.pageCount), ISBN, email, 1,))
-    
     
 
