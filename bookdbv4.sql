@@ -50,7 +50,7 @@ CREATE TABLE WrittenBy (
   BookISBN VARCHAR(255),
   AuthorID INT UNSIGNED NOT NULL,
   FOREIGN KEY (AuthorID) REFERENCES Author(A_ID),
-  FOREIGN KEY (BookISBN) REFERENCES Book(ISBN),
+  FOREIGN KEY (BookISBN) REFERENCES Book(APIid),
   PRIMARY KEY (AuthorID, BookISBN)
 );
 
@@ -129,10 +129,8 @@ CREATE TABLE BookInUserCollection (
   -- ShelfName VARCHAR(255) BINARY,
   CollectionID INT UNSIGNED,
   
-  FOREIGN KEY (ISBN) REFERENCES Book (ISBN),
-  -- FOREIGN KEY (ShelfName, Email) REFERENCES Shelf (Name, Email),
-  FOREIGN KEY (CollectionID) REFERENCES Collection(ID, Shelfname),
+  FOREIGN KEY (ISBN) REFERENCES Book(APIid),
+  FOREIGN KEY (CollectionID) REFERENCES Collection(ID),
   FOREIGN KEY (Email) REFERENCES User (Email),
-  -- PRIMARY KEY (ISBN, ShelfName, Email)
   PRIMARY KEY (ISBN, Email)
 );

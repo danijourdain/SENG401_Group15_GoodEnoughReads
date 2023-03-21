@@ -102,7 +102,6 @@ def account(request):
     elif request.method == 'POST' and request.POST.get('id') == 'updateAccount':
         print('updating account')
         username = request.POST.get('username', '')
-        email = request.POST.get('email', '')
         fname = request.POST.get('fname', '') 
         lname = request.POST.get('lname', '')
 
