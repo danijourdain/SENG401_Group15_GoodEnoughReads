@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 import requests
-from . import LoginModel
 from datetime import datetime
 import random
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
