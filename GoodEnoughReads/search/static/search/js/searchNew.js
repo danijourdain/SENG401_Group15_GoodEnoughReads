@@ -1,5 +1,6 @@
 const search_box = document.querySelector("#search-box"); // This is the reference to the search box id tag in the HTML
-
+var bookIndex = 0;
+var previousSearch = "";
 function bookSearch(){
     // This function uses the google books API to search for books. What we have found is this information tends to be extremely unreliable
     // There is alot of fun and interesting things we need to do when it comes to dealing with this information.
@@ -7,10 +8,16 @@ function bookSearch(){
     var cardResults = document.getElementById("results");
     var placeHldr = "{% static 'gersiteapp/img/placeholder.png' %}"; // Placeholder image
     var parsed = search.replace(" ", "-");
+    if (previousSearch != search){
+        previousSearch = search;
+        bookIndex = 0;
+        cardResults.innerHTML = "";
+    }
     console.log(parsed);
+    console.log(bookIndex);
     cardResults.innerHTML = cardResults.innerHTML + "";
     $.ajax({
-        url: "https://www.googleapis.com/books/v1/volumes?q=" + parsed + "&printType=books&maxResults=20", 
+        url: "https://www.googleapis.com/books/v1/volumes?q=" + parsed + "&printType=books&maxResults=20&startIndex=" + bookIndex, 
         dataType: "json",
         type: 'get',
         success: function(data){
@@ -42,9 +49,29 @@ function bookSearch(){
         },
         type: 'GET'
     });
+    bookIndex += 20;
 }
 
 document.getElementById("search-button").addEventListener('click', bookSearch, false)
+
+const observer = new IntersectionObserver(entries => {
+    const bottomReload = entries[0]
+    if (!bottomReload.isIntersecting) {
+        return
+    }
+    bookSearch()
+}, {})
+
+observer.observe(document.querySelector('.bottom-reload'))
+
+
+
+
+
+
+
+
+
 
 function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating, bookID) {
     // console.log(title + ""+ author +" "+ publisher +" "+ bookLink+" "+ bookImg)
@@ -73,7 +100,7 @@ function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating
                     <p class="card-text">Author: ${author}</p>
                     <p class="card-text">Publisher: ${publisher}</p>
                     <p class="card-text">Page Count: ${pageCount}</p>
-                    <input type="submit" value="View Book">
+                    <button type="submit" class="btn btn-primary">View Book</button>
                   </form>
                 </div>
               </div>
