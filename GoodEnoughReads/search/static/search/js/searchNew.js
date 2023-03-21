@@ -1,21 +1,32 @@
+/**
+ * This file was made by Ryan Mailhiot for Good Enough Reads. 
+ * Date of final edit by Ryan was: March 21, 2023
+ */
+
+// Defining variables 
 const search_box = document.querySelector("#search-box"); // This is the reference to the search box id tag in the HTML
-var bookIndex = 0;
-var previousSearch = "";
+var bookIndex = 0; // used for API index
+var previousSearch = ""; // Used for resetting searches
+
+
 function bookSearch(){
     // This function uses the google books API to search for books. What we have found is this information tends to be extremely unreliable
     // There is alot of fun and interesting things we need to do when it comes to dealing with this information.
-    var search = search_box.value;
-    var cardResults = document.getElementById("results");
-    var placeHldr = "{% static 'gersiteapp/img/placeholder.png' %}"; // Placeholder image
-    var parsed = search.replace(" ", "-");
+    var search = search_box.value; // grabs the value at the search bar
+    var cardResults = document.getElementById("results"); // grabs the results div
+    var placeHldr = "{% static 'search/img/placeholder.png' %}"; // Placeholder image
+    var parsed = search.replace(" ", "-"); // removes spaces in the query
+    // This block resets on a new search
     if (previousSearch != search){
         previousSearch = search;
         bookIndex = 0;
         cardResults.innerHTML = "";
     }
-    console.log(parsed);
+    console.log(parsed); 
     console.log(bookIndex);
-    cardResults.innerHTML = cardResults.innerHTML + "";
+    cardResults.innerHTML = cardResults.innerHTML + ""; 
+    // This pings the google books api for search queries
+    // Uses the parsed search data as well as the book index
     $.ajax({
         url: "https://www.googleapis.com/books/v1/volumes?q=" + parsed + "&printType=books&maxResults=20&startIndex=" + bookIndex, 
         dataType: "json",
@@ -32,15 +43,15 @@ function bookSearch(){
                 desc = item.volumeInfo.description;
                 rating = item.volumeInfo.averageRating;
 
-                if (pageCount1 === undefined || pageCount1 === 0) {
+                if (pageCount1 === undefined || pageCount1 === 0) { // Removes all 0 book queries
                     continue;
                 }
-                if (rating === undefined){
+                if (rating === undefined){ // changes ratings so it doesnt break it
                     rating = "unavailable";
                 }
-
+                // placeholder is not working properly with django and cannot figure out how to fix.
                 bookImg1 = (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : placeHldr ;
-
+                // Formats the output into a card that can be added
                 cardResults.innerHTML += '<div class="row mt-4">' +
                                         formatOutput(bookImg1, title1, author1, publisher1, pageCount1, desc, rating, bookID) +
                                         '</div>';
@@ -52,8 +63,10 @@ function bookSearch(){
     bookIndex += 20;
 }
 
+// Search buttons
 document.getElementById("search-button").addEventListener('click', bookSearch, false)
 
+// This is an intersection check to see if a hidden element is visible to auto reload
 const observer = new IntersectionObserver(entries => {
     const bottomReload = entries[0]
     if (!bottomReload.isIntersecting) {
@@ -62,17 +75,10 @@ const observer = new IntersectionObserver(entries => {
     bookSearch()
 }, {})
 
+// This is the observe command
 observer.observe(document.querySelector('.bottom-reload'))
 
-
-
-
-
-
-
-
-
-
+// This is the format card that makes the search cards show up. 
 function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating, bookID) {
     // console.log(title + ""+ author +" "+ publisher +" "+ bookLink+" "+ bookImg)
     var htmlCard = `
@@ -83,7 +89,7 @@ function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating
           <div class="card">
             <div class="row no-gutters">
               <div class="col-sm-4">
-                <img src="${bookImg}" class="card-img" alt="${title}" width="120" height="200"></img>
+                <img src="${bookImg}" class="card-img" alt="${title}" width="120" height="240"></img>
               </div>
               <div class="col-sm-8">
                 <div class="card-body">
