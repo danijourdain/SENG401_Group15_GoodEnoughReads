@@ -35,6 +35,3 @@ class LoginModel:
         
     def updateUser(self, name):
         self.cursor.execute("UPDATE `User` SET `Name`='"+name+"' WHERE Email='"+self.email+"';")
-
-        self.name = name
-        #someone pls send help i can't figure out how to update ;-; -dani
