@@ -1,4 +1,4 @@
-import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 from matplotlib.ticker import MaxNLocator
@@ -6,6 +6,7 @@ from django.db import models
 from django.db import connection, transaction
 import datetime
 
+matplotlib.use('SVG')
 
 class StatisticsModel:
     def __init__(self, email):
