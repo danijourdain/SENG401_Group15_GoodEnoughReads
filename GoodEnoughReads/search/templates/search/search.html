@@ -12,17 +12,16 @@
                 <button id="search-button" type="submit" class="btn btn-primary" onclick="">Search</button>
             </div>
         </div>
-        <!-- <div class="row" id="adv-search">
-            <div id="advanced-search" class="input-group mx-auto col-lg-6 col-md-8 col-sm-12" >
-                <input id="search-box" type="text" class="form-control" placeholder="Search Books...">
-                <button id="search-button" type="submit" class="btn btn-primary" onclick="">Search</button>
-            </div>
-        </div> -->
     </div>
-    <div class="container-fluid" id="results">
-        {% csrf_token %}
+    <div>
+        <div class="container-fluid" id="results">
+            {% csrf_token %}
+        </div>
+    </div>
+    <div id="bottom-reload" class="bottom-reload">
+        <small>Loading</small>
+    </div>
 
-    </div>
     <!-- <div id="pageSelect">
         
     </div> -->
@@ -39,10 +38,7 @@
             }
         };
     </script>
-    <script type="text/javascript" src="{% static 'search/js/search.js' %}"></script>
-
-    
-
-
+    <script type="text/javascript" src="{% static 'search/js/searchNew.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'search/css/style.css' %}">
     
 {% endblock %}

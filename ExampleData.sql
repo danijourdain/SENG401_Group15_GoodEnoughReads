@@ -1,6 +1,5 @@
 SELECT * FROM Book;
 SELECT *  FROM USER;
-SELECT * FROM Statistics;
 
 SELECT * FROM BookInUserCollection;
 
@@ -14,29 +13,29 @@ UPDATE User
 SET XP = 450, AwardProfile = 3
 WHERE Email = "a@gmail.com";
 
-INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
-VALUES("000000000", "ebook", "The Candle and the Flame", 
+INSERT INTO Book(APIid, Title, Genre, Pages)
+VALUES("000000000", "The Candle and the Flame", 
 		"Fantasy", 416);
 
-INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
-VALUES("000000001", "Hardcover", "The Selection", 
+INSERT INTO Book(APIid,  Title, Genre, Pages)
+VALUES("000000001", "The Selection", 
 		"Dystopian", 336);
 
-INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
-VALUES("000000002", "Hardcover", "The Elite", 
+INSERT INTO Book(APIid, Title, Genre, Pages)
+VALUES("000000002", "The Elite", 
 		"Dystopian", 336);
 
-INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
-VALUES("000000003", "Hardcover", "The One", 
+INSERT INTO Book(APIid,  Title, Genre, Pages)
+VALUES("000000003",  "The One", 
 		"Dystopian", 336);
         
-INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
-VALUES("000000004", "Hardcover", "The Heir", 
+INSERT INTO Book(APIid, Title, Genre, Pages)
+VALUES("000000004", "The Heir", 
 		"Dystopian", 336);
                 
 
-INSERT INTO Book(ISBN, `Type`, Title, Genre, Pages)
-VALUES("000000005", "Hardcover", "The Crown", 
+INSERT INTO Book(APIid, Title, Genre, Pages)
+VALUES("000000005", "The Crown", 
 		"Dystopian", 336);
 
 INSERT INTO BookInUserCollection(NewestReadingStartDate, 
@@ -76,6 +75,11 @@ VALUES ("2023-04-01", "2023-04-19", 5, 50, "000000003",
         
 SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead 
 	FROM BookInUserCollection WHERE email = "a@gmail.com";
+    
+   --  INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, 
+-- 									NewestReadingEndDate, NumberOfTimesReread, 
+--                                     PagesRead, ISBN, Email, ShelfName, CollectionID) 
+-- 	VALUES()
     
 -- SELECT C.NewestReadingEndDate, B.Genre 
 -- FROM BookInUserCollection AS C, Book AS B 
