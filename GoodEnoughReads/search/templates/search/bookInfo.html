@@ -1,0 +1,75 @@
+{% extends 'gersiteapp/base.html' %}
+{% load static %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+   
+
+</head>
+<body>
+  <h1> Book Information </h1>
+  <div class="container">
+    <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px;">
+      <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+        <p style = "margin-bottom: 0px;"> {{ title }}</p>
+      </div>
+    </div>
+    <div class="media">
+        <img class= "align-self-start mr-3" src="{{ bookImg }}" style= "width: 30%; height: 100%; border-style: solid; 
+              border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px;">
+      <div class="media-body" style="background-color: #84A98C; color:#004643; border-radius: 10px;
+          border-style: solid; border-color:#004643; 
+            border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px; padding-bottom: 5px;">
+            <form action="/bookSubmission/" method ="POST">
+              {% csrf_token %}
+              <div class = "col">
+                <div class = "row">
+                  <label for="shelf" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Add to Shelf:</label>
+                  <select name="shelf" id="shelf" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                    <option value="read">Read</option>
+                    <option value="currentlyReading">Currently Reading</option>
+                    <option value="DNF">DNF</option>
+                  </select>
+                </div>
+                <div class = "row">
+                  <label for="startDate" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Date Started:</label>
+                  <input type="date" id="startDate" name="startDate" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px;  text-align: center;">
+                </div>
+                <div class = "row">
+                  <label for="endDate" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Date Finished:</label>
+                  <input type="date" id="endDate" name="endDate" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                </div>
+                <div class = "row">
+                  <label for="reread" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Times Reread:</label>
+                  <input type="number" id="reread" name="reread" min = "0" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                </div>
+                <div class = "row">
+                  <label for="rating" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Rating</label>
+                  <select name="rating" id="rating" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                    <option value="0">0</option>
+                    <option value=".5">.5</option>
+                    <option value="1">1</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2">2</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3">3</option>
+                    <option value="3.5">3.5</option>
+                    <option value="4">4</option>
+                    <option value="4.5">4.5</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>  
+              <div class = "col">
+                <input type="submit" value="Submit" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+              </div>            
+            </form>
+      </div>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -7,8 +7,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7/0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
-  </head>
+</head>
 <body>
   <h1> Book Information </h1>
   <div class="container">
@@ -25,10 +32,10 @@
             Add To Shelf
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Read</a>
-            <a class="dropdown-item" href="#">To Read</a>
-            <a class="dropdown-item" href="#">Currently Reading</a>
-            <a class="dropdown-item" href="#">DNF</a>
+            <a class="dropdown-item" name = "read" href="{% url 'bookInfo'%}">Read</a>
+            <a class="dropdown-item" name = "toRead" href="{% url 'bookInfo'%}">To Read</a>
+            <a class="dropdown-item" name = "CurrentlyReading" href="{% url 'bookInfo'%}">Currently Reading</a>
+            <a class="dropdown-item" name = "DNF" href="{% url 'bookInfo'%}">DNF</a>
           </div>
         </div>
       </div>
@@ -70,8 +77,6 @@
           </div>
       </div>
     </div>
-
-  </div>
 </body>
 </html>
 {% endblock %}

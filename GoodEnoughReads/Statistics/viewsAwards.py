@@ -14,6 +14,7 @@ def awards(request):
     Image = "gersiteapp/static/gersiteapp/img/Awards/"
 
     if UserXP > ReqXP:
+        # pass
         Userlevel = awd.updateUserLevel()
 
     if(Userlevel < 6):
