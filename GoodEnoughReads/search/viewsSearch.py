@@ -29,8 +29,8 @@ def bookDisplay(request, ):
         "rating": rating,
         "bookID": bookID
     }
-
-    book.set(title, author, publisher, bookImg, pageCount, desc, rating, bookID)
+    email = request.session['email']
+    book.set(title, author, publisher, bookImg, pageCount, desc, rating, bookID, email)
     book.addBooktoBooks()
     return render(request, 'search/bookDisplay.html', context)
 

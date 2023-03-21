@@ -31,6 +31,10 @@ class LoginModel:
         
         # set default xp to 0 and default level to 1 -- null pfp?
         self.cursor.execute("INSERT INTO User(email, `Name`, XP, AwardProfile) VALUES (\""+self.email+"\", \""+name+"\", 0, 0);")
+        self.cursor.execute("INSERT INTO Collection(`Name`, Email) VALUES (\"read\", \"" + self.email + "\")")
+        self.cursor.execute("INSERT INTO Collection(`Name`, Email) VALUES (\"toRead\", \"" + self.email + "\")")
+        self.cursor.execute("INSERT INTO Collection(`Name`, Email) VALUES (\"currentlyReading\", \"" + self.email + "\")")
+        self.cursor.execute("INSERT INTO Collection(`Name`, Email) VALUES (\"DNF\", \"" + self.email + "\")")
         return True
         
     def updateUser(self, name):

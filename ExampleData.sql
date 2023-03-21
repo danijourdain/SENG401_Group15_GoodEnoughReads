@@ -96,4 +96,14 @@ VALUES ("2023-04-01", "2023-04-19", 5, 50, "000000003",
 
 
 SELECT * FROM `User`;
-SELECT * FROM auth_user; 
+-- SELECT * FROM auth_user; 
+
+DELETE FROM Collection WHERE Email = "sobia.khan1@ucalgary.ca";
+
+INSERT INTO  Collection (`Name`, Email) 
+VALUES("Read", "sobia.khan1@ucalgary.ca");
+
+INSERT INTO  Collection (`Name`, Email) 
+VALUES("Read", "a@gmail.com");
+
+SELECT * FROM Collection;
