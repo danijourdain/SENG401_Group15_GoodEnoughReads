@@ -1,5 +1,13 @@
 {% load static %}
 
+{% if not request.session.username %}
+    {% url 'ManageAccount:login' as login_url %}
+    <script>
+        window.location.href = "{% autoescape off %}{% spaceless %}{% url 'ManageAccount:login' %}{% endspaceless %}{% endautoescape %}";
+    </script>
+{% endif %}
+
+
 <!DOCTYPE html>
 <html>
     <head>
