@@ -8,7 +8,7 @@ function bookSearch(){
     var placeHldr = "{% static 'gersiteapp/img/placeholder.png' %}"; // Placeholder image
     var parsed = search.replace(" ", "-");
     console.log(parsed);
-    cardResults.innerHTML = "";
+    cardResults.innerHTML = cardResults.innerHTML + "";
     $.ajax({
         url: "https://www.googleapis.com/books/v1/volumes?q=" + parsed + "&printType=books&maxResults=20", 
         dataType: "json",
@@ -29,13 +29,13 @@ function bookSearch(){
                     continue;
                 }
                 if (rating === undefined){
-                    rating = "unavailable"
+                    rating = "unavailable";
                 }
 
                 bookImg1 = (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : placeHldr ;
 
                 cardResults.innerHTML += '<div class="row mt-4">' +
-                                        formatOutput(bookImg1, title1, author1, publisher1, pageCount1, desc, rating) +
+                                        formatOutput(bookImg1, title1, author1, publisher1, pageCount1, desc, rating, bookID) +
                                         '</div>';
 
             }
@@ -46,7 +46,7 @@ function bookSearch(){
 
 document.getElementById("search-button").addEventListener('click', bookSearch, false)
 
-function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating) {
+function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating, bookID) {
     // console.log(title + ""+ author +" "+ publisher +" "+ bookLink+" "+ bookImg)
     var htmlCard = `
   
@@ -68,6 +68,7 @@ function formatOutput(bookImg, title, author, publisher, pageCount, desc, rating
                     <input type="text" name="pageCount" value="${pageCount}" hidden>
                     <input type="text" name="desc" value="${desc}" hidden>
                     <input type="text" name="rating" value="${rating}" hidden>
+                    <input type="text" name="bookID" value="${bookID}" hidden>
                     <h5 class="card-title">${title}</h5>
                     <p class="card-text">Author: ${author}</p>
                     <p class="card-text">Publisher: ${publisher}</p>
