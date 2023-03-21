@@ -103,22 +103,23 @@ def account(request):
         print('updating account')
         username = request.POST.get('username', '')
         email = request.POST.get('email', '')
-        name = request.POST.get('fname') + ' ' + request.POST.get('lname')
+        fname = request.POST.get('fname', '') 
+        lname = request.POST.get('lname', '')
 
         user = User.objects.get(username=request.session['username'])
-        login = LoginModel.LoginModel(email)
+        login = LoginModel.LoginModel(request.session['email'])
 
         if username != '':
             validateUser = authenticate(request, username=username)
             if validateUser is None:
                 user.username = username
                 request.session['username'] = username
-        if name != ' ':
+        if fname != '' and lname != '':
             user.first_name = request.POST.get('fname')
             user.last_name = request.POST.get('lname')
-            request.session['name'] = name
+            request.session['name'] = fname + ' ' + lname
+            login.updateUser(name=(fname + ' ' + lname))
 
-        login.updateUser(name=name)
         user.save()
 
     return render(request, 'ManageAccount/account.html')
