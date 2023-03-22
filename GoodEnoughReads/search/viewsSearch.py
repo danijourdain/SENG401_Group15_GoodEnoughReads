@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from . import BookModel
+import datetime
 
 #import datetime
 
@@ -35,9 +36,13 @@ def bookDisplay(request, ):
     return render(request, 'search/bookDisplay.html', context)
 
 def bookInfo(request):
+    dateM = datetime.datetime.now()
+    dateString = dateM.strftime('%Y-%m-%d')
     context = {
         "title": book.title,
         "bookImg": book.bookImg,
+        "pagesRead": book.pageCount,
+        "dateMax": dateString, 
     }
     return render(request, 'search/bookInfo.html', context)
 
@@ -46,13 +51,13 @@ def bookSubmission(request):
     startDate = request.POST.get("startDate", "")
     endDate = request.POST.get("endDate", "")
     ratingUser = request.POST.get("rating", "")
-    reread = request.POST.get("reread","")
+    reread = request.POST.get("timesRead","")
 
-    # print(shelf)
-    # print(startDate)
-    # print(endDate)
-    # print(ratingUser)
-    # print(reread)
+    start = datetime.datetime.strptime(startDate,'%Y-%m-%d').date()
+    end = datetime.datetime.strptime(endDate,'%Y-%m-%d').date()
+    
+    if start > end:
+        return redirect('/bookInfo/')
     
     book.setInfo(startDate, endDate, ratingUser, reread, shelf)
     book.addBooktoBooksinUserCollection()

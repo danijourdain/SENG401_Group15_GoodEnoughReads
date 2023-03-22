@@ -1,18 +1,47 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
+from . import CollectionModel
+from search import BookModel
+
+
+collections = CollectionModel.CollectionModel()
 
 def collection(request):
-    return render(request, 'Collections/collection.html')
+    email = request.session['email']
+    collections.setEmail(email)
+    bookList = collections.getAllCollection()
+
+    context = {'bookList': bookList}
+    return render(request, 'Collections/collection.html', context)
 
 def read(request):
-    return render(request, 'Collections/read.html')
+    email = request.session['email']
+    collections.setEmail(email)
+    bookList = collections.getRead()
+
+    context = {'bookList': bookList}
+    return render(request, 'Collections/read.html', context)
 
 def toRead(request, bookID = "default"):
-    context = {"bookID": bookID}
+    email = request.session['email']
+    collections.setEmail(email)
+    bookList = collections.gettoRead()
+
+    context = {'bookList': bookList}
     return render(request, 'Collections/toRead.html', context)
 
 def currentlyReading(request):
-    return render(request, 'Collections/collection.html')
+    email = request.session['email']
+    collections.setEmail(email)
+    bookList = collections.gettoRead()
+
+    context = {'bookList': bookList}
+    return render(request, 'Collections/collection.html', context)
 
 def DNF(request):
-    return render(request, 'Collections/collection.html')
+    email = request.session['email']
+    collections.setEmail(email)
+    bookList = collections.getDNF()
+
+    context = {'bookList': bookList}
+    return render(request, 'Collections/collection.html', context)

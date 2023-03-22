@@ -23,75 +23,22 @@
           <p style = "text-align: right; margin: 0px"> Organize: By Date</p>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col mx-1" style="margin: 10px 10px 10px 10px;">
-          {% load static %}
-          <img class= "book" src="{% static 'gersiteapp/img/test.jpg' %}" style= "width: 100%; border-style: solid; 
+      {% for x in bookList %} 
+        <div class="row">
+          <div class="col mx-1" style="margin: 10px 10px 10px 10px;">
+          <img class= "book" src="{{x.bookImg}}" style= "width: 30%; border-style: solid; 
                 border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px">
-            <div style="background-color: #84A98C; color:#004643; width: 100%; border-radius: 10px;
-                padding: 3px 3px 3px 3px; border-style: solid; 
-                border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
-                margin: 5px 5px 5px 5px;">
-              <p> Star Rating &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-              <p> Author: J.K Rowling</p>
-              <p> Volume: 7 </p>
-            </div>
+          <div style="background-color: #84A98C; color:#004643; width: 100%; border-radius: 10px;
+              padding: 3px 3px 3px 3px; border-style: solid; 
+              border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
+              margin: 5px 5px 5px 5px;">
+            <p> Title: {{x.title}}</p>
+            <p> Pages: {{x.pageCount}}</p>
+            <p> Your Rating: {{x.userRating}}/5</p>
+          </div>
+          </div>  
         </div>
-        <div class="col mx-1" style="margin: 10px 10px 10px 10px;">
-          {% load static %}
-          <img class= "book" src="{% static 'gersiteapp/img/test.jpg' %}" style= "width: 100%; border-style: solid; 
-                border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px">
-            <div style="background-color: #84A98C; color:#004643; width: 100%; border-radius: 10px;
-                padding: 3px 3px 3px 3px; border-style: solid; 
-                border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
-                margin: 5px 5px 5px 5px;">
-              <p> Star Rating &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-              <p> Author: J.K Rowling</p>
-              <p> Volume: 7 </p>
-            </div>
-        </div>
-        <div class="col mx-1" style="margin: 10px 10px 10px 10px;">
-          {% load static %}
-          <img class= "book" src="{% static 'gersiteapp/img/test.jpg' %}" style= "width: 100%; border-style: solid; 
-                border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px">
-            <div style="background-color: #84A98C; color:#004643; width: 100%; border-radius: 10px;
-                padding: 3px 3px 3px 3px; border-style: solid; 
-                border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
-                margin: 5px 5px 5px 5px;">
-              <p> Star Rating &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-              <p> Author: J.K Rowling</p>
-              <p> Volume: 7 </p>
-            </div>
-        </div>
-        <div class="col mx-1" style="margin: 10px 10px 10px 10px;">
-          {% load static %}
-          <img class= "book" src="{% static 'gersiteapp/img/test.jpg' %}" style= "width: 100%; border-style: solid; 
-                border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px">
-            <div style="background-color: #84A98C; color:#004643; width: 100%; border-radius: 10px;
-                padding: 3px 3px 3px 3px; border-style: solid; 
-                border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
-                margin: 5px 5px 5px 5px;">
-              <p> Star Rating &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-              <p> Author: J.K Rowling</p>
-              <p> Volume: 7 </p>
-            </div>
-        </div>
-        <div class="col mx-1" style="margin: 10px 10px 10px 10px;">
-          {% load static %}
-          <img class= "book" src="{% static 'gersiteapp/img/test.jpg' %}" style= "width: 100%; border-style: solid; 
-                border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px">
-            <div style="background-color: #84A98C; color:#004643; width: 100%; border-radius: 10px;
-                padding: 3px 3px 3px 3px; border-style: solid; 
-                border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
-                margin: 5px 5px 5px 5px;">
-              <p> Star Rating &#9733; &#9733; &#9733; &#9733; &#9733;</p>
-              <p> Author: J.K Rowling</p>
-              <p> Volume: 7 </p>
-            </div>
-        </div>
-        
-    </div>
+      {% endfor %}
   </body>
   </html>
 

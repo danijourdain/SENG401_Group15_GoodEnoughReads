@@ -32,10 +32,15 @@ class BookModel():
         self.bookImg = bookImg
         self.pageCount = pageCount
         self.desc = desc
-        self.rating = rating
+        if rating == "unavailable":
+            self.rating = 0
+        else:
+            self.rating = rating
         self.bookID = bookID
         self.email = email
         print(bookID)
+        print(rating)
+        print(bookImg)
 
     def setInfo(self, startDate, endDate, rating, reread, shelf):
         self.shelf = shelf
@@ -45,19 +50,24 @@ class BookModel():
         self.reread = reread
 
     def addBooktoBooks(self):
-        self.cursor.execute('INSERT INTO Book(APIid, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s)', (self.bookID, self.title, self.genre, self.pageCount, self.rating))
+        self.cursor.execute('SELECT * FROM Book WHERE Book.APIid = %s', [self.bookID])
+        val = self.cursor.fetchall()
+        print(val)
+        if not val:
+            self.cursor.execute('INSERT INTO Book(APIid, ImageURL, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s, %s)', (self.bookID, self.bookImg, self.title, self.genre, self.pageCount, self.rating))
+        elif self.bookID in val[0]:
+            return
+        else:
+            self.cursor.execute('INSERT INTO Book(APIid, ImageURL, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s, %s)', (self.bookID, self.bookImg, self.title, self.genre, self.pageCount, self.rating))
+      
 
     def addBooktoBooksinUserCollection(self):
         start = datetime.strptime(self.startDate,'%Y-%m-%d').date()
         end = datetime.strptime(self.endDate,'%Y-%m-%d').date()
         print(self.shelf)
         print(self.bookID)
-        # print(ISBN)
-        # self.cursor.execute("""INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, 
-        #                     NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, CollectionID) VALUES(%s,'%s','%s',%s, %s, %s,%s, %s)""", 
-        #                     (int(self.userRating), start, end, int(self.reread), int(self.pageCount), ISBN, email, 1,))
 
-        self.cursor.execute("INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, CollectionName) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", 
+        self.cursor.execute("INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, shelfName) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", 
                             (int(self.userRating), start, end, int(self.reread), int(self.pageCount), self.bookID, self.email, self.shelf))
     
 

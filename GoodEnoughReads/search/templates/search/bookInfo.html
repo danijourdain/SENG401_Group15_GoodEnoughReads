@@ -41,25 +41,26 @@
                 </div>
                 <div class = "row">
                   <label for="endDate" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Date Finished:</label>
-                  <input type="date" id="endDate" name="endDate" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                  <input type="date" id="endDate" name="endDate" max="{{ dateMax }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
                 </div>
                 <div class = "row">
-                  <label for="reread" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Times Reread:</label>
-                  <input type="number" id="reread" name="reread" min = "0" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                  <div class = "col">
+                     <label for="timesRead" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Times Read:</label>
+                    <input type="number" id="timesRead" name="timesRead" min = "1" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                  </div>
+                  <div class="col">
+                    <label for="pagesRead" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Pages Read</label>
+                    <input type="number" id="pagesRead" name="pagesRead" min = "0" value = "{{ pagesRead }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                  </div>
                 </div>
                 <div class = "row">
                   <label for="rating" style="text-align: center; display: inline-block; vertical-align: middle; margin: 5px 5px 5px 5px;">Rating</label>
                   <select name="rating" id="rating" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
                     <option value="0">0</option>
-                    <option value=".5">.5</option>
                     <option value="1">1</option>
-                    <option value="1.5">1.5</option>
                     <option value="2">2</option>
-                    <option value="2.5">2.5</option>
                     <option value="3">3</option>
-                    <option value="3.5">3.5</option>
                     <option value="4">4</option>
-                    <option value="4.5">4.5</option>
                     <option value="5">5</option>
                   </select>
                 </div>
