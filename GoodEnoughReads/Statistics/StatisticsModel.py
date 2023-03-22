@@ -34,6 +34,18 @@ class StatisticsModel:
 
         return self.pages
 
+    def NumPages(self):
+        self.cursor.execute("SELECT PagesRead FROM BookInUserCollection WHERE email = %s;", [self.email])
+        readPages = self.cursor.fetchall()
+        totalReadPages = 0
+
+        i = 0
+        while i < len(readPages):
+            totalReadPages += readPages[i][0]
+            i+= 1
+
+        return totalReadPages
+
     def CalculateBooksPerMonth(self):
         self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = %s;", [self.email])
         MonthlyBooksRead = self.cursor.fetchall()

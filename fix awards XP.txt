@@ -1,9 +1,9 @@
-fix awards XP
+fix awards XP - Awards fixed - Award image not centered - fix?
 fix stats pie chart
 reformat collections pages
 
 pop up messages
 Recommendations
-Sign up with duplicate username check
+Sign up with duplicate username checks
 Deployment
 
