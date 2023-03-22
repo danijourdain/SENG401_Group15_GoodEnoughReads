@@ -6,18 +6,18 @@ INSERT INTO Awards(`Level`, Required_XP)
 VALUES (1, 1000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (2, 2500);
+VALUES (2, 2000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (3, 4000);
+VALUES (3, 5000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (4, 6000);
+VALUES (4, 10000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (5, 9000);
+VALUES (5, 20000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (6, 14000);
+VALUES (6, 35000);
 
 SELECT * FROM Awards;
