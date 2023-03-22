@@ -1,7 +1,6 @@
-fix awards XP - Awards fixed - Award image not centered - fix?
+fix awards XP - fixed - Award image not centered - fixed
 fix stats pie chart
 reformat collections pages
-
 pop up messages
 Recommendations
 Sign up with duplicate username checks
