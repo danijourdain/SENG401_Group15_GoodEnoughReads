@@ -5,7 +5,8 @@ import PIL
 def awards(request):
 
     #Hardcoded email for now
-    email = "a@gmail.com"
+    # email = "a@gmail.com"
+    email = request.session['email']
     awd = Awards.Awards(email)
     Userlevel = awd.getUserLevel()
     UserXP = awd.getUserXP()
@@ -14,6 +15,7 @@ def awards(request):
     Image = "gersiteapp/static/gersiteapp/img/Awards/"
 
     if UserXP > ReqXP:
+        # pass
         Userlevel = awd.updateUserLevel()
 
     if(Userlevel < 6):

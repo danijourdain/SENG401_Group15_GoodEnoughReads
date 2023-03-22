@@ -28,7 +28,9 @@ VALUES("000000002", "The Elite",
 INSERT INTO Book(APIid,  Title, Genre, Pages)
 VALUES("000000003",  "The One", 
 		"Dystopian", 336);
-        
+
+DELETE FROM BookInUserCollection WHERE ISBN = "000000003";
+
 INSERT INTO Book(APIid, Title, Genre, Pages)
 VALUES("000000004", "The Heir", 
 		"Dystopian", 336);
@@ -73,8 +75,8 @@ INSERT INTO BookInUserCollection(NewestReadingStartDate,
 VALUES ("2023-04-01", "2023-04-19", 5, 50, "000000003", 
 		"a@gmail.com");
         
-SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead 
-	FROM BookInUserCollection WHERE email = "a@gmail.com";
+-- SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead 
+-- 	FROM BookInUserCollection WHERE email = "a@gmail.com";
     
    --  INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, 
 -- 									NewestReadingEndDate, NumberOfTimesReread, 
@@ -91,3 +93,17 @@ SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead
 -- WHERE C.email = "a@gmail.com" 
 -- AND B.ISBN = C.ISBN
 -- AND C.NumberOfTimesReread > 1;
+
+
+SELECT * FROM `User`;
+-- SELECT * FROM auth_user; 
+
+DELETE FROM Collection WHERE Email = "sobia.khan1@ucalgary.ca";
+
+INSERT INTO  Collection (`Name`, Email) 
+VALUES("Read", "sobia.khan1@ucalgary.ca");
+
+INSERT INTO  Collection (`Name`, Email) 
+VALUES("Read", "a@gmail.com");
+
+SELECT * FROM Collection;

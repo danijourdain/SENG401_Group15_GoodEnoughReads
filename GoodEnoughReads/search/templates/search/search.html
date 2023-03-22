@@ -1,9 +1,15 @@
-{% extends 'gersiteapp/base.html' %}
-{% load static %}
+<!-- This document was made by Ryan Mailhiot for Good Enough Reads
+     Final edit date for Ryan was March 21, 2023.
+-->
+
+{% extends 'gersiteapp/base.html' %}<!-- Extends a base template HTML file -->
+
 
 {% block title %}Search{% endblock %}
 
 {% block content %}
+{% load static %}
+<!-- This section is for the search field and button at the top -->
     <div class="container">
         <h1 id="title" class="text-center mt-5">Search</h1>
         <div class="row">
@@ -14,18 +20,15 @@
         </div>
     </div>
     <div>
+        <!-- This is where the searchNew.js file will put data -->
         <div class="container-fluid" id="results">
             {% csrf_token %}
         </div>
     </div>
+    <!-- When this is on screen it will auto add more components-->
     <div id="bottom-reload" class="bottom-reload">
         <small>Loading</small>
     </div>
-
-    <!-- <div id="pageSelect">
-        
-    </div> -->
-    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
     <script type="text/javascript">
         const searchBox = document.getElementById('search-box');
         const params = new URLSearchParams(window.location.search);
@@ -37,7 +40,7 @@
                 document.getElementById('search-button').click();
             }
         };
-    </script>
+    </script> 
     <script type="text/javascript" src="{% static 'search/js/searchNew.js' %}"></script>
     <link rel="stylesheet" href="{% static 'search/css/style.css' %}">
     

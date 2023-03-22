@@ -4,7 +4,8 @@ from . import StatisticsModel
 def statistics(request):
 
     # hard coded email (for now)
-    stats = StatisticsModel.StatisticsModel("a@gmail.com")
+    email = request.session['email']
+    stats = StatisticsModel.StatisticsModel(email)
     pages_this_week = stats.NumPagesThisWeek()
     
     books_this_month, books_per_month = stats.CalculateBooksPerMonth()

@@ -12,9 +12,9 @@ class Awards:
         self.email = email
         self.cursor = connection.cursor()
 
-    def getImage(self, level):
-        self.cursor.execute("SELECT Image FROM Awards WHERE Level = ?;", level)
-        return self.cursor.fetchall()[0]
+    # def getImage(self, level):
+    #     self.cursor.execute("SELECT Image FROM Awards WHERE Level = ?;", level)
+    #     return self.cursor.fetchall()[0]
     
     def getReqXP(self, level):
         level = str(level)
@@ -28,6 +28,7 @@ class Awards:
     def getUserLevel(self):
         self.cursor.execute("SELECT AwardProfile FROM User WHERE Email = ?;", self.email)
         self.UserLevel = self.cursor.fetchall()[0][0]
+        # print(self.UserLevel)
         return self.UserLevel
     
     def updateUserLevel(self):
