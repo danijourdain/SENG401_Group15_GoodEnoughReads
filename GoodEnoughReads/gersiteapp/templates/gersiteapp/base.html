@@ -40,24 +40,25 @@
                         <a class="nav-link" href="{% url 'search' %}"
                             style="color: #004643; font-size: 18px;">Search</a>
                     </li>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"
-                                id="collection-dropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" style="color: #004643;;
-                                font-size: 18px;">Collections</a>
-                            <div class="dropdown-menu"
-                                aria-labelledby="collection-dropdown">
-                                <a class="dropdown-item" href="{% url 'collection'%}">Collection: All</a>
-                                <a class="dropdown-item" href="{% url 'read'%}">Read</a>
-                                <a class="dropdown-item" href="{% url 'toRead'%}">To Read</a>
-                                <a class="dropdown-item" href="{% url 'read'%}">Currently Reading</a>
-                                <a class="dropdown-item" href="{% url 'read'%}">Did Not Finish</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </li>
-                    </ul>
+                    <li class="nav-item order-md-last">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"
+                                    id="collection-dropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" style="color: #004643;
+                                    font-size: 18px;">Collections</a>
+                                <div class="dropdown-menu"
+                                    aria-labelledby="collection-dropdown">
+                                    <a class="dropdown-item" href="{% url 'collection'%}">Collection: All</a>
+                                    <a class="dropdown-item" href="{% url 'read'%}">Read</a>    
+                                    <a class="dropdown-item" href="{% url 'toRead'%}">To Read</a>
+                                    <a class="dropdown-item" href="{% url 'currentlyReading'%}">Currently Reading</a>
+                                    <a class="dropdown-item" href="{% url 'dnf'%}">Did Not Finish</a> 
+                                    <div class="dropdown-divider"></div></div>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'recommendations' %}"
                             style="color: #004643;
