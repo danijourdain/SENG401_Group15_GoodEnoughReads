@@ -9,3 +9,7 @@ GoodEnoughReads/pyvenv.cfg
 __pycache__/
 *.py[cod]
 *$py.class
+GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/BarGraphNumberofBooksyouReadperMonththisYear.png
+GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/LineGraphAllTimeNumberofBooksyouRead.png
+GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/PieChartBookPagesyouReadthisyear.png
+GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/PieChartGenresyouReadthisyear.png
