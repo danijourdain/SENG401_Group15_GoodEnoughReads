@@ -1,6 +1,4 @@
 -- Total Number of Awards that a User can get 
-SELECT * FROM Awards;
-
 INSERT INTO Awards(`Level`, Required_XP)
 VALUES (0, 0);
 
@@ -21,3 +19,5 @@ VALUES (5, 900);
 
 INSERT INTO Awards(`Level`, Required_XP)
 VALUES (6, 1400);
+
+SELECT * FROM Awards;

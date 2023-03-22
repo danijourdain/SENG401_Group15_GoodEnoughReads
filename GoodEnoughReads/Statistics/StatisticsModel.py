@@ -18,7 +18,7 @@ class StatisticsModel:
         self.cursor = connection.cursor()
 
     def NumPagesThisWeek(self):  
-        self.cursor.execute("SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead FROM BookInUserCollection WHERE email = ?;", self.email)
+        self.cursor.execute("SELECT NewestReadingStartDate, NewestReadingEndDate, PagesRead FROM BookInUserCollection WHERE email = %s;", [self.email])
         readPages = self.cursor.fetchall()
 
         # from: https://stackoverflow.com/questions/2003841/how-can-i-get-the-current-week-using-python#:~:text=Use%20get_week_dates(date.,to%20get%20current%20week%20dates.
@@ -35,7 +35,7 @@ class StatisticsModel:
         return self.pages
 
     def CalculateBooksPerMonth(self):
-        self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = ?;", self.email)
+        self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = %s;", [self.email])
         MonthlyBooksRead = self.cursor.fetchall()
 
         # dictionary with key value pairs: key- month, value - number of books read that month
@@ -61,7 +61,7 @@ class StatisticsModel:
         return self.num_books_read_per_month[months[this_month-1]], self.num_books_read_per_month
 
     def CalculateBooksPerYear(self):
-        self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = ?;", self.email)
+        self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = %s;", [self.email])
         YearlyBooksRead = self.cursor.fetchall()
 
         # dictionary with key value pairs: key - year, value - number of books read that year 
@@ -101,7 +101,7 @@ class StatisticsModel:
         return self.num_books_read_per_year[this_year], self.sorted_num_books_read_per_year
 
     def CalculateBookPagesPerYear(self):
-        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Pages FROM BookInUserCollection AS C, Book AS B WHERE C.email = ? AND B.APIid = C.ISBN;", self.email)
+        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Pages FROM BookInUserCollection AS C, Book AS B WHERE C.email = %s AND B.APIid = C.ISBN;", [self.email])
         YearlyBooksPagesRead = self.cursor.fetchall()
 
         this_year = datetime.date.today().year
@@ -126,7 +126,7 @@ class StatisticsModel:
         return self.book_pages_year
 
     def CalculateGenresPerYear(self): 
-        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = ? AND B.APIid = C.ISBN;", self.email)
+        self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = %s AND B.APIid = C.ISBN;", [self.email])
         YearlyGenresRead = self.cursor.fetchall()
 
         this_year = datetime.date.today().year
@@ -145,7 +145,7 @@ class StatisticsModel:
         return self.num_genres_per_year
     
     def CalcBookReread(self):
-        self.cursor.execute("SELECT B.Title, C.NumberOfTimesReread FROM BookInUserCollection AS C, Book AS B WHERE C.email = ? AND B.APIid = C.ISBN AND C.NumberOfTimesReread > 1;", self.email)
+        self.cursor.execute("SELECT B.Title, C.NumberOfTimesReread FROM BookInUserCollection AS C, Book AS B WHERE C.email = %s AND B.APIid = C.ISBN AND C.NumberOfTimesReread > 1;", [self.email])
         BooksReread = self.cursor.fetchall()
 
         BookTitle = ""
