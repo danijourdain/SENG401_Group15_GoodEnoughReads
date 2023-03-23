@@ -4,6 +4,8 @@ GoodEnoughReads/pyvenv.cfg
 /env
 /.venv
 /ger
+/venv
+GoodEnoughReads\gersiteapp\static\gersiteapp\img\stats
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

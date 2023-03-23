@@ -34,6 +34,18 @@ class StatisticsModel:
 
         return self.pages
 
+    def NumPages(self):
+        self.cursor.execute("SELECT PagesRead FROM BookInUserCollection WHERE email = %s;", [self.email])
+        readPages = self.cursor.fetchall()
+        totalReadPages = 0
+
+        i = 0
+        while i < len(readPages):
+            totalReadPages += readPages[i][0]
+            i+= 1
+
+        return totalReadPages
+
     def CalculateBooksPerMonth(self):
         self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = %s;", [self.email])
         MonthlyBooksRead = self.cursor.fetchall()
@@ -190,6 +202,8 @@ class StatisticsModel:
         ax.spines['right'].set_visible(False)
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+        ax.set_xlim(x[0] - 1, x[-1] + 1)
+        ax.set_ylim(0, max(y) + 3)
 
         fig.savefig('gersiteapp/static/gersiteapp/img/stats/LineGraph' + title.replace(' ', '') + '.png', bbox_inches='tight', transparent=True)
 
@@ -208,7 +222,8 @@ class StatisticsModel:
                 PieExplode.append(0.03)
                 i += 1
 
-        plt.pie(y, labels = x, startangle = 90, colors = PieColors, labeldistance = 1.05, explode = PieExplode, autopct='%1.1f%%', pctdistance=1.25)
+        plt.pie(y, labels = x, startangle = 90, colors = PieColors, labeldistance = 1.1, explode = PieExplode, autopct='%1.1f%%', pctdistance = 1.25)
+        # plt.legend()
         # plt.title(title, fontproperties = self.font, fontsize = 20)
         
         fig.savefig('gersiteapp/static/gersiteapp/img/stats/PieChart' + title.replace(' ','') + '.png', bbox_inches='tight', transparent=True)

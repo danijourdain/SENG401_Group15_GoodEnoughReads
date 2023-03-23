@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . import Awards
+from . import StatisticsModel
 import PIL
 
 def awards(request):
@@ -7,16 +8,21 @@ def awards(request):
     #Hardcoded email for now
     # email = "a@gmail.com"
     email = request.session['email']
+
+    stats = StatisticsModel.StatisticsModel(email)
     awd = Awards.Awards(email)
+
     Userlevel = awd.getUserLevel()
-    UserXP = awd.getUserXP()
+    TotalPages = stats.NumPages()
+    awd.updateUserXP(TotalPages)
+    UserXP = TotalPages
     ReqXP = awd.getReqXP(Userlevel + 1)
-    
+
     Image = "gersiteapp/static/gersiteapp/img/Awards/"
 
     if UserXP > ReqXP:
-        # pass
-        Userlevel = awd.updateUserLevel()
+        awd.updateUserLevel()
+        Userlevel = Userlevel + 1
 
     if(Userlevel < 6):
         NextReqXP = awd.getReqXP(Userlevel + 1)
