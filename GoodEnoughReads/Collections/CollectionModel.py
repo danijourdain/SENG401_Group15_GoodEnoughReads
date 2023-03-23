@@ -18,25 +18,25 @@ class CollectionModel:
 
     def addToCollection(self, email, isbn, startdate, enddate, pagesread):
         # more functionality?
-        self.cursor.execute("INSERT INTO BookInUserCollection VALUES ("+startdate+", "+enddate+", "+pagesread+", "+isbn+", '"+email+"');")
+        self.cursor.execute("INSERT INTO BookInUserCollection VALUES (%s, %s, %s, %s, %s);", [startdate, enddate, pagesread, isbn, email])
         
     def getName(self):
-        self.cursor.execute("SELECT Name FROM Collection WHERE Email = '" + self.email + "' ;")
+        self.cursor.execute("SELECT Name FROM Collection WHERE Email = %s;", [self.email])
         return self.cursor.fetchall()[0]
     
     def getBooksInCollection(self, shelfName):
-        self.cursor.execute("SELECT ISBN FROM BookInUserCollection WHERE Email = '"+self.email+"';")
+        self.cursor.execute("SELECT ISBN FROM BookInUserCollection WHERE Email = %s;", [self.email])
         bookList = self.cursor.fetchall()
         return bookList
     
     # user passes in a book, gets every collection of theirs with said book
     def collectionsWithBook(self, bookisbn):
-        self.cursor.execute("SELECT ShelfName FROM BookInUserCollection WHERE Email = '"+self.email+"' AND ISBN = "+bookisbn+";")
+        self.cursor.execute("SELECT ShelfName FROM BookInUserCollection WHERE Email = %s AND ISBN = %s;", [self.email, bookisbn])
         cols = self.cursor.fetchall()
         return cols
     
     def getAllCollection(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.Email = '"+self.email+"';")
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
         print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
@@ -52,7 +52,7 @@ class CollectionModel:
         return list
     
     def getRead(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = '"+self.email+"';")
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
         print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
@@ -68,7 +68,7 @@ class CollectionModel:
         return list
     
     def gettoRead(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'toRead' AND BC.Email = '"+self.email+"';")
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'toRead' AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
         print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
@@ -84,7 +84,7 @@ class CollectionModel:
         return list
     
     def getcurrentlyReading(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'curentlyReading' AND BC.Email = '"+self.email+"';")
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'curentlyReading' AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
         print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
@@ -100,7 +100,7 @@ class CollectionModel:
         return list
     
     def getDNF(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'DNF' AND BC.Email = '"+self.email+"';")
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'DNF' AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
         print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
