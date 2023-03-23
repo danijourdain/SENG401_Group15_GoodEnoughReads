@@ -33,7 +33,7 @@ def toRead(request, bookID = "default"):
 def currentlyReading(request):
     email = request.session['email']
     collections.setEmail(email)
-    bookList = collections.gettoRead()
+    bookList = collections.getcurrentlyReading()
 
     context = {'bookList': bookList}
     return render(request, 'Collections/collection.html', context)

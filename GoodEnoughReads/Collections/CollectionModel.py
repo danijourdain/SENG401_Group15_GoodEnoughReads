@@ -35,13 +35,14 @@ class CollectionModel:
         cols = self.cursor.fetchall()
         return cols
     
+    # Description: Function gets every book in the user's collection regardless of the shelf it is being added to. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getAllCollection(self):
         self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.Email = '"+self.email+"';")
         tupleInfo = self.cursor.fetchall()
-        print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
         print(tupleInfo)
-        for i in range(len(tupleInfo)):
+        for i in range(len(tupleInfo)): #Non python loop so that specific class variables can be accessed and retrieved since the database is not returning the entire book tuple
             book = BookModel.BookModel()
             book.bookImg = tupleInfo[i][0]
             book.title = tupleInfo[i][1]
@@ -51,10 +52,11 @@ class CollectionModel:
 
         return list
     
+    # Description: Function gets every book in the user's read collection. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getRead(self):
         self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = '"+self.email+"';")
         tupleInfo = self.cursor.fetchall()
-        print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
         print(tupleInfo)
         for i in range(len(tupleInfo)):
@@ -67,10 +69,11 @@ class CollectionModel:
 
         return list
     
+    # Description: Function gets every book in the user's toRead collection. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def gettoRead(self):
         self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'toRead' AND BC.Email = '"+self.email+"';")
         tupleInfo = self.cursor.fetchall()
-        print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
         print(tupleInfo)
         for i in range(len(tupleInfo)):
@@ -83,10 +86,11 @@ class CollectionModel:
 
         return list
     
+    # Description: Function gets every book in the user's currently reading collection. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getcurrentlyReading(self):
         self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'curentlyReading' AND BC.Email = '"+self.email+"';")
         tupleInfo = self.cursor.fetchall()
-        print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
         print(tupleInfo)
         for i in range(len(tupleInfo)):
@@ -98,11 +102,12 @@ class CollectionModel:
             list.append(book)
 
         return list
-    
+
+    # Description: Function gets every book in the user's DNF (did not finish) collection. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getDNF(self):
         self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'DNF' AND BC.Email = '"+self.email+"';")
         tupleInfo = self.cursor.fetchall()
-        print("HELP ME PLEASE FOR THE LOVE OF GOD HELP ME IM_")
         list = []
         print(tupleInfo)
         for i in range(len(tupleInfo)):
