@@ -62,10 +62,16 @@ class BookModel():
       
 
     def addBooktoBooksinUserCollection(self):
-        start = datetime.strptime(self.startDate,'%Y-%m-%d').date()
-        end = datetime.strptime(self.endDate,'%Y-%m-%d').date()
+        start = None
+        end = None
+        if(self.shelf != 'toRead'):
+            start = datetime.strptime(self.startDate,'%Y-%m-%d').date()
+            end = datetime.strptime(self.endDate,'%Y-%m-%d').date()
+        
+        print("SOMEONE TELL ME WHAT IN THE WORLD IS HAPPENING")
         print(self.shelf)
         print(self.bookID)
+
 
         self.cursor.execute("INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, shelfName) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", 
                             (int(self.userRating), start, end, int(self.reread), int(self.pageCount), self.bookID, self.email, self.shelf))

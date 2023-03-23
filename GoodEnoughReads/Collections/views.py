@@ -36,7 +36,7 @@ def currentlyReading(request):
     bookList = collections.getcurrentlyReading()
 
     context = {'bookList': bookList}
-    return render(request, 'Collections/collection.html', context)
+    return render(request, 'Collections/currentlyReading.html', context)
 
 def DNF(request):
     email = request.session['email']
@@ -44,4 +44,4 @@ def DNF(request):
     bookList = collections.getDNF()
 
     context = {'bookList': bookList}
-    return render(request, 'Collections/collection.html', context)
+    return render(request, 'Collections/dnf.html', context)

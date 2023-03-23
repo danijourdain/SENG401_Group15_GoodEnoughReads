@@ -51,7 +51,7 @@ def bookSubmission(request):
     startDate = request.POST.get("startDate", "")
     endDate = request.POST.get("endDate", "")
     ratingUser = request.POST.get("rating", "")
-    reread = request.POST.get("timesRead","")
+    timesRead = request.POST.get("timesRead","")
 
     start = datetime.datetime.strptime(startDate,'%Y-%m-%d').date()
     end = datetime.datetime.strptime(endDate,'%Y-%m-%d').date()
@@ -59,7 +59,18 @@ def bookSubmission(request):
     if start > end:
         return redirect('/bookInfo/')
     
-    book.setInfo(startDate, endDate, ratingUser, reread, shelf)
+    book.setInfo(startDate, endDate, ratingUser, timesRead, shelf)
+    book.addBooktoBooksinUserCollection()
+    return redirect('/search/')
+
+def bookSubmissionToRead(request):
+    shelf = 'toRead'
+    startDate = None
+    endDate = None
+    ratingUser = 0
+    timesRead = 0
+    
+    book.setInfo(startDate, endDate, ratingUser, timesRead, shelf)
     book.addBooktoBooksinUserCollection()
     return redirect('/search/')
    

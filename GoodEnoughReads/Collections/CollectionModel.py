@@ -89,7 +89,7 @@ class CollectionModel:
     # Description: Function gets every book in the user's currently reading collection. It then takes this information and 
     # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getcurrentlyReading(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'curentlyReading' AND BC.Email = %s;", [self.email])
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'currentlyReading' AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
         list = []
         print(tupleInfo)

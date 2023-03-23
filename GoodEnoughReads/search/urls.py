@@ -8,6 +8,7 @@ urlpatterns = [
     path('toRead/<bookID>', views.toRead, name = "toRead"),
     path('bookDisplay/', viewsSearch.bookDisplay, name = "bookDisplay"),
     path('bookInfo/', viewsSearch.bookInfo, name = "bookInfo"),
-    path('bookSubmission/', viewsSearch.bookSubmission, name = "bookSubmission")
+    path('bookSubmission/', viewsSearch.bookSubmission, name = "bookSubmission"),
+    path('bookSubmissionToRead/', viewsSearch.bookSubmissionToRead, name = "bookSubmissionToRead")
 ]
 

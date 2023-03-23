@@ -17,27 +17,25 @@
     <div class="container">
       <div class="row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px;">
         <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
-          <p style = "margin-bottom: 0px;"> Shelf: All</p>
+          <p style = "margin-bottom: 0px;"> Shelf: DNF - Did Not Finish</p>
         </div>
         <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align: right; margin: 0px"> Organize: By Date</p>
         </div>
       </div>
       {% for x in bookList %} 
-        <div class="row">
-          <div class="col mx-1" style="margin: 10px 10px 10px 10px;">
-          <img class= "book" src="{{x.bookImg}}" style= "width: 10%; border-style: solid; 
-                border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px">
-          <div style="background-color: #84A98C; color:#004643; width: 20%; border-radius: 10px;
-              padding: 3px 3px 3px 3px; border-style: solid; 
-              border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
-              margin: 5px 5px 5px 5px;">
-            <p> Title: {{x.title}}</p>
-            <p> Pages: {{x.pageCount}}</p>
-            <p> Your Rating: {{x.userRating}}/5</p>
+      <ul class="list-unstyled">
+        <li class="media">
+          <img class="mr-3" src="{{x.bookImg}}" alt="Generic placeholder image" style= "width: 15%; border-style: solid; 
+          border-color: #004643; border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px">
+          <div class="media-body" style="background-color: #84A98C; color:#004643; width: 100%; border-radius: 10px;
+          padding: 3px 3px 3px 3px; border-style: solid; border-color:#EDD0B1; border-radius: 10px; border-width: 5px;
+          margin: 5px 5px 5px 5px;">
+             <p> Title: {{x.title}}</p>
+             <p> Pages: {{x.pageCount}}</p>
+             <p> Your Rating: {{x.userRating}}/5</p>
           </div>
-          </div>  
-        </div>
+      </ul>
       {% endfor %}
   </body>
   </html>
