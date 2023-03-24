@@ -75,28 +75,25 @@ class BookModel():
     def addBooktoBooksinUserCollection(self):
         start = None
         end = None
-
         self.cursor.execute('SELECT * FROM BookInUserCollection WHERE BookInUserCollection.ISBN = %s and Email = %s', [self.bookID, self.email])
         val = self.cursor.fetchall()
 
+        print(self.bookID)
         # Val can be 2 things:
             # 1. A tuple is found and therefore the book exists in the users collection already - A user wants to edit the book information in this case
             # 2. A tuple is not found and therefore does not exist in the database - This means that val = None
-        
         if not val: #if val = None then you can insert
             pass
         
         elif self.bookID in val[0]: # the bookID we are about to add already exists in the database therefore we don't need to add it and can return back
             self.cursor.execute('DELETE FROM BookInUserCollection WHERE ISBN = %s AND Email = %s;', [self.bookID, self.email] )
         
-
-        if(self.shelf != 'toRead' and self.shelf != 'currentlyReading' ):
+        if  self.startDate != "" and self.startDate != None:
             start = datetime.strptime(self.startDate,'%Y-%m-%d').date()
+    
+        if self.endDate != "" and self.endDate != None:
             end = datetime.strptime(self.endDate,'%Y-%m-%d').date()
-        
-        if(self.shelf == 'currentlyReading'):
-            start = datetime.strptime(self.startDate,'%Y-%m-%d').date()
-
+    
         self.cursor.execute("INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, shelfName) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", 
                             (int(self.userRating), start, end, int(self.timesRead), int(self.pageCount), self.bookID, self.email, self.shelf))
     
@@ -119,13 +116,21 @@ class BookModel():
         self.cursor.execute('SELECT * FROM BookInUserCollection WHERE BookInUserCollection.ISBN = %s and Email = %s', [self.bookID, self.email])
         val = self.cursor.fetchall()
 
+        print("WHERE AM I?")
+        self.shelfName = val[0][6]
+        print(self.shelfName)
         print(val)
+
+        if val[0][1] != None:
+            self.startDate = (val[0][1]).strftime('%Y-%m-%d')
+        
+        if val[0][2] != None:
+            self.endDate = (val[0][2]).strftime('%Y-%m-%d')
+
         self.userRating = val[0][0]
-        self.startDate = (val[0][1]).strftime('%Y-%m-%d')
-        self.endDate = (val[0][2]).strftime('%Y-%m-%d')
         self.timesRead = val[0][3]
         self.pageCount = val[0][4]
-        self.shelfName = val[0][5]
+        
 
 
 

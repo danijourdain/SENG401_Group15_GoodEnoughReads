@@ -57,17 +57,27 @@ def bookInfo(request):
     return render(request, 'search/bookInfo.html', context)
 
 def bookSubmission(request):
+    start = None
+    end = None
     shelf = request.POST.get("shelf", "")
     startDate = request.POST.get("startDate", "")
     endDate = request.POST.get("endDate", "")
     ratingUser = request.POST.get("rating", "")
     timesRead = request.POST.get("timesRead","")
 
-    start = datetime.datetime.strptime(startDate,'%Y-%m-%d').date()
-    end = datetime.datetime.strptime(endDate,'%Y-%m-%d').date()
+    print("TESTING TESTING")
+    print(type(startDate))
+    print(type(endDate))
+
+    if  not startDate == "":
+        start = datetime.datetime.strptime(startDate,'%Y-%m-%d').date()
     
-    if start > end:
-        return redirect('/bookInfo/')
+    if not endDate == "":
+        end = datetime.datetime.strptime(endDate,'%Y-%m-%d').date()
+    
+    if (not endDate == "") and (not startDate == ""):
+        if start > end:
+            return redirect('/bookInfo/')
     
     book.setInfo(startDate, endDate, ratingUser, timesRead, shelf)
     book.addBooktoBooksinUserCollection()
