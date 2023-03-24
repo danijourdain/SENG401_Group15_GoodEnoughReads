@@ -28,7 +28,7 @@ def statistics(request):
     books_reread_the_most = stats.CalcBookReread()
 
     if len(books_reread_the_most) > 0:
-        books_reread_message = "You reread <Strong>" + books_reread_the_most + "</Strong> the most! You must really love it."
+        books_reread_message = "You reread " + books_reread_the_most + " the most! You must really love it."
     else:
         books_reread_message = "You haven't reread any books."
 
