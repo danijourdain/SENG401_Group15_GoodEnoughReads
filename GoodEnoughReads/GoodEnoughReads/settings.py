@@ -169,3 +169,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'Statistics/media')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/"
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
