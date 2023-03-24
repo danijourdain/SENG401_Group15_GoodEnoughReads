@@ -3,21 +3,21 @@ INSERT INTO Awards(`Level`, Required_XP)
 VALUES (0, 0);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (1, 100);
+VALUES (1, 1000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (2, 250);
+VALUES (2, 2000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (3, 400);
+VALUES (3, 5000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (4, 600);
+VALUES (4, 10000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (5, 900);
+VALUES (5, 20000);
 
 INSERT INTO Awards(`Level`, Required_XP)
-VALUES (6, 1400);
+VALUES (6, 35000);
 
 SELECT * FROM Awards;

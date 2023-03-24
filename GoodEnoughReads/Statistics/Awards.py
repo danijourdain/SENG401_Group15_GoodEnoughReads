@@ -28,12 +28,15 @@ class Awards:
     def getUserLevel(self):
         self.cursor.execute("SELECT AwardProfile FROM User WHERE Email = %s;", [self.email])
         self.UserLevel = self.cursor.fetchall()[0][0]
-        # print(self.UserLevel)
         return self.UserLevel
     
     def updateUserLevel(self):
         self.cursor.execute("UPDATE User SET AwardProfile = %s WHERE Email = %s;", [self.UserLevel + 1, self.email])
-        pass
+        # self.cursor.execute("SELECT AwardProfile FROM User WHERE Email = %s;", [self.email])
+        # return self.cursor.fetchall()[0][0]
+        
+    def updateUserXP(self, xp):
+        self.cursor.execute("UPDATE User SET XP = %s WHERE Email = %s;", [xp, self.email])
 
 
     
