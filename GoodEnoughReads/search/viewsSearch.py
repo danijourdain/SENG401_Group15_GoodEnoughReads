@@ -10,6 +10,8 @@ book = BookModel.BookModel()
 def search(request):
     return render(request, 'search/search.html')
 
+#Book information that is returned from the API itself 
+# - Data cannot be corrupted because its not user input
 @csrf_exempt
 def bookDisplay(request, ):
     title = request.POST.get('title', '')
@@ -35,14 +37,22 @@ def bookDisplay(request, ):
     book.addBooktoBooks()
     return render(request, 'search/bookDisplay.html', context)
 
+
+# There are 2 options for when a user wants to add a book into their shelf
+# 1. The book does not exist anywhere in the collection 
+# 2. The book already exists in the collection and the user wants to edit the book
+    # - When the book already exists in the users collection it retrieves the information rather than having empty
+    # - This way a user does not need to remember they previously gave
 def bookInfo(request):
+    check = book.checkBookInUserCollection()
+    if check:
+        book.setInfoFromDataBase()
+
     dateM = datetime.datetime.now()
     dateString = dateM.strftime('%Y-%m-%d')
     context = {
-        "title": book.title,
-        "bookImg": book.bookImg,
-        "pagesRead": book.pageCount,
         "dateMax": dateString, 
+        "book": book
     }
     return render(request, 'search/bookInfo.html', context)
 
