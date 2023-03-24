@@ -1,5 +1,5 @@
 {% extends 'gersiteapp/base.html' %}
-{% load static %}
+<!-- {% load static %} -->
 {% block title %}Awards{% endblock %}
 
 {% block content %}
@@ -32,7 +32,8 @@
         <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>My Awards</Strong></p>
           </p>
-          <img src = "{% static 'gersiteapp/img/Awards/Award_image.png' %}" alt = "My Award" style = "display: block; margin-left: auto; margin-right: auto;">
+          <!-- <img src = "{% static 'gersiteapp/img/Awards/Award_image.png' %}" alt = "My Award" style = "display: block; margin-left: auto; margin-right: auto;"> -->
+          <img class = "img-responsive" src = "/media/Award_image.png" alt = "My Award" style = "display: block; margin-left: auto; margin-right: auto;">
         </div>
       </div>
     </div>
