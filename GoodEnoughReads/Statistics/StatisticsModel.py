@@ -65,7 +65,9 @@ class StatisticsModel:
         i = 0
         while i < len(MonthlyBooksRead):
             current_year = datetime.date.today().year
-            if (MonthlyBooksRead[i][0].year == current_year):
+            if (MonthlyBooksRead[i][0] == None):
+                print()
+            elif (MonthlyBooksRead[i][0].year == current_year):
                 self.num_books_read_per_month[months[MonthlyBooksRead[i][0].month - 1]] += 1
             i += 1
 
@@ -85,7 +87,9 @@ class StatisticsModel:
 
         i = 0
         while i < len(YearlyBooksRead):
-            if (YearlyBooksRead[i][0].year in self.num_books_read_per_year):
+            if (YearlyBooksRead[i][0] == None):
+                print()
+            elif (YearlyBooksRead[i][0].year in self.num_books_read_per_year):
                 self.num_books_read_per_year[YearlyBooksRead[i][0].year] += 1
             else:
                 self.num_books_read_per_year[YearlyBooksRead[i][0].year] = 1
@@ -121,7 +125,9 @@ class StatisticsModel:
 
         i = 0
         while i < len(YearlyBooksPagesRead):
-            if YearlyBooksPagesRead[i][0].year == this_year:
+            if (YearlyBooksPagesRead[i][0] == None):
+                print()
+            elif YearlyBooksPagesRead[i][0].year == this_year:
                 if YearlyBooksPagesRead[i][1] < 100:
                     self.book_pages_year["< 100"] += 1
                 elif YearlyBooksPagesRead[i][1] < 200:
@@ -147,7 +153,9 @@ class StatisticsModel:
 
         i = 0
         while i < len(YearlyGenresRead):
-            if(YearlyGenresRead[i][0].year == this_year):
+            if (YearlyGenresRead[i][0] == None):
+                print()
+            elif(YearlyGenresRead[i][0].year == this_year):
                 if(YearlyGenresRead[i][1] in self.num_genres_per_year):
                     self.num_genres_per_year[YearlyGenresRead[i][1]] += 1
                 else:
