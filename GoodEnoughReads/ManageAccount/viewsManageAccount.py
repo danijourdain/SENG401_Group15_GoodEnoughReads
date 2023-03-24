@@ -17,14 +17,26 @@ def signup(request):
         uname = request.POST.get('username', '')
         pw1 = request.POST.get('password', '')
         pw2 = request.POST.get('password2', '')
-        user = authenticate(request, email=email)
-        
+        username = None
+        user = None
+
+        try:
+            username = User.objects.get(username=uname)
+            user = User.objects.get(email=email)
+        except:
+            pass
+
         login = LoginModel.LoginModel(email)
         uniqueEmail = login.verifyUser()
         if not uniqueEmail:
             error_message = "That email is already signed up!"
             # template currently not made
             return render(request, 'ManageAccount/signup.html', {'error_message': error_message})
+        elif username is not None:
+            error_message = "That username is already signed up!"
+            # template currently not made
+            return render(request, 'ManageAccount/signup.html', {'error_message': error_message})
+
 
         if user is None and pw1 == pw2:
             user = User.objects.create_user(username=uname, password=pw1, email=email)
