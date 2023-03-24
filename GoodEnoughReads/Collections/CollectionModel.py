@@ -55,7 +55,7 @@ class CollectionModel:
     # Description: Function gets every book in the user's read collection. It then takes this information and 
     # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getRead(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = %s;", [self.email])
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
         list = []
         print(tupleInfo)
@@ -63,8 +63,9 @@ class CollectionModel:
             book = BookModel.BookModel()
             book.bookImg = tupleInfo[i][0]
             book.title = tupleInfo[i][1]
-            book.pageCount = tupleInfo[i][2]
+            book.maxPages = tupleInfo[i][2]
             book.userRating = tupleInfo[i][3]
+            book.pageCount = tupleInfo[i][4]
             list.append(book)
 
         return list
