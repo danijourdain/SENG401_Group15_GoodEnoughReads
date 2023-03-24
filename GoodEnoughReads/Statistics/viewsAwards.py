@@ -48,7 +48,7 @@ def awards(request):
     # print(Image)
     Image1 = PIL.Image.open(Image)
     # Image1.save("gersiteapp/static/gersiteapp/img/Awards/Award_image.png")
-    Image1.save("Statistics/media/Award_image.png")
+    # Image1.save("Statistics/media/Award_image.png")
 
     return render(request, 'Awards/awards.html', {"Current_XP": UserXP, 
                                                   "LevelUp_XP": LevelUp,

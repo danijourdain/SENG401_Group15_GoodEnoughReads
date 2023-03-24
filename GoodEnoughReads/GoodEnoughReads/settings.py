@@ -86,7 +86,7 @@ if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/goodenoughreads',
+            'HOST': '/cloudsql/ger-v2:us-central1:goodenoughreads',
             'USER': 'ger',
             'PASSWORD': 'seng',
             'NAME': 'GER_DB',
@@ -157,7 +157,6 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = 'static'
-
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'gersiteapp/static')]
 
 MEDIA_URL = '/media/'
