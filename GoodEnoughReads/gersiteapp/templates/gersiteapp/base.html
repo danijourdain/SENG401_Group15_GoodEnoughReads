@@ -1,16 +1,14 @@
 {% load static %}
 
-{% if not request.session.username %}
-    {% url 'ManageAccount:login' as login_url %}
-    <script>
-        window.location.href = "{% autoescape off %}{% spaceless %}{% url 'ManageAccount:login' %}{% endspaceless %}{% endautoescape %}";
-    </script>
-{% endif %}
+
 
 
 <!DOCTYPE html>
 <html>
     <head>
+        {% if not request.session.username %}
+            <meta http-equiv="refresh" content="0; URL=/login">
+        {% endif %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %} - GoodEnoughReads</title>
@@ -113,5 +111,5 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    </body>
+    </head>
 </html>
