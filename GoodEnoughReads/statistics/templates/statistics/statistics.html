@@ -51,7 +51,10 @@
           </p>
           <p style = "text-align:center; color: #000000; font-size: 18px; margin-bottom: 3px; font-family: Andalé Mono, monospace"> You read {{books_this_year}} books this year! </p>
           </p>
-          <img src= "{% static 'gersiteapp/img/stats/BarGraphNumberofBooksyouReadperMonththisYear.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
+          <!-- <img src= "{% static 'gersiteapp/img/stats/BarGraphNumberofBooksyouReadperMonththisYear.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;"> -->
+          <div style = "width:1000;height:100">
+          {{ Bar_graph|safe }}
+          </div>
         </div>
       </div>
     </div>
@@ -61,7 +64,10 @@
         <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Books you Read since the Beginning of Time</Strong></p>
           </p>
-          <img src= "{% static 'gersiteapp/img/stats/LineGraphAllTimeNumberofBooksyouRead.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
+          <!-- <img src= "{% static 'gersiteapp/img/stats/LineGraphAllTimeNumberofBooksyouRead.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;"> -->
+          <div style = "width:1000;height:100">
+          {{ Bar_line|safe }}
+          </div>
         </div>
       </div>
     </div>
@@ -81,7 +87,10 @@
         <div class="col" style = "color: #004643; font-size: 30px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
           <p style = "text-align:center; margin-bottom: 0px;"> <Strong>Length of Books you Read this Year</Strong></p>
           </p>
-          <img src= "{% static 'gersiteapp/img/stats/PieChartBookPagesyouReadthisyear.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
+          <!-- <img src= "{% static 'gersiteapp/img/stats/PieChartBookPagesyouReadthisyear.png' %}" alt = "Books you read every month per year" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;"> -->
+          <div style = "width:1000;height:100">
+            {{ Pie_chart|safe }}
+          </div>
         </div>
       </div>
     </div>

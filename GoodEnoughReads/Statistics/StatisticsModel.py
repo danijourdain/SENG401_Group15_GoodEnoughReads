@@ -5,6 +5,10 @@ from matplotlib.ticker import MaxNLocator
 from django.db import models
 from django.db import connection, transaction
 import datetime
+# from chart_studio import plotly as py
+import plotly as py
+import plotly.express as px
+from pandas import DataFrame
 
 matplotlib.use('SVG')
 
@@ -182,6 +186,7 @@ class StatisticsModel:
 
     def CreateBarGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
+        # fig, ax = plt.figure()
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
@@ -193,8 +198,20 @@ class StatisticsModel:
         plt.xticks(rotation = 45, fontproperties = self.font, fontsize = 10)
         plt.ylabel(y_label, fontproperties = self.font, fontsize = 15)
         plt.yticks(fontproperties = self.font, fontsize = 10)
+        # fig.savefig('gersiteapp/static/gersiteapp/img/stats/BarGraph' + title.replace(' ', '') + '.png', bbox_inches='tight', transparent=True)
         
-        fig.savefig('gersiteapp/static/gersiteapp/img/stats/BarGraph' + title.replace(' ', '') + '.png', bbox_inches='tight', transparent=True)
+
+    def CreatePlotlyBarGraph(self, x_data, y_data, x_label, y_label):
+        data = {x_label: x_data, y_label: y_data}
+        df = DataFrame(data)
+        # fig = px.bar(x = x_data, y = y_data)
+        fig = px.bar(df, x = x_label, y = y_label, color_discrete_sequence = ["#84A98C"])
+        fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", 
+                          xaxis = {'tickformat': ',d'}, yaxis = {'tickformat': ',d'}, separators = "")
+        fig.update_xaxes(type = 'category')
+        bar_graph = py.offline.plot(fig, auto_open = False, output_type="div")
+        return bar_graph
+
 
     def CreateLineGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
@@ -213,7 +230,20 @@ class StatisticsModel:
         ax.set_xlim(x[0] - 1, x[-1] + 1)
         ax.set_ylim(0, max(y) + 3)
 
-        fig.savefig('gersiteapp/static/gersiteapp/img/stats/LineGraph' + title.replace(' ', '') + '.png', bbox_inches='tight', transparent=True)
+        # fig.savefig('gersiteapp/static/gersiteapp/img/stats/LineGraph' + title.replace(' ', '') + '.png', bbox_inches='tight', transparent=True)
+
+    def CreatePlotlyLineGraph(self, x_data, y_data, x_label, y_label):
+        data = {x_label: x_data, y_label: y_data}
+        df = DataFrame(data)
+        
+        fig = px.line(df, x = x_label, y = y_label, color_discrete_sequence = ["#84A98C"], markers = True)
+        fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", 
+                          xaxis = {'tickformat': ',d'}, yaxis = {'tickformat': ',d'}, separators = "")
+        fig.update_xaxes(type = 'category')
+        fig.update_traces(marker = dict (size = 11, color = "#004643", line = dict(width = 2, color = "#84A98C")))
+
+        line_graph = py.offline.plot(fig, auto_open = False, output_type="div")
+        return line_graph
 
     def CreatePieChart(self, x, y, title):
         fig, ax = plt.subplots()
@@ -234,7 +264,32 @@ class StatisticsModel:
         # plt.legend()
         # plt.title(title, fontproperties = self.font, fontsize = 20)
         
-        fig.savefig('gersiteapp/static/gersiteapp/img/stats/PieChart' + title.replace(' ','') + '.png', bbox_inches='tight', transparent=True)
+        # fig.savefig('gersiteapp/static/gersiteapp/img/stats/PieChart' + title.replace(' ','') + '.png', bbox_inches='tight', transparent=True)
+
+
+    def CreatePlotlyPieChart(self, x_label, y_data, title):
+        # PieColors = {x_label[0] : "#84A98C"}
+        PieColors = {}
+        # PieColors = []
+
+        i = 0
+        while i < len(x_label):
+            if y_data[i] == 0:
+                y_data.pop(i)
+                x_label.pop(i)
+            else:
+                PieColors[x_label[i]] = ("#" + (str(hex(int(("#84A98C")[1:], 16) + 40*i)))[2:])
+                # PieColors.append("#" + (str(hex(int(("#84A98C")[1:], 16) + 20*i)))[2:])
+                i += 1
+
+        data = {"Data" : y_data, "Label" : x_label}
+        df = DataFrame(data)
+        # fig = px.pie(df, values = "Data", names = "labels", color = "labels", color_discrete_sequence = PieColors)
+        fig = px.pie(df, values = "Data", names = x_label, color = x_label, color_discrete_map = PieColors)
+        fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)")
+        
+        pie_chart = py.offline.plot(fig, auto_open = False, output_type="div")
+        return pie_chart
 
 # if __name__ == '__main__':
 #     books_per_month = {"January":5, "February": 7, "March": 10, "April": 10, "May": 0,

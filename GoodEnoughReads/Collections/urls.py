@@ -7,6 +7,7 @@ urlpatterns = [
     path('currentlyReading/', views.currentlyReading, name='currentlyReading'),
     path('dnf/', views.DNF, name='dnf'),
     path('collection/', views.collection, name='collection'),
+    path('removeBook/', views.removeBook, name='removeBook'),
     #path("collection/", include("Collections.urls")),
 ]
 

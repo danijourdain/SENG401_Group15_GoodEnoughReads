@@ -38,26 +38,50 @@ class CollectionModel:
     # Description: Function gets every book in the user's collection regardless of the shelf it is being added to. It then takes this information and 
     # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getAllCollection(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.Email = %s;", [self.email])
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead, B.APIid FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
-        list = []
-        print(tupleInfo)
-        for i in range(len(tupleInfo)): #Non python loop so that specific class variables can be accessed and retrieved since the database is not returning the entire book tuple
-            book = BookModel.BookModel()
-            book.bookImg = tupleInfo[i][0]
-            book.title = tupleInfo[i][1]
-            book.pageCount = tupleInfo[i][2]
-            book.userRating = tupleInfo[i][3]
-            list.append(book)
-
+        list = self.loopInfo(tupleInfo)
         return list
+    
     
     # Description: Function gets every book in the user's read collection. It then takes this information and 
     # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
     def getRead(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = %s;", [self.email])
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead, B.APIid FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = %s;", [self.email])
         tupleInfo = self.cursor.fetchall()
-        list = []
+        list = self.loopInfo(tupleInfo)
+        return list
+    
+    # Description: Function gets every book in the user's toRead collection. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
+    def gettoRead(self):
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead, B.APIid FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'toRead' AND BC.Email = %s;", [self.email])
+        tupleInfo = self.cursor.fetchall()
+        list = self.loopInfo(tupleInfo)
+        return list
+    
+    # Description: Function gets every book in the user's currently reading collection. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
+    def getcurrentlyReading(self):
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead, B.APIid FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'currentlyReading' AND BC.Email = %s;", [self.email])
+        tupleInfo = self.cursor.fetchall()
+        list = self.loopInfo(tupleInfo)
+        return list
+
+    # Description: Function gets every book in the user's DNF (did not finish) collection. It then takes this information and 
+    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
+    def getDNF(self):
+        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead, B.APIid FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'DNF' AND BC.Email = %s;", [self.email])
+        tupleInfo = self.cursor.fetchall()
+        list = self.loopInfo(tupleInfo)
+        return list
+    
+    def removeBook(self, bookID):
+        self.cursor.execute('DELETE FROM BookInUserCollection WHERE ISBN = %s', [bookID])
+
+
+    def loopInfo(self, tupleInfo):
+        listInfo = []
         print(tupleInfo)
         for i in range(len(tupleInfo)):
             book = BookModel.BookModel()
@@ -66,57 +90,7 @@ class CollectionModel:
             book.maxPages = tupleInfo[i][2]
             book.userRating = tupleInfo[i][3]
             book.pageCount = tupleInfo[i][4]
-            list.append(book)
+            book.bookID = tupleInfo[i][5]
+            listInfo.append(book)
 
-        return list
-    
-    # Description: Function gets every book in the user's toRead collection. It then takes this information and 
-    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
-    def gettoRead(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'toRead' AND BC.Email = %s;", [self.email])
-        tupleInfo = self.cursor.fetchall()
-        list = []
-        print(tupleInfo)
-        for i in range(len(tupleInfo)):
-            book = BookModel.BookModel()
-            book.bookImg = tupleInfo[i][0]
-            book.title = tupleInfo[i][1]
-            book.pageCount = tupleInfo[i][2]
-            book.userRating = tupleInfo[i][3]
-            list.append(book)
-
-        return list
-    
-    # Description: Function gets every book in the user's currently reading collection. It then takes this information and 
-    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
-    def getcurrentlyReading(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'currentlyReading' AND BC.Email = %s;", [self.email])
-        tupleInfo = self.cursor.fetchall()
-        list = []
-        print(tupleInfo)
-        for i in range(len(tupleInfo)):
-            book = BookModel.BookModel()
-            book.bookImg = tupleInfo[i][0]
-            book.title = tupleInfo[i][1]
-            book.pageCount = tupleInfo[i][2]
-            book.userRating = tupleInfo[i][3]
-            list.append(book)
-
-        return list
-
-    # Description: Function gets every book in the user's DNF (did not finish) collection. It then takes this information and 
-    # places that data in a temporary book function that the template can access and retrieve without the use of the API. 
-    def getDNF(self):
-        self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'DNF' AND BC.Email = %s;", [self.email])
-        tupleInfo = self.cursor.fetchall()
-        list = []
-        print(tupleInfo)
-        for i in range(len(tupleInfo)):
-            book = BookModel.BookModel()
-            book.bookImg = tupleInfo[i][0]
-            book.title = tupleInfo[i][1]
-            book.pageCount = tupleInfo[i][2]
-            book.userRating = tupleInfo[i][3]
-            list.append(book)
-
-        return list
+        return listInfo

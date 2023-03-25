@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
 from . import Awards
 from . import StatisticsModel
-import PIL
+# import PIL
 
 def awards(request):
 
-    #Hardcoded email for now
-    # email = "a@gmail.com"
     email = request.session['email']
 
     stats = StatisticsModel.StatisticsModel(email)
@@ -18,7 +16,8 @@ def awards(request):
     UserXP = TotalPages
     ReqXP = awd.getReqXP(Userlevel + 1)
 
-    Image = "gersiteapp/static/gersiteapp/img/Awards/"
+    # Image = "gersiteapp/static/gersiteapp/img/Awards/"
+    Image = "/media/Awards/"
 
     if UserXP > ReqXP:
         awd.updateUserLevel()
@@ -46,12 +45,12 @@ def awards(request):
     Image += ".png"
 
     # print(Image)
-    Image1 = PIL.Image.open(Image)
+    # Image1 = PIL.Image.open(Image)
     # Image1.save("gersiteapp/static/gersiteapp/img/Awards/Award_image.png")
     # Image1.save("Statistics/media/Award_image.png")
 
     return render(request, 'Awards/awards.html', {"Current_XP": UserXP, 
                                                   "LevelUp_XP": LevelUp,
-                                                  "awards_image" : Image1})
+                                                  "Awards_image" : Image})
 
 # <img src= "{% static '{{Award_image}}' %}" alt = "My Award" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
