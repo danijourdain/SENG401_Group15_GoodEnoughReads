@@ -86,7 +86,7 @@ if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/goodenoughreads',
+            'HOST': '/cloudsql/ger-v2:us-central1:goodenoughreads',
             'USER': 'ger',
             'PASSWORD': 'seng',
             'NAME': 'GER_DB',
@@ -108,6 +108,13 @@ else:
             'OPTIONS': {  
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
             } 
+        }, 'TEST': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'test_ger_db',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'USER': 'ger',
+            'PASSWORD': 'seng',
         }
     }
 # [END db_setup]
@@ -157,7 +164,6 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = 'static'
-
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'gersiteapp/static')]
 
 MEDIA_URL = '/media/'

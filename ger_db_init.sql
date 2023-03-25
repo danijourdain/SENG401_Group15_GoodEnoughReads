@@ -42,6 +42,17 @@ CREATE TABLE Author (
   PRIMARY KEY (A_ID)
 );
 
+DROP TABLE IF EXISTS `Book`;
+CREATE TABLE Book (
+  APIid VARCHAR(255),
+  ImageURL VARCHAR(255),
+  Title VARCHAR(255),
+  Genre VARCHAR(255),
+  Pages INT NOT NULL,
+  Rating FLOAT,
+  PRIMARY KEY (APIid)
+);
+
 DROP TABLE IF EXISTS `WrittenBy`;
 CREATE TABLE WrittenBy (
   BookISBN VARCHAR(255),
@@ -51,7 +62,6 @@ CREATE TABLE WrittenBy (
   PRIMARY KEY (AuthorID, BookISBN)
 );
 
-USE GER_DB;
 DROP TABLE IF EXISTS `BookInUserCollection`;
 CREATE TABLE BookInUserCollection (
   UserRating INT,
@@ -67,17 +77,6 @@ CREATE TABLE BookInUserCollection (
   FOREIGN KEY (shelfName) REFERENCES Collection(`Name`),
   FOREIGN KEY (Email) REFERENCES User (Email),
   PRIMARY KEY (ISBN, Email)
-);
-
-DROP TABLE IF EXISTS `Book`;
-CREATE TABLE Book (
-  APIid VARCHAR(255),
-  ImageURL VARCHAR(255),
-  Title VARCHAR(255),
-  Genre VARCHAR(255),
-  Pages INT NOT NULL,
-  Rating FLOAT,
-  PRIMARY KEY (APIid)
 );
 
 INSERT INTO `Awards` VALUES (0,0),(1,1000),(2,2000),(3,5000),(4,10000),(5,20000),(6,35000);
