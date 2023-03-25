@@ -1,0 +1,518 @@
+{
+  "id": "2325f83a-b4ca-46ea-96ad-323a4f90e82f",
+  "version": "2.0",
+  "name": "GoodEnoughReadsGUITesting",
+  "url": "http://127.0.0.1:8000",
+  "tests": [{
+    "id": "ba14295d-e84b-4f09-ad2f-0efd38f7d91d",
+    "name": "LoginValidUsernameAndPassword",
+    "commands": [{
+      "id": "e14937d4-267d-4781-ad00-9d6702f671bf",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0f94098d-22ae-41f7-9af9-7cde4a3a2c56",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "718x720",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3308fc96-1862-4f44-9508-9a30ee94ff42",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2943593a-ec1d-4130-929e-1a1bbc2731e6",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "Sobia"
+    }, {
+      "id": "975bf72f-9bca-47af-a855-3f314be5ad45",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d4000866-03d0-4b40-853e-c23b4e51cbce",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "b"
+    }, {
+      "id": "9b8fdc28-fbc4-49c4-8b00-9344c58d1508",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'LOGIN')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "219aabf6-a6cd-4b7f-8c36-cc42f73865bb",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Good morning, Sobia.')]", "xpath:innerText"]
+      ],
+      "value": "Good morning, Sobia."
+    }, {
+      "id": "0a35cdf0-50c0-457a-bce4-2e200034525a",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-center > .text-center",
+      "targets": [
+        ["css=.text-center > .text-center", "css:finder"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Welcome to GoodEnoughReads.')]", "xpath:innerText"]
+      ],
+      "value": "Welcome to GoodEnoughReads."
+    }, {
+      "id": "df5a325a-1126-452c-b21f-1a66f525ca38",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Welcome - GoodEnoughReads",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "4fe2b95b-9aef-4139-ab79-2593e69326c6",
+    "name": "LoginValidUsernameAndInvalidPassword",
+    "commands": [{
+      "id": "5e4b23ad-65ba-40ce-87b1-9b81c7f2723b",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2ed01a8-5ab5-4369-a356-6797c9c9d7c9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "718x720",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cb57025d-d837-4a59-9772-830e1370b432",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dffbf2ed-ca12-46b2-a320-3a8031076683",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "Sobia"
+    }, {
+      "id": "126caccb-bdfd-4e41-abd8-90699b5346a9",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fca0ad47-d6d7-47e8-ac3b-98f33eef85d1",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "c"
+    }, {
+      "id": "fb540876-e3b6-4180-9cd1-dc148579cad7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'LOGIN')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "787f6d95-54cc-4557-bf02-648b53f861da",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=strong",
+      "targets": [
+        ["css=strong", "css:finder"],
+        ["xpath=//strong", "xpath:position"],
+        ["xpath=//strong[contains(.,'Invalid login credentials')]", "xpath:innerText"]
+      ],
+      "value": "Invalid login credentials"
+    }, {
+      "id": "0873c199-48b0-4ec6-8dd2-3c14017f796f",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Login - GoodEnoughReads",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "04f171ce-5931-4dc4-8690-0d4b454c8aa5",
+    "name": "LoginInvalidUsernameValidPassword",
+    "commands": [{
+      "id": "ae8fcb4b-015e-4780-9b42-cde62b963d8f",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2414c78b-1523-44cc-a4da-3e7c63176467",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "718x720",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2d8f4c9-7b2e-47fd-bd65-7465214220ec",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9daa65a-0b39-4a6d-9037-d86e43c3c8ab",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "S"
+    }, {
+      "id": "987b194a-1771-475b-938c-e7215692cf1d",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "112fef13-286b-40c8-a9cd-edd135372199",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "b"
+    }, {
+      "id": "c5d62dc9-97b6-4cfa-bfd2-d7c30af3161b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'LOGIN')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3432f3e-a5d4-4dd5-8ac9-c7214b844332",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=strong",
+      "targets": [
+        ["css=strong", "css:finder"],
+        ["xpath=//strong", "xpath:position"],
+        ["xpath=//strong[contains(.,'Invalid login credentials')]", "xpath:innerText"]
+      ],
+      "value": "Invalid login credentials"
+    }, {
+      "id": "c487d531-99d3-4842-8aa4-97af7be008cf",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Login - GoodEnoughReads",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "9a1a9dc3-0093-4fbe-a5cc-dc9ff4619e58",
+    "name": "ChangePasswordWithValidUsernameAndEmail",
+    "commands": [{
+      "id": "2c5eb574-88d5-43d5-97e5-789a742ad54b",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "06af2591-b3a4-402d-9586-37982ec1488b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "718x720",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7c6f463f-c4a8-4b61-8fd8-e81e51e0d26a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Forgot password?",
+      "targets": [
+        ["linkText=Forgot password?", "linkText"],
+        ["css=.nav-link:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'Forgot password?')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/reset-password/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Forgot password?')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f0485abd-9d07-45a6-b07d-8a0258730a90",
+      "comment": "",
+      "command": "verifyTitle",
+      "target": "Reset Password - GoodEnoughReads",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4df2fcf5-2148-465b-8713-287599d27bd9",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.display-6",
+      "targets": [
+        ["css=.display-6", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
+      ],
+      "value": "Reset Password"
+    }, {
+      "id": "fa458151-9515-4e61-9487-e326117e3fdf",
+      "comment": "",
+      "command": "click",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8a3f7d88-218e-4c5d-972e-3b3a10b3948f",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "Sobia"
+    }, {
+      "id": "f79f6f0b-785c-4df0-9757-e0ee48fb0f19",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "80f1be00-aa62-4e8c-80e9-8ee23dfdadd4",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "sobia.khan1@ucalgary.ca"
+    }, {
+      "id": "84a40fc5-f4b0-466b-8ef3-a677b1cf8a1f",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8affb8d-2d75-43f6-bb65-87752d225bd5",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "d"
+    }, {
+      "id": "d736be9f-4043-4942-a0e8-c3d7ea9f83b7",
+      "comment": "",
+      "command": "click",
+      "target": "id=password2",
+      "targets": [
+        ["id=password2", "id"],
+        ["name=password2", "name"],
+        ["css=#password2", "css:finder"],
+        ["xpath=//input[@id='password2']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cd441eaf-c035-43f5-9675-ad09d16bcd77",
+      "comment": "",
+      "command": "type",
+      "target": "id=password2",
+      "targets": [
+        ["id=password2", "id"],
+        ["name=password2", "name"],
+        ["css=#password2", "css:finder"],
+        ["xpath=//input[@id='password2']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "d"
+    }, {
+      "id": "a2135fd6-c63a-4ad4-9680-53a8477acd52",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'RESET PASSWORD')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "482572d4-2f4d-4662-a594-7d6e6f472ab8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Good morning, Sobia.')]", "xpath:innerText"]
+      ],
+      "value": "Good morning, Sobia."
+    }, {
+      "id": "990f5359-3050-4581-b8a7-843268e59adc",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Welcome - GoodEnoughReads",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "8210b83d-4019-4427-b585-4168ee7bcecb",
+    "name": "Login",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["ba14295d-e84b-4f09-ad2f-0efd38f7d91d", "4fe2b95b-9aef-4139-ab79-2593e69326c6", "04f171ce-5931-4dc4-8690-0d4b454c8aa5"]
+  }, {
+    "id": "1111bd42-05ca-4cba-a164-9fadf910eb95",
+    "name": "SignUp",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}
