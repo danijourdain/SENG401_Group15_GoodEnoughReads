@@ -37,6 +37,23 @@ def bookDisplay(request, ):
     book.addBooktoBooks()
     return render(request, 'search/bookDisplay.html', context)
 
+def bookDisplayFromCollection(request):
+    bookID = request.POST.get('bookDisp', '')
+    book = book.retrieveBook(bookID)
+
+    context = {
+        "title": book.title,
+        "author": book.author,
+        "publisher": book.publisher,
+        "bookImg": book.bookImg,
+        "pageCount": book.pageCount,
+        "desc": book.desc,
+        "rating": book.rating,
+        "bookID": bookID
+    }
+
+    return render(request, 'search/bookDisplay.html', context)
+
 
 # There are 2 options for when a user wants to add a book into their shelf
 # 1. The book does not exist anywhere in the collection 
@@ -82,6 +99,18 @@ def bookSubmission(request):
     book.setInfo(startDate, endDate, ratingUser, timesRead, shelf)
     book.addBooktoBooksinUserCollection()
     return redirect('/search/')
+
+def bookSubmissionFromCollection(request):
+    book.bookID = request.POST.get("booksubmit", "")
+    book.email = request.session['email']
+    book.setInfoFromDataBase()
+    dateM = datetime.datetime.now()
+    dateString = dateM.strftime('%Y-%m-%d')
+    context = {
+        "dateMax": dateString, 
+        "book": book
+    }
+    return render(request, 'search/bookInfo.html', context)
 
 def bookSubmissionToRead(request):
     shelf = 'toRead'

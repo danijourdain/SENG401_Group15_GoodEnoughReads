@@ -53,6 +53,10 @@ class BookModel():
         self.userRating = rating
         self.timesRead = timesRead
 
+    def retrieveBook(self, bookID):
+        self.bookID = bookID
+        self.cursor.execute('SELECT * FROM Book WHERE APIid = %s', [self.bookID])
+
     def addBooktoBooks(self):
         self.cursor.execute('SELECT * FROM Book WHERE Book.APIid = %s', [self.bookID])
         val = self.cursor.fetchall()
@@ -130,6 +134,12 @@ class BookModel():
         self.userRating = val[0][0]
         self.timesRead = val[0][3]
         self.pageCount = val[0][4]
+
+        self.cursor.execute('SELECT ImageURL, Title, Pages FROM Book WHERE Book.APIid = %s', [self.bookID])
+        val = self.cursor.fetchall()
+        self.bookImg = val[0][0]
+        self.title = val[0][1]
+        self.maxPages = val[0][2]
         
 
 

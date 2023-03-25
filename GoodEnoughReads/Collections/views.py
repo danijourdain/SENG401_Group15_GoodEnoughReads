@@ -11,7 +11,10 @@ def collection(request):
     collections.setEmail(email)
     bookList = collections.getAllCollection()
 
-    context = {'bookList': bookList}
+    context = {
+        'bookList': bookList,
+        'path': request.get_full_path(),
+        }
     return render(request, 'Collections/collection.html', context)
 
 def read(request):
@@ -19,7 +22,10 @@ def read(request):
     collections.setEmail(email)
     bookList = collections.getRead()
 
-    context = {'bookList': bookList}
+    context = {
+        'bookList': bookList,
+        'path': request.get_full_path(),
+        }
     return render(request, 'Collections/read.html', context)
 
 def toRead(request, bookID = "default"):
@@ -27,7 +33,10 @@ def toRead(request, bookID = "default"):
     collections.setEmail(email)
     bookList = collections.gettoRead()
 
-    context = {'bookList': bookList}
+    context = {
+        'bookList': bookList,
+        'path': request.get_full_path(),
+        }
     return render(request, 'Collections/toRead.html', context)
 
 def currentlyReading(request):
@@ -35,7 +44,10 @@ def currentlyReading(request):
     collections.setEmail(email)
     bookList = collections.getcurrentlyReading()
 
-    context = {'bookList': bookList}
+    context = {
+        'bookList': bookList,
+        'path': request.get_full_path(),
+        }
     return render(request, 'Collections/currentlyReading.html', context)
 
 def DNF(request):
@@ -43,5 +55,16 @@ def DNF(request):
     collections.setEmail(email)
     bookList = collections.getDNF()
 
-    context = {'bookList': bookList}
+    context = {
+        'bookList': bookList,
+        'path': request.get_full_path(),
+        }
     return render(request, 'Collections/dnf.html', context)
+
+def removeBook(request):
+    bookID = request.POST.get("bookrmv", '')
+    path = request.POST.get("bookPath", '')
+    print(path)
+    collections.removeBook(bookID)
+    return redirect(path)
+    

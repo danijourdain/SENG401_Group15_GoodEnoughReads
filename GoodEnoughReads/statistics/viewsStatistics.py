@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . import StatisticsModel
+from django.db import connection
 
 def statistics(request):
 
