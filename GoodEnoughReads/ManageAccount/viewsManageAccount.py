@@ -121,8 +121,11 @@ def account(request):
         login = LoginModel.LoginModel(request.session['email'])
 
         if username != '':
-            validateUser = authenticate(request, username=username)
-            if validateUser is None:
+            try:
+                User.objects.get(username=username)
+                error_message = "Username is already taken!"
+                return render(request, 'ManageAccount/account.html', {'error_message': error_message})
+            except:
                 user.username = username
                 request.session['username'] = username
         if fname != '' and lname != '':
