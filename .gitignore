@@ -15,3 +15,5 @@ GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/BarGraphNumberofBooksyouR
 GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/LineGraphAllTimeNumberofBooksyouRead.png
 GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/PieChartBookPagesyouReadthisyear.png
 GoodEnoughReads/gersiteapp/static/gersiteapp/img/stats/PieChartGenresyouReadthisyear.png
+*.pyc
+GoodEnoughReads/GoodEnoughReads/__pycache__/settings.cpython-38.pyc

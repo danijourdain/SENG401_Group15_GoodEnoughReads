@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-__-*o8f_7nxhjd9#w0t3hkqj(37@++&7(8g180nw43+jk$+_nd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://ger-v2.uc.r.appspot.com', "*"]
 
 
 # Application definition
@@ -79,19 +79,52 @@ WSGI_APPLICATION = "GoodEnoughReads.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'GER_DB',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'USER': 'ger',
-        'PASSWORD': 'seng',
-        'OPTIONS': {  
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-        } 
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/goodenoughreads',
+            'USER': 'ger',
+            'PASSWORD': 'seng',
+            'NAME': 'GER_DB',
+        }
     }
-}
+else:
+    # Running locally so connect to either a local MySQL instance or connect 
+    # to Cloud SQL via the proxy.  To start the proxy via command line: 
+    #    $ ./cloud-sql-proxy ger-v2:us-central1:goodenoughreads 
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': 'GER_DB',
+            'USER': 'ger',
+            'PASSWORD': 'seng',
+            'OPTIONS': {  
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+            } 
+        }
+    }
+# [END db_setup]
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'GER_DB',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'USER': 'ger',
+#         'PASSWORD': 'seng',
+#         'OPTIONS': {  
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+#         } 
+#     }
+# }
 
 
 # Password validation
@@ -123,6 +156,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = 'static'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'gersiteapp/static')]
 
@@ -135,3 +169,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'Statistics/media')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/"
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
