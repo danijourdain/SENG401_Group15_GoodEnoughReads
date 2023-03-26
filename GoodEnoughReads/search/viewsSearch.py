@@ -38,8 +38,9 @@ def bookDisplay(request, ):
     return render(request, 'search/bookDisplay.html', context)
 
 def bookDisplayFromCollection(request):
-    bookID = request.POST.get('bookDisp', '')
-    book = book.retrieveBook(bookID)
+    bookID = request.POST.get('bookdisp', '')
+    print(bookID)
+    book.retrieveBook(bookID)
 
     context = {
         "title": book.title,
@@ -81,10 +82,10 @@ def bookSubmission(request):
     endDate = request.POST.get("endDate", "")
     ratingUser = request.POST.get("rating", "")
     timesRead = request.POST.get("timesRead","")
+    pagesRead = request.POST.get("pagesRead", '')
 
-    print("TESTING TESTING")
-    print(type(startDate))
-    print(type(endDate))
+    if shelf == 'toRead':
+        bookSubmissionToRead(request)
 
     if  not startDate == "":
         start = datetime.datetime.strptime(startDate,'%Y-%m-%d').date()
@@ -96,9 +97,9 @@ def bookSubmission(request):
         if start > end:
             return redirect('/bookInfo/')
     
-    book.setInfo(startDate, endDate, ratingUser, timesRead, shelf)
+    book.setInfo(startDate, endDate, ratingUser, timesRead, shelf, pagesRead)
     book.addBooktoBooksinUserCollection()
-    return redirect('/search/')
+    return redirect('/collection/')
 
 def bookSubmissionFromCollection(request):
     book.bookID = request.POST.get("booksubmit", "")
@@ -118,8 +119,9 @@ def bookSubmissionToRead(request):
     endDate = None
     ratingUser = 0
     timesRead = 0
+    pagesRead = 0
     
-    book.setInfo(startDate, endDate, ratingUser, timesRead, shelf)
+    book.setInfo(startDate, endDate, ratingUser, timesRead, shelf, pagesRead)
     book.addBooktoBooksinUserCollection()
     return redirect('/search/')
    

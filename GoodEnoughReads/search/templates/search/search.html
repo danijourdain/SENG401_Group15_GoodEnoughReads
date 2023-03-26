@@ -1,5 +1,5 @@
 <!-- This document was made by Ryan Mailhiot for Good Enough Reads
-     Final edit date for Ryan was March 21, 2023.
+     Final edit date for Ryan was March 25, 2023.
 -->
 
 {% extends 'gersiteapp/base.html' %}<!-- Extends a base template HTML file -->
@@ -9,6 +9,9 @@
 
 {% block content %}
 {% load static %}
+
+<img id="placeholder" src="{% static 'search/img/placeholder.png' %}" alt="" hidden> 
+
 <!-- This section is for the search field and button at the top -->
     <div class="container">
         <h1 id="title" class="text-center mt-5">Search</h1>
@@ -41,7 +44,7 @@
             }
         };
     </script> 
-    <script type="text/javascript" src="{% static 'search/js/searchNew.js' %}"></script>
+    <script type="text/javascript" src="{% static 'search/js/search.js' %}"></script>
     <link rel="stylesheet" href="{% static 'search/css/style.css' %}">
     
 {% endblock %}
