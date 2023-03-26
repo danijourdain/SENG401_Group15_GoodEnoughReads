@@ -19,9 +19,10 @@ def awards(request):
     # Image = "gersiteapp/static/gersiteapp/img/Awards/"
     Image = "/media/Awards/"
 
-    if UserXP > ReqXP:
-        awd.updateUserLevel()
-        Userlevel = Userlevel + 1
+    while UserXP > ReqXP:
+        # awd.updateUserLevel()
+        Userlevel += 1
+        ReqXP = awd.getReqXP(Userlevel + 1)
 
     if(Userlevel < 6):
         NextReqXP = awd.getReqXP(Userlevel + 1)

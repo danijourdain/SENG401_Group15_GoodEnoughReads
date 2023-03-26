@@ -5,7 +5,6 @@ from matplotlib.ticker import MaxNLocator
 from django.db import models
 from django.db import connection, transaction
 import datetime
-# from chart_studio import plotly as py
 import plotly as py
 import plotly.express as px
 from pandas import DataFrame
