@@ -122,11 +122,11 @@ class BookModel():
         self.cursor.execute('SELECT * FROM BookInUserCollection WHERE BookInUserCollection.ISBN = %s and Email = %s', [self.bookID, self.email])
         val = self.cursor.fetchall()
 
-        print("WHERE AM I?")
         self.shelfName = val[0][6]
         print(self.shelfName)
         print(val)
-
+        self.startDate = None
+        self.endDate = None
         if val[0][1] != None:
             self.startDate = (val[0][1]).strftime('%Y-%m-%d')
         
