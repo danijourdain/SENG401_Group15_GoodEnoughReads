@@ -24,6 +24,7 @@ class BookModel():
         self.genre = None
         self.shelf = None
         self.email = None
+        self.timesRead = 0
         self.cursor = connection.cursor()
 
     def set(self, title, author, publisher, bookImg, pageCount, desc, rating, bookID, email):
@@ -46,12 +47,13 @@ class BookModel():
         print(rating)
         print(bookImg)
 
-    def setInfo(self, startDate, endDate, rating, timesRead, shelf):
+    def setInfo(self, startDate, endDate, rating, timesRead, shelf, pagesRead):
         self.shelf = shelf
         self.startDate = startDate
         self.endDate = endDate
         self.userRating = rating
         self.timesRead = timesRead
+        self.pageCount = pagesRead
 
     def retrieveBook(self, bookID):
         self.bookID = bookID
@@ -67,13 +69,13 @@ class BookModel():
             # 2. A tuple is not found and therefore does not exist in the database - This means that val = None
         
         if not val: #if val = None then you can insert
-            self.cursor.execute('INSERT INTO Book(APIid, ImageURL, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s, %s)', (self.bookID, self.bookImg, self.title, self.genre, self.pageCount, self.rating))
+            self.cursor.execute('INSERT INTO Book(APIid, ImageURL, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s, %s)', (self.bookID, self.bookImg, self.title, self.genre, self.maxPages, self.rating))
         
         elif self.bookID in val[0]: # the bookID we are about to add already exists in the database therefore we don't need to add it and can return back
            return
         
         else: # I'm honestly not sure why this is here but Im scare it will break the program if it isn't
-            self.cursor.execute('INSERT INTO Book(APIid, ImageURL, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s, %s)', (self.bookID, self.bookImg, self.title, self.genre, self.pageCount, self.rating))
+            self.cursor.execute('INSERT INTO Book(APIid, ImageURL, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s, %s)', (self.bookID, self.bookImg, self.title, self.genre, self.maxPages, self.rating))
       
 
     def addBooktoBooksinUserCollection(self):
@@ -141,7 +143,3 @@ class BookModel():
         self.title = val[0][1]
         self.maxPages = val[0][2]
         
-
-
-
-

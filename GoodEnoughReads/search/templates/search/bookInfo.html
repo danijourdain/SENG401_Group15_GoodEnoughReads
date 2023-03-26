@@ -11,7 +11,7 @@
 
 </head>
 <body>
-  <h1> Book Information </h1>
+  <h1> Book Information Submission </h1>
   <div class=".container">
     <div class=".row", style="background-color: #EDD0B1; padding-top: 5px; border-radius: 10px;">
       <div class="col" style = "color: #004643; font-size: 24px; margin-bottom: 3px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
@@ -24,6 +24,17 @@
       <div class="media-body" style="background-color: #84A98C; color:#004643; border-radius: 10px;
           border-style: solid; border-color:#004643; 
             border-radius: 10px; border-width: 5px; margin: 5px 5px 5px 5px; padding-bottom: 5px;">
+            <div class=".container" style="background-color:#EDD0B1; color:#004643; border-radius: 10px;
+            border-color:#004643; padding: 10px 10px 10px 10px">
+              <p> Select a shelf. Both start and end dates can be left empty. 
+                If you're rereading a book, put the most recently read date.
+                Times read should only be increased if adding to the read shelf otherwise it 
+                can remain 0 or what your last selected number was. If the To Read shelf is selected than 
+                all previous saved data on the book will be reset. NOTE: The start date should not be 
+                greater than the end date or else the data will not submit.</p>
+            </div>
+            
+            
             <form action="/bookSubmission/" method ="POST">
               {% csrf_token %}
               
@@ -32,6 +43,7 @@
                 <div class = "col">
                   <label class = "col-form-label" for="shelf" style="text-align: center; vertical-align: middle;">Add to Shelf:</label>
                   <select class = "custom-select" name="shelf" id="shelf" style = "background-color:#EDD0B1; color:#004643; text-align: center; width: 40%">
+                    <option value="toRead">To Read</option>
                     <option value="read">Read</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="DNF">DNF</option>
@@ -42,12 +54,12 @@
               <div class = "row">
                 <div class = 'col'>
                   <label for="startDate" class = "col-form-label" style="text-align: center; vertical-align: middle;">Date Started:</label>
-                  <input type="date" id="startDate" name="startDate" max="{{ dateMax }}" value = "{{ book.startDate }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                  <input type="date" id="startDate" name="startDate" max="{{ dateMax }}" value = "{{ book.startDate }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center; padding: 5px 5px 5px 5px; border-radius: 5px; width: 50%">
                 </div>
 
                 <div class = "col">
                   <label for="endDate" class = "col-form-label" style="text-align: center; vertical-align: middle">Date Finished:</label>
-                  <input type="date" id="endDate" name="endDate" max="{{ dateMax }}" value = "{{ book.endDate }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
+                  <input type="date" id="endDate" name="endDate" max="{{ dateMax }}" value = "{{ book.endDate }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center; padding: 5px 5px 5px 5px; border-radius: 5px; width: 50%">
                 </div>
               </div>
 
@@ -57,13 +69,13 @@
                   <input type="number" class="form-control" id="timesRead" name="timesRead" min = "0"  value= "{{ book.timesRead }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
                 </div>
                 <div class="col">
-                  <label for="pagesRead" class = "col-form-label" style="text-align: center; vertical-align: middle; margin: 5px 5px 5px 5px;">Pages Read</label>
+                  <label for="pagesRead" class = "col-form-label" style="text-align: center; vertical-align: middle; margin: 5px 5px 5px 5px;">Pages Read:</label>
                   <input type="number" class="form-control" id="pagesRead" name="pagesRead" min = "0" value = "{{ book.pageCount }}" max = "{{ book.maxPages }}" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
                 </div>
                 <div class="col">
-                  <label for="rating" class = "col-form-label" style="text-align: center; vertical-align: middle; margin: 5px 5px 5px 5px;">Rating</label>
+                  <label for="rating" class = "col-form-label" style="text-align: center; vertical-align: middle; margin: 5px 5px 5px 5px;">Rating:</label>
                   <select class = "custom-select" name="rating" id="rating" style = "background-color:#EDD0B1; color:#004643; margin: 5px 5px 5px 5px; text-align: center;">
-                    <option selected> {{ book.userRating }} </option>
+                    <option selected value = "{{ book.userRating }}"> Previously Selected: {{ book.userRating }} </option>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
