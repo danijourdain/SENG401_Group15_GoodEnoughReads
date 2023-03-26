@@ -14,7 +14,7 @@ function bookSearch(){
     // There is alot of fun and interesting things we need to do when it comes to dealing with this information.
     var search = search_box.value; // grabs the value at the search bar
     var cardResults = document.getElementById("results"); // grabs the results div
-    var placeHldr = "{% static 'search/img/placeholder.png' %}"; // Placeholder image
+    var placeHldr = document.getElementById("placeholder").src; // Placeholder image
     var parsed = search.replace(" ", "-"); // removes spaces in the query
     // This block resets on a new search
     if (previousSearch != search){
@@ -24,6 +24,7 @@ function bookSearch(){
     }
     console.log(parsed); 
     console.log(bookIndex);
+    console.log(placeHldr);
     cardResults.innerHTML = cardResults.innerHTML + ""; 
     // This pings the google books api for search queries
     // Uses the parsed search data as well as the book index
@@ -49,6 +50,7 @@ function bookSearch(){
                 if (rating === undefined){ // changes ratings so it doesnt break it
                     rating = "unavailable";
                 }
+
                 // placeholder is not working properly with django and cannot figure out how to fix.
                 bookImg1 = (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : placeHldr ;
                 // Formats the output into a card that can be added

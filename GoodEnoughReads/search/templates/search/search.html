@@ -9,6 +9,9 @@
 
 {% block content %}
 {% load static %}
+
+<img id="placeholder" src="{% static 'search/img/placeholder.png' %}" alt="" hidden> 
+
 <!-- This section is for the search field and button at the top -->
     <div class="container">
         <h1 id="title" class="text-center mt-5">Search</h1>
@@ -41,7 +44,7 @@
             }
         };
     </script> 
-    <script type="text/javascript" src="{% static 'search/js/searchNew.js' %}"></script>
+    <script type="text/javascript" src="{% static 'search/js/search.js' %}"></script>
     <link rel="stylesheet" href="{% static 'search/css/style.css' %}">
     
 {% endblock %}
