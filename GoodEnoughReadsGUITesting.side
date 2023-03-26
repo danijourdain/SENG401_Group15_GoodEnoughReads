@@ -2,7 +2,7 @@
   "id": "2325f83a-b4ca-46ea-96ad-323a4f90e82f",
   "version": "2.0",
   "name": "GoodEnoughReadsGUITesting",
-  "url": "http://127.0.0.1:8000/signup/",
+  "url": "http://127.0.0.1:8000/welcome/",
   "tests": [{
     "id": "ba14295d-e84b-4f09-ad2f-0efd38f7d91d",
     "name": "LoginValidUsernameAndPassword",
@@ -891,6 +891,313 @@
       ],
       "value": "Good afternoon, Tom."
     }]
+  }, {
+    "id": "ad6dae68-b798-484b-8a67-5070507d1bab",
+    "name": "Search by title",
+    "commands": [{
+      "id": "de171607-1a1b-432d-ad7a-0e693eb19c28",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/welcome/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "84dd9d1c-24b4-4d5b-976f-4f4bc10cdbdd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "936x1140",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dad63443-24d5-4ee0-a981-74dd527b1766",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Search",
+      "targets": [
+        ["linkText=Search", "linkText"],
+        ["css=.mr-auto > .nav-item:nth-child(1) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Search')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/search/')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Search')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "48844a3f-b420-4cae-915d-cc293bae2068",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-box",
+      "targets": [
+        ["id=search-box", "id"],
+        ["css=#search-box", "css:finder"],
+        ["xpath=//input[@id='search-box']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "62c3c758-6989-4dcc-8c3a-8548cfc8e9a4",
+      "comment": "",
+      "command": "type",
+      "target": "id=search-box",
+      "targets": [
+        ["id=search-box", "id"],
+        ["css=#search-box", "css:finder"],
+        ["xpath=//input[@id='search-box']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "The One"
+    }, {
+      "id": "86c74b0a-9ad5-46d4-b727-cff5b07747c0",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-button",
+      "targets": [
+        ["id=search-button", "id"],
+        ["css=#search-button", "css:finder"],
+        ["xpath=//button[@id='search-button']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/button", "xpath:idRelative"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Search')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f5d49b9-77d7-4f43-8ada-8ab53c3b95c2",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.row:nth-child(1) > .col-md-6 .card-title",
+      "targets": [
+        ["css=.row:nth-child(1) > .col-md-6 .card-title", "css:finder"],
+        ["xpath=//div[@id='results']/div/div[2]/div/div/div[2]/div/form/h5", "xpath:idRelative"],
+        ["xpath=//h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'The ONE Book')]", "xpath:innerText"]
+      ],
+      "value": "The ONE Book"
+    }, {
+      "id": "ea6d7bec-9bac-4db7-b5ce-d54096a846aa",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.row:nth-child(2) .card-title",
+      "targets": [
+        ["css=.row:nth-child(2) .card-title", "css:finder"],
+        ["xpath=//div[@id='results']/div[2]/div[2]/div/div/div[2]/div/form/h5", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/div[2]/div/form/h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'The One')]", "xpath:innerText"]
+      ],
+      "value": "The One"
+    }, {
+      "id": "b4258a4b-e5f5-408e-a183-160971f3c3e5",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.row:nth-child(3) .card-title",
+      "targets": [
+        ["css=.row:nth-child(3) .card-title", "css:finder"],
+        ["xpath=//div[@id='results']/div[3]/div[2]/div/div/div[2]/div/form/h5", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/div/div[2]/div/form/h5", "xpath:position"]
+      ],
+      "value": "The One"
+    }, {
+      "id": "329b2c6a-a508-4dd7-b4aa-8162516dd4f5",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=results",
+      "targets": [
+        ["id=results", "id"],
+        ["css=#results", "css:finder"],
+        ["xpath=//div[@id='results']", "xpath:attributes"],
+        ["xpath=//div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "fb84efc5-c598-496b-8462-7fbdd22f48b7",
+    "name": "Search by author",
+    "commands": [{
+      "id": "cb9e6efc-d2e2-49d9-88b1-4d3c03b7a49e",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/welcome/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ec5ad938-4faf-4238-adf1-d9c243ffff65",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "936x1140",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5a30a7b5-a0a5-40fd-945e-46928eaf78e5",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Search",
+      "targets": [
+        ["linkText=Search", "linkText"],
+        ["css=.mr-auto > .nav-item:nth-child(1) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Search')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/search/')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Search')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f75985f8-df5b-419d-af3c-974023c87c3b",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-box",
+      "targets": [
+        ["id=search-box", "id"],
+        ["css=#search-box", "css:finder"],
+        ["xpath=//input[@id='search-box']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1fdd204-9cf9-4186-8cc0-4ae5c3b9ad16",
+      "comment": "",
+      "command": "type",
+      "target": "id=search-box",
+      "targets": [
+        ["id=search-box", "id"],
+        ["css=#search-box", "css:finder"],
+        ["xpath=//input[@id='search-box']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Kiera Cass"
+    }, {
+      "id": "a6761905-0edb-4cc8-b938-483161c75758",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-button",
+      "targets": [
+        ["id=search-button", "id"],
+        ["css=#search-button", "css:finder"],
+        ["xpath=//button[@id='search-button']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/button", "xpath:idRelative"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Search')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2bcceebd-3ac1-48ea-b1c0-669e49e55cc3",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.row:nth-child(1) > .col-md-6 .card-text:nth-child(10)",
+      "targets": [
+        ["css=.row:nth-child(1) > .col-md-6 .card-text:nth-child(10)", "css:finder"],
+        ["xpath=//div[@id='results']/div/div[2]/div/div/div[2]/div/form/p", "xpath:idRelative"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'Author: Kiera Cass')]", "xpath:innerText"]
+      ],
+      "value": "Author: Kiera Cass"
+    }, {
+      "id": "9c49bf88-4fda-401b-9140-cd1d39236a98",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.row:nth-child(2) .card-text:nth-child(10)",
+      "targets": [
+        ["css=.row:nth-child(2) .card-text:nth-child(10)", "css:finder"],
+        ["xpath=//div[@id='results']/div[2]/div[2]/div/div/div[2]/div/form/p", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/div/div[2]/div/form/p", "xpath:position"]
+      ],
+      "value": "Author: Kiera Cass"
+    }, {
+      "id": "b29d6eda-536e-4338-a749-c6134e3b99f0",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.row:nth-child(3) .card-text:nth-child(10)",
+      "targets": [
+        ["css=.row:nth-child(3) .card-text:nth-child(10)", "css:finder"],
+        ["xpath=//div[@id='results']/div[3]/div[2]/div/div/div[2]/div/form/p", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div/div/div[2]/div/form/p", "xpath:position"]
+      ],
+      "value": "Author: Kiera Cass"
+    }]
+  }, {
+    "id": "322e6a69-748d-4d63-8893-9d2c6fa8798d",
+    "name": "Search not a book",
+    "commands": [{
+      "id": "5fc03784-3ce6-4d8a-985a-c99010014d1c",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/welcome/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3886343a-d5a5-4ed4-9178-88a1cb2b47fb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "936x1140",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9a547531-987e-43a9-b978-cbe4d215ba1b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Search",
+      "targets": [
+        ["linkText=Search", "linkText"],
+        ["css=.mr-auto > .nav-item:nth-child(1) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Search')]", "xpath:link"],
+        ["xpath=//div[@id='navbar']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/search/')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Search')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d013f14-9979-4afe-867a-f839e8ee6bcc",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-box",
+      "targets": [
+        ["id=search-box", "id"],
+        ["css=#search-box", "css:finder"],
+        ["xpath=//input[@id='search-box']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "abc9a024-e560-4a00-b929-a5e35b147ade",
+      "comment": "",
+      "command": "type",
+      "target": "id=search-box",
+      "targets": [
+        ["id=search-box", "id"],
+        ["css=#search-box", "css:finder"],
+        ["xpath=//input[@id='search-box']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "kjsahdjhasd"
+    }, {
+      "id": "defd3fcb-6073-4caf-969b-b3a3af313670",
+      "comment": "",
+      "command": "click",
+      "target": "id=search-button",
+      "targets": [
+        ["id=search-button", "id"],
+        ["css=#search-button", "css:finder"],
+        ["xpath=//button[@id='search-button']", "xpath:attributes"],
+        ["xpath=//div[@id='input']/button", "xpath:idRelative"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Search')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "459e70a8-b209-417c-9445-751b8f491011",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "css=.row:nth-child(1) > .col-md-6",
+      "targets": [],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "8210b83d-4019-4427-b585-4168ee7bcecb",
@@ -906,7 +1213,14 @@
     "parallel": false,
     "timeout": 300,
     "tests": ["e509a185-dbdc-41e2-94b0-e9d95907302b", "f25fa6b3-d22a-4b64-a214-bd2201417eea", "3f9e34ab-63c2-4fef-a6a8-a8236f06b26a"]
+  }, {
+    "id": "d320763f-e906-433a-95bc-c203b28673a9",
+    "name": "Search",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["ad6dae68-b798-484b-8a67-5070507d1bab", "fb84efc5-c598-496b-8462-7fbdd22f48b7", "322e6a69-748d-4d63-8893-9d2c6fa8798d"]
   }],
-  "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/signup/"],
+  "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/signup/", "http://127.0.0.1:8000/welcome/"],
   "plugins": []
 }
