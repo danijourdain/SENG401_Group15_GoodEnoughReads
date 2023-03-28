@@ -6,6 +6,7 @@ from django.db import connection, transaction
 from django.views import View
 from search import BookModel
 import datetime
+import random
 
 
 class CollectionModel:
@@ -51,6 +52,15 @@ class CollectionModel:
         tupleInfo = self.cursor.fetchall()
         list = self.loopInfo(tupleInfo)
         return list
+    
+    # # Description: Function gets a random book in the user's read collection. It then takes this information and
+    # # places that data in a temporary book function that the recommendations template can access and retrieve without the use of the API.
+    # def getRandomRead(self):
+    #     self.cursor.execute("SELECT B.ImageURL, B.Title, B.Pages, BC.UserRating, BC.PagesRead, B.APIid FROM Book AS B INNER JOIN BookInUserCollection as BC ON B.APIid = BC.ISBN AND BC.shelfName = 'read' AND BC.Email = %s;", [self.email])
+    #     tupleInfo = self.cursor.fetchall()
+    #     bookList = self.loopInfo(tupleInfo)
+    #     randomBooks = random.sample(bookList, 1)
+    #     return randomBooks
     
     # Description: Function gets every book in the user's toRead collection. It then takes this information and 
     # places that data in a temporary book function that the template can access and retrieve without the use of the API. 

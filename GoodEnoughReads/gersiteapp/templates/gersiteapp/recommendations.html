@@ -1,7 +1,123 @@
 {% extends 'gersiteapp/base.html' %}
 
-{% block title %}Search{% endblock %}
-
 {% block content %}
-  <h1>Recommendations</h1>
+<div class="container">
+  <h1 class="text-center my-5">Book Recommendations</h1>
+  <div class="text-center mt-4">
+    <h4>For when you liked what you read, but can't figure out what's next.. 😤</h4>
+  </div>
+
+  {% if recommended_books %}
+  {% for book in recommended_books %}
+  <div class="bordered-section mb-4">
+    <h3 class="mb-4">Because you read <em>{{ book.title }}</em>:</h3>
+    {% if book.genres %}
+    <p class="mb-4"><strong>Genres:</strong> {{ book.genres|join:", " }}</p>
+    {% endif %}
+    <div class="row flex-nowrap overflow-auto">
+      {% for similar_book in book.similar_books %}
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          {% if similar_book.cover %}
+          <img class="card-img-top" src="{{ similar_book.cover }}" alt="{{ similar_book.title }}">
+          {% else %}
+          <img class="card-img-top" src="https://i.ibb.co/ByZHgKM/gernon.png" alt="{{ similar_book.title }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ similar_book.title }}</h5>
+            <p class="card-text">by {{ similar_book.author|join:", " }}</p>
+            <a href="{% url 'search' %}?q={{ similar_book.title }}" class="btn btn-primary mb-4">Search Book</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="text-center my-5">
+    <h3>You need to read more. Even a little? Making sure you finish the books?</h3>
+  </div>
+  {% endif %}
+</div>
+<style>
+  .bordered-section {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .card {
+    border: none;
+    height: 500px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-img-top {
+    height: 70%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .book-title em {
+    font-style: italic;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card {
+    flex: 1;
+  }
+
+
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #1c2237;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1c2237;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #777;
+  }
+
+  /* Hide scrollbar */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
 {% endblock %}
