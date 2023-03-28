@@ -17,18 +17,18 @@ class CollectionModel:
     def setEmail(self, email):
         self.email = email
 
-    def addToCollection(self, email, isbn, startdate, enddate, pagesread):
-        # more functionality?
-        self.cursor.execute("INSERT INTO BookInUserCollection VALUES (%s, %s, %s, %s, %s);", [startdate, enddate, pagesread, isbn, email])
+    # def addToCollection(self, email, isbn, startdate, enddate, pagesread):
+    #     # more functionality?
+    #     self.cursor.execute("INSERT INTO BookInUserCollection VALUES (%s, %s, %s, %s, %s);", [startdate, enddate, pagesread, isbn, email])
         
-    def getName(self):
-        self.cursor.execute("SELECT Name FROM Collection WHERE Email = %s;", [self.email])
-        return self.cursor.fetchall()[0]
+    # def getName(self):
+    #     self.cursor.execute("SELECT Name FROM Collection WHERE Email = %s;", [self.email])
+    #     return self.cursor.fetchall()[0]
     
-    def getBooksInCollection(self, shelfName):
-        self.cursor.execute("SELECT ISBN FROM BookInUserCollection WHERE Email = %s;", [self.email])
-        bookList = self.cursor.fetchall()
-        return bookList
+    # def getBooksInCollection(self, shelfName):
+    #     self.cursor.execute("SELECT ISBN FROM BookInUserCollection WHERE Email = %s;", [self.email])
+    #     bookList = self.cursor.fetchall()
+    #     return bookList
     
     # user passes in a book, gets every collection of theirs with said book
     def collectionsWithBook(self, bookisbn):
@@ -86,13 +86,13 @@ class CollectionModel:
         list = self.loopInfo(tupleInfo)
         return list
     
+    # Description: Function is executed when the user clicks 'remove book' within the collections page - This will delete the book from the database 
     def removeBook(self, bookID):
         self.cursor.execute('DELETE FROM BookInUserCollection WHERE ISBN = %s', [bookID])
 
-
+    # Description: Takes the information given by a database query and places it into a usable book object that is passed into templates
     def loopInfo(self, tupleInfo):
         listInfo = []
-        print(tupleInfo)
         for i in range(len(tupleInfo)):
             book = BookModel.BookModel()
             book.bookImg = tupleInfo[i][0]

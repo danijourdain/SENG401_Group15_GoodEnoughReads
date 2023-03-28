@@ -64,7 +64,6 @@ def DNF(request):
 def removeBook(request):
     bookID = request.POST.get("bookrmv", '')
     path = request.POST.get("bookPath", '')
-    print(path)
     collections.removeBook(bookID)
     return redirect(path)
     

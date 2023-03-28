@@ -1,7 +1,7 @@
 // This will literally run the moment it is loaded, which is something we want. 
 // This file will basically search for the hidden tag called "BookID" and then it will run a search based on that book alone.
 // This way if we want any new information it can be separate from the search results. 
-
+// This file is used for the purpose of compiling a book display page through the collections "view book information" button
 var volumeID = document.getElementById("bookID").getAttribute("value"); // Grabs the book id
 console.log(volumeID);
 var cardResults = document.getElementById("bookRead"); // This is the place where the html gets placed
