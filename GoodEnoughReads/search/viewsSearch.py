@@ -58,7 +58,7 @@ def bookDisplayFromCollection(request):
 
 # There are 2 options for when a user wants to add a book into their shelf
 # 1. The book does not exist anywhere in the collection 
-# 2. The book already exists in the collection and the user wants to edit the book
+# 2. The book already exists in the collection and the user wants to edit the bookInfo
     # - When the book already exists in the users collection it retrieves the information rather than having empty
     # - This way a user does not need to remember they previously gave
 def bookInfo(request):

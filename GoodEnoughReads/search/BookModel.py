@@ -57,7 +57,11 @@ class BookModel():
 
     def retrieveBook(self, bookID):
         self.bookID = bookID
-        self.cursor.execute('SELECT * FROM Book WHERE APIid = %s', [self.bookID])
+        self.cursor.execute('SELECT title, ImageURL FROM Book WHERE APIid = %s', [self.bookID])
+        val = self.cursor.fetchone()
+        self.title = val[0]
+        self.bookImg = val[1]
+
 
     def addBooktoBooks(self):
         self.cursor.execute('SELECT * FROM Book WHERE Book.APIid = %s', [self.bookID])
