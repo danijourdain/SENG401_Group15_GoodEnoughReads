@@ -70,6 +70,8 @@ def recommendations(request):
         recommended_books = []
         for book in selected_books:
             genres = get_book_genre(book.title)
+            if not genres:
+                continue
             valid_genres_set = set([genre.lower() for genre in valid_genres])
             book_genres = [genre for genre in genres if genre.lower() in valid_genres_set]
             if book_genres:
@@ -89,7 +91,10 @@ def get_book_genre(title):
     url = 'http://openlibrary.org/search.json'
     params = {'q': title}
     response = requests.get(url, params=params)
-    book_data = response.json()['docs'][0]
+    book_data_list = response.json().get('docs', [])
+    if not book_data_list:
+        return []
+    book_data = book_data_list[0]
     subjects = book_data.get('subject', [])
     genres = []
     for subject in subjects:
