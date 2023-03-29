@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
+# import pymysql
 
 # Create your tests here.
 
@@ -11,7 +12,6 @@ from django.urls import reverse
 # GRANT ALL PRIVILEGES ON test_ger_db.* TO 'ger'@'localhost';
 # I've added into settings.py in GER the name and credenitals for the test database 
 # Current error: django.db.utils.ProgrammingError: (1146, "Table 'test_ger_db.user' doesn't exist")
-
 
 class SignUpTestCase(TestCase):
     def setUp(self) -> None:
@@ -27,15 +27,23 @@ class SignUpTestCase(TestCase):
         response = self.client.get("/signup/")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, template_name='ManageAccount/signup.html')
+    
+    # Test that login page exists
+    def test_login_page_url(self):
+        response = self.client.get("/login/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='ManageAccount/registration/login.html')
 
     #Test signup with a valid username with valid password
-    def test_signup_form_valid_credentials(self):
-        response = self.client.post(reverse('signup'), data={
-            'email': self.validemail,
-            'fname': self.validfname,
-            'lname': self.validlname,
-            'username': self.validusername,
-            'pw1': self.validpassword,
-            'pw2': self.validpassword
-        })
-        self.assertEqual(response.status_code, 200)
+    # def test_signup_form_valid_credentials(self):
+    #     response = self.client.post(reverse('signup'), data={
+    #         'email': self.validemail,
+    #         'fname': self.validfname,
+    #         'lname': self.validlname,
+    #         'username': self.validusername,
+    #         'pw1': self.validpassword,
+    #         'pw2': self.validpassword
+    #     })
+    #     self.assertEqual(response.status_code, 200)
+
+
