@@ -8,9 +8,15 @@ Due to time constraints and technical issues, we were not able to host the websi
 
 1. MySQL Community Server version 8.0 or newer installed
 
-    If MySQL is not installed on your machine, visit [this link](https://dev.mysql.com/downloads/mysql/) to download the appropriate version for your operating system. You can check if it is installed by running `mysql -V` in the terminal. If it is installed, you will see a message similar to `mysql  Ver 8.0.32 for macos13 on x86_64 (MySQL Community Server - GPL)`. When setting up MySQL, follow the instructions of the installer. Set the root password as something easy for you to remember.
+    If MySQL is not installed on your machine, visit [this link](https://dev.mysql.com/downloads/mysql/) to download the appropriate version for your operating system. You can check if it is installed by running
 
-    Once MySQL is installed, also install MySQL Workbench from [this link](https://dev.mysql.com/downloads/workbench/), again, choosing the appropriate version for your operating system.
+    ```terminal
+    mysql --version
+    ```
+
+    in the terminal. If it is installed, you will see a message similar to `mysql  Ver 8.0.32 for macos13 on x86_64 (MySQL Community Server - GPL)`. When setting up MySQL, follow the instructions of the installer. Set the root password as something easy for you to remember.
+
+    If you are on Mac, you will need to install MySQL Workbench separately. Once MySQL is installed, also install MySQL Workbench from [this link](https://dev.mysql.com/downloads/workbench/), choosing the appropriate version for your operating system.
 
 2. Python version 3.8 or newer
 
@@ -46,9 +52,25 @@ Once the steps above have been completed, setup for the project can begin.
     python3 -m venv env
     ```
 
-    c. Activate the virtual environment using `source env/bin/activate` if on Unix/macOS or `.\env\Scripts\activate` if on Windows. The terminal should now have (env) at the beginning.
+    c. Activate the virtual environment using
 
-    d. `cd` insto the GoodEnoughReads directory. Install all required libraries for the project by running:
+    ```terminal
+    source env/bin/activate
+    ```
+
+    if on Unix/macOS or
+
+    ```command prompt
+    .\env\Scripts\activate
+    ```
+
+    if on Windows. The terminal should now have (env) at the beginning.
+
+    d. Enter the GoodEnoughReads directory and install all the required Python libraries.
+
+    ```terminal
+    cd GoodEnoughReads/
+    ```
 
     ```python
     pip install -r requirements.txt
@@ -56,13 +78,15 @@ Once the steps above have been completed, setup for the project can begin.
 
 3. Set up the database
 
-    a. Ensure MySQL is running [FILL IN LATER HOW TO DO THAT]
+    a. Ensure MySQL is running. If you are on Windows, and you have killed the MySQL process, visit [this video](https://www.youtube.com/watch?v=TRispu6xgiA) if you need help getting it running again. If on Mac, open settings, scroll to the bottom, click on MySQL and ensure there is a green dot beside MySQL. If the dot is red, click `Start MySQL server`.
+
+    ![Check MySQL is running on Mac](./media/MySQLRunningMac.png)
 
     b. Open MySQL Workbench and create a new connection. Click the + button next to MySQL Connections on the hompage. Ensure the host is `127.0.0.1`, the port is `3306`, and the username is `root`. Click on the new connection and enter the password for the root user.
 
     c. Click this button in the top left corner of MySQL Workbench ![Open s SQL Script file in a new query tab button](./media/OpenSQLScript.png).  Open the folder where this repository was cloned. Select the file `ger_db_init.sql`. Click the lightning bolt icon to run the SQL file and all the queries.
 
-    d. Open a terminal window and `cd` into the `GoodEnoughReads` directory of the project. Run the following command:
+    d. In the terminal window from earlier in the GoodEnoughReads directory, run the following command.
 
     ```python
     python manage.py migrate
@@ -72,7 +96,7 @@ Congrats! GoodEnoughReads should be ready to run on your local system!
 
 ### 3. Running the Project
 
-Now that everything is set up, open a terminal window in the `GoodEnoughReads` directory of the project. Run the following command:
+Now that everything is set up, open the terminal window in the `GoodEnoughReads` directory of the project. Run the following command:
 
 ```python
 python manage.py runserver
@@ -92,13 +116,3 @@ Quit the server with CONTROL-C.
 ```
 
 Visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view GoodEnoughReads! Once you are done, type CTRL-C to quit the server. Thank you for using GoodEnoughReads!!
-
-<!-- Connecting to SQL Database:
-
-1. Go into SQL command line client
-2. Enter password
-3. Run the command: CREATE USER 'ger'@'localhost' IDENTIFIED BY 'seng';
-4. Run the command: CREATE DATABASE GER_DB
-5. Run the command: GRANT ALL PRIVILEGES ON GER_DB.* TO 'ger'@'localhost';
-6. Open Workbench IN ADMINSTRATOR
-7. You should see a connection for GER_DB just copy and paste the database file in the git (Note: you might have to delete some things) -->
