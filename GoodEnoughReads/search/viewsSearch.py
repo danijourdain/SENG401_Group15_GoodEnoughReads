@@ -1,3 +1,6 @@
+# This is a file created by Ryan Mailhiot and Maitry Rohit.
+# Last modified date: March 29, 2023
+
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from . import BookModel
@@ -12,6 +15,7 @@ def search(request):
 
 #Book information that is returned from the API itself 
 # - Data cannot be corrupted because its not user input
+#This is called from the search page directly using the hidden form in search.js
 @csrf_exempt
 def bookDisplay(request, ):
     title = request.POST.get('title', '')
@@ -37,6 +41,8 @@ def bookDisplay(request, ):
     book.addBooktoBooks()
     return render(request, 'search/bookDisplay.html', context)
 
+# calls the bookDisplay.html file after retrieving information from the database
+# This comes from collections
 def bookDisplayFromCollection(request):
     bookID = request.POST.get('bookdisp', '')
     print("in book display from collection")
@@ -78,17 +84,18 @@ def bookInfo(request):
     }
     return render(request, 'search/bookInfo.html', context)
 
+# This submits a book to the database for a given collection with all the fields input. 
 def bookSubmission(request):
     start = None
     end = None
-    shelf = request.POST.get("shelf", "")
+    shelf = request.POST.get("shelf", "") # Shelf is also collection. 
     startDate = request.POST.get("startDate", "")
     endDate = request.POST.get("endDate", "")
     ratingUser = request.POST.get("rating", "")
     timesRead = request.POST.get("timesRead","")
     pagesRead = request.POST.get("pagesRead", '')
 
-    if shelf == 'toRead':
+    if shelf == 'toRead': # If shelf is toRead, dont worry about anything
         bookSubmissionToRead(request)
 
     if  not startDate == "":
@@ -99,12 +106,14 @@ def bookSubmission(request):
     
     if (not endDate == "") and (not startDate == ""):
         if start > end:
-            return redirect('/bookInfo/')
+            return redirect('/bookInfo/') # retry if invalid input
     
     book.setInfo(startDate, endDate, ratingUser, timesRead, shelf, pagesRead)
     book.addBooktoBooksinUserCollection()
     return redirect('/collection/')
 
+# This runs the bookInfo.html file and receives information from collections. 
+# This happens if a request comes from collections
 def bookSubmissionFromCollection(request):
     book.bookID = request.POST.get("booksubmit", "")
     book.email = request.session['email']
@@ -116,7 +125,8 @@ def bookSubmissionFromCollection(request):
         "book": book
     }
     return render(request, 'search/bookInfo.html', context)
-
+# This submits data the to read collection. Because the user is storing it for later and has not read the book,
+# regardless of the information they put on the submission form, none of it will be stored.
 def bookSubmissionToRead(request):
     shelf = 'toRead'
     startDate = None

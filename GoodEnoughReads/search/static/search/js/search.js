@@ -1,6 +1,6 @@
 /**
  * This file was made by Ryan Mailhiot for Good Enough Reads. 
- * Date of final edit by Ryan was: March 25, 2023
+ * Date of final edit by Ryan was: March 28, 2023
  */
 
 // Defining variables 
@@ -47,11 +47,11 @@ function bookSearch(){
                 if (pageCount1 === undefined || pageCount1 === 0) { // Removes all 0 book queries
                     continue;
                 }
-                if (rating === undefined){ // changes ratings so it doesnt break it
+                if (rating === undefined){ // changes ratings so it doesnt break in python later
                     rating = "unavailable";
                 }
 
-                // placeholder is not working properly with django and cannot figure out how to fix.
+                
                 bookImg1 = (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : placeHldr ;
                 // Formats the output into a card that can be added
                 cardResults.innerHTML += '<div class="row mt-4">' +
@@ -69,6 +69,9 @@ function bookSearch(){
 document.getElementById("search-button").addEventListener('click', bookSearch, false)
 
 // This is an intersection check to see if a hidden element is visible to auto reload
+// There is a known bug that will auto run the googlebooksAPI call on page load. This is
+// known but is considered an extremely low priority as it affects basically noone. 
+// The functionality will be the same on the first user submission regardless.
 const observer = new IntersectionObserver(entries => {
     const bottomReload = entries[0]
     if (!bottomReload.isIntersecting) {
