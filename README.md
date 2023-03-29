@@ -122,3 +122,5 @@ Visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view GoodEnoughReads! 
 #### 4.1 Selenium GUI Tests
 
 Before Running the Selenium tests, please create 2 test users for the database. The first has username Sobia, email sobia.khan1@ucalgary.ca, first name Sobia, last name Khan, and password d. The second user has email tim@gmail.com, first name Tim, last name Smith, username Tim, and password a.
+
+Please ensure that the server is running before running GUI tests.
