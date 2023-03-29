@@ -222,8 +222,10 @@ class StatisticsModel:
         df = DataFrame(data)
         fig = px.bar(df, x = x_label, y = y_label, color_discrete_sequence = ["#84A98C"])
         fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", 
-                          xaxis = {'tickformat': ',d'}, yaxis = {'tickformat': ',d'}, separators = "")
+                          xaxis = {'tickformat': 'd'}, yaxis = {'tickformat': 'd'}, separators = "")
         fig.update_xaxes(type = 'category')
+        if(max(y_data) < 2):
+            fig.update_yaxes(type = 'category')
         bar_graph = py.offline.plot(fig, auto_open = False, output_type="div")
         return bar_graph
 
@@ -255,7 +257,10 @@ class StatisticsModel:
         fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", 
                           xaxis = {'tickformat': ',d'}, yaxis = {'tickformat': ',d'}, separators = "")
         fig.update_xaxes(type = "category")
-        fig.update_yaxes(range = [0, max(y_data) + 2])
+        if max(y_data) < 2:
+            fig.update_yaxes(type = "category")
+        else:
+            fig.update_yaxes(range = [0, max(y_data) + 2])
         fig.update_traces(marker = dict (size = 11, color = "#004643", line = dict(width = 2, color = "#84A98C")))
 
         line_graph = py.offline.plot(fig, auto_open = False, output_type="div")
