@@ -16,27 +16,32 @@
     {% endif %}
     <div class="row flex-nowrap overflow-auto">
       {% for similar_book in book.similar_books %}
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          {% if similar_book.cover %}
-          <img class="card-img-top" src="{{ similar_book.cover }}" alt="{{ similar_book.title }}">
-          {% else %}
-          <img class="card-img-top" src="https://i.ibb.co/ByZHgKM/gernon.png" alt="{{ similar_book.title }}">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ similar_book.title }}</h5>
-            <p class="card-text">by {{ similar_book.author|join:", " }}</p>
-            <a href="{% url 'search' %}?q={{ similar_book.title }}" class="btn btn-primary mb-4">Search Book</a>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
+<div class="col-md-3 mb-4">
+  <div class="card">
+    {% if similar_book.cover %}
+    <img class="card-img-top" src="{{ similar_book.cover }}" alt="{{ similar_book.title }}">
+    {% else %}
+    <img class="card-img-top" src="https://i.ibb.co/ByZHgKM/gernon.png" alt="{{ similar_book.title }}">
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ similar_book.title }}</h5>
+      {% if similar_book.author %}
+      <p class="card-text">by {{ similar_book.author|slice:":25"|join:", " }}</p>
+      {% endif %}
+      <a href="{% url 'search' %}?q={{ similar_book.title }}" class="btn btn-primary mb-4">Search Book</a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
     </div>
   </div>
   {% endfor %}
   {% else %}
   <div class="text-center my-5">
-    <h3>You need to read more. Even a little? Are you sure you're finishing the books?</h3>
+    <h3>You need to read more. Even a little? Are you sure you're finishing the
+      books?</h3>
   </div>
   {% endif %}
 </div>
