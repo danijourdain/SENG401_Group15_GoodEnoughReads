@@ -50,6 +50,7 @@ class StatisticsModel:
         return totalReadPages
 
     def CalculateBooksPerMonth(self):
+        # query to get newest reading end date for every book in the users collection - each book will have only oneneweest reading end date
         self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = %s;", [self.email])
         MonthlyBooksRead = self.cursor.fetchall()
 
@@ -57,11 +58,9 @@ class StatisticsModel:
         self.num_books_read_per_month = {"January": 0, "February": 0, "March": 0, "April": 0, "May": 0,
                                           "June": 0, "July":0, "August": 0, "September": 0, "October": 0,
                                           "November": 0, "December": 0}
-        
-        # get pages read of books with newest reading end date in the current month 
-        # compare to total pages in that book
-        # if total pages = number of pages read
-        #   increase the number of books read this month 
+    
+        # If the newest reading end date is in this year
+        #   increase the number of books read that month 
 
         months = list(self.num_books_read_per_month.keys())
 
@@ -75,18 +74,21 @@ class StatisticsModel:
             i += 1
 
         this_month = datetime.date.today().month
+
+        # return books read this month and books read every month this year
         return self.num_books_read_per_month[months[this_month-1]], self.num_books_read_per_month
 
     def CalculateBooksPerYear(self):
+        # query to get newest reading end date for every book in the users collection - each book will have only oneneweest reading end date
         self.cursor.execute("SELECT NewestReadingEndDate FROM BookInUserCollection WHERE email = %s;", [self.email])
         YearlyBooksRead = self.cursor.fetchall()
 
         # dictionary with key value pairs: key - year, value - number of books read that year 
         self.num_books_read_per_year = {2023: 0}  # Add years as keys as searching through database
         # get pages read of books with newest reading end date in the current year
-        # compare to total pages in that book
-        # if total pages = number of pages read
-        #   increase the number of books read this year 
+        # if the date is not none
+        #   if the year already exists in the dictionary, increase the key for that year by one 
+        #   elif the year is not a key, add it as a key and set it to one
 
         i = 0
         while i < len(YearlyBooksRead):
@@ -102,7 +104,8 @@ class StatisticsModel:
         year_keys.sort()
 
         # Fill in any missing years
-        # Ex. year_keys = 2020, 2022, 2023 - adds 2021
+        # Ex. year_keys = 2020, 2022, 2023 - adds 2021 key with value 0 
+        # This creates a more accurate graph
         self.sorted_num_books_read_per_year = {}
         i = 0
         while i < len(year_keys):
@@ -117,14 +120,22 @@ class StatisticsModel:
 
         this_year = datetime.date.today().year
         
+        # return books read this year and number of books read every year 
         return self.num_books_read_per_year[this_year], self.sorted_num_books_read_per_year
 
     def CalculateBookPagesPerYear(self):
+        # query to get newest reading end date and number of pages in the book for each book in the users collection - each book will have only oneneweest reading end date
         self.cursor.execute("SELECT C.NewestReadingEndDate, B.Pages FROM BookInUserCollection AS C, Book AS B WHERE C.email = %s AND B.APIid = C.ISBN;", [self.email])
         YearlyBooksPagesRead = self.cursor.fetchall()
 
         this_year = datetime.date.today().year
+
+        # dictionary with key value pairs - key is the number of pages in the book, value is number of books of that length read this year
         self.book_pages_year = {"< 100": 0, "100-200": 0, "200-400": 0, "400-600": 0, "> 600": 0}
+
+        # if date is not none
+        #   if newest reading end date is in this year
+        #       increase the number of books read by one for correct page range
 
         i = 0
         while i < len(YearlyBooksPagesRead):
@@ -144,16 +155,22 @@ class StatisticsModel:
             
             i += 1
 
+        # return number of books read at each length 
         return self.book_pages_year
 
     def CalculateGenresPerYear(self): 
+        # query to get newest reading end date and number of pages in the book for each book in the users collection - each book will have only oneneweest reading end date
         self.cursor.execute("SELECT C.NewestReadingEndDate, B.Genre FROM BookInUserCollection AS C, Book AS B WHERE C.email = %s AND B.APIid = C.ISBN;", [self.email])
         YearlyGenresRead = self.cursor.fetchall()
 
         this_year = datetime.date.today().year
+        
+        # dictionary of key value pairs - key: genre, value: number of books read in that genre
+        self.num_genres_per_year = {}   
+        # Add genres as keys as searching through database
 
-        self.num_genres_per_year = {}   #Add genres as keys as searching through database
-
+        # if genre exists in dictionary already increase value by one
+        # else add genre to dictionary
         i = 0
         while i < len(YearlyGenresRead):
             if (YearlyGenresRead[i][0] == None):
@@ -165,6 +182,7 @@ class StatisticsModel:
                     self.num_genres_per_year[YearlyGenresRead[i][1]] = 1
             i += 1
 
+        # return number of books for each genre read 
         return self.num_genres_per_year
     
     def CalcBookReread(self):
@@ -185,7 +203,6 @@ class StatisticsModel:
 
     def CreateBarGraph(self, x, y, x_label, y_label, title):
         fig, ax = plt.subplots()
-        # fig, ax = plt.figure()
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
@@ -203,11 +220,12 @@ class StatisticsModel:
     def CreatePlotlyBarGraph(self, x_data, y_data, x_label, y_label):
         data = {x_label: x_data, y_label: y_data}
         df = DataFrame(data)
-        # fig = px.bar(x = x_data, y = y_data)
         fig = px.bar(df, x = x_label, y = y_label, color_discrete_sequence = ["#84A98C"])
         fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", 
-                          xaxis = {'tickformat': ',d'}, yaxis = {'tickformat': ',d'}, separators = "")
+                          xaxis = {'tickformat': 'd'}, yaxis = {'tickformat': 'd'}, separators = "")
         fig.update_xaxes(type = 'category')
+        if(max(y_data) < 2):
+            fig.update_yaxes(type = 'category')
         bar_graph = py.offline.plot(fig, auto_open = False, output_type="div")
         return bar_graph
 
@@ -238,7 +256,11 @@ class StatisticsModel:
         fig = px.line(df, x = x_label, y = y_label, color_discrete_sequence = ["#84A98C"], markers = True)
         fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)", 
                           xaxis = {'tickformat': ',d'}, yaxis = {'tickformat': ',d'}, separators = "")
-        fig.update_xaxes(type = 'category')
+        fig.update_xaxes(type = "category")
+        if max(y_data) < 2:
+            fig.update_yaxes(type = "category")
+        else:
+            fig.update_yaxes(range = [0, max(y_data) + 2])
         fig.update_traces(marker = dict (size = 11, color = "#004643", line = dict(width = 2, color = "#84A98C")))
 
         line_graph = py.offline.plot(fig, auto_open = False, output_type="div")
@@ -267,9 +289,7 @@ class StatisticsModel:
 
 
     def CreatePlotlyPieChart(self, x_label, y_data, title):
-        # PieColors = {x_label[0] : "#84A98C"}
         PieColors = {}
-        # PieColors = []
 
         i = 0
         while i < len(x_label):
@@ -278,12 +298,10 @@ class StatisticsModel:
                 x_label.pop(i)
             else:
                 PieColors[x_label[i]] = ("#" + (str(hex(int(("#84A98C")[1:], 16) + 40*i)))[2:])
-                # PieColors.append("#" + (str(hex(int(("#84A98C")[1:], 16) + 20*i)))[2:])
                 i += 1
 
         data = {"Data" : y_data, "Label" : x_label}
         df = DataFrame(data)
-        # fig = px.pie(df, values = "Data", names = "labels", color = "labels", color_discrete_sequence = PieColors)
         fig = px.pie(df, values = "Data", names = x_label, color = x_label, color_discrete_map = PieColors)
         fig.update_layout(font_family = "Times New Roman", paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor = "rgba(0,0,0,0)")
         

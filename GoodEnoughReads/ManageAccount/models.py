@@ -2,8 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class UserManager(BaseUserManager):
+    # creates an authenticated user for the Django database
     def create_user(self, email, password=None):
         if not email:
+            # ensure email exists
             raise ValueError('Users must have an email address')
         user = self.model(
             email=self.normalize_email(email)
@@ -12,6 +14,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    # creates an administrator account for the Django database
     def create_superuser(self, email, password):
         user = self.create_user(
             email=self.normalize_email(email),
@@ -22,6 +25,7 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser):
+    # django
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,

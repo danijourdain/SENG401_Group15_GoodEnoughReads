@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.urls import reverse
+# import pymysql
 
 # Create your tests here.
 
@@ -11,7 +12,6 @@ from django.urls import reverse
 # GRANT ALL PRIVILEGES ON test_ger_db.* TO 'ger'@'localhost';
 # I've added into settings.py in GER the name and credenitals for the test database 
 # Current error: django.db.utils.ProgrammingError: (1146, "Table 'test_ger_db.user' doesn't exist")
-
 
 # class SignUpTestCase(TestCase):
 #     def setUp(self) -> None:
