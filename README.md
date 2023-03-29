@@ -127,8 +127,7 @@ Please ensure that the server is running before running GUI tests.
 
 #### 4.2 Unit Tests
 
-Run unit tests using the command 
-
+Run unit tests using the command
 
 ```python
 python manage.py test
