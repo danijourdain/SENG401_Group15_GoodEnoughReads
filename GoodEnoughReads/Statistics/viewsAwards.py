@@ -14,15 +14,19 @@ def awards(request):
     TotalPages = stats.NumPages()
     awd.updateUserXP(TotalPages)
     UserXP = TotalPages
-    ReqXP = awd.getReqXP(Userlevel + 1)
+
+    if Userlevel < 5:
+        ReqXP = awd.getReqXP(Userlevel + 1)
+    else:
+        ReqXP = 0
 
     # Image = "gersiteapp/static/gersiteapp/img/Awards/"
     Image = "/media/Awards/"
 
-    while UserXP > ReqXP:
+    while UserXP > ReqXP and Userlevel < 6:
         # awd.updateUserLevel()
-        Userlevel += 1
         ReqXP = awd.getReqXP(Userlevel + 1)
+        Userlevel += 1
 
     if(Userlevel < 6):
         NextReqXP = awd.getReqXP(Userlevel + 1)
@@ -40,7 +44,7 @@ def awards(request):
         Image += "AdvancedReaderAward"
     elif Userlevel == 4:
         Image += "AvidReaderAward"
-    elif Userlevel == 5:
+    else:
         Image += "ProReaderAward"
 
     Image += ".png"
