@@ -1,3 +1,6 @@
+# This page was created by Maitry Rohit
+# Final day of editing was done on March 28, 2023
+
 from django.db import models
 from django.db import connection, transaction
 from django.shortcuts import render, redirect
@@ -6,27 +9,31 @@ from django.views import View
 # import requests
 from datetime import datetime
 
-
+# The book model makes saving components the user searches for possible.
+# The important part of this class is the translation between MySQL and Models which happens within a given function
+# Variable names will have details if needed
 class BookModel():
     def __init__(self):
-        self.title = None
-        self.author = None
-        self.publisher = None
+        self.title = None 
+        self.author = None # Multiple authors are not stored
+        self.publisher = None # Multiple publishers are not stored
         self.bookImg = None
-        self.pageCount = 0
-        self.maxPages = 0
-        self.desc = None
-        self.rating = 0
-        self.userRating = 0
-        self.startDate = None
+        self.pageCount = 0 # 0 by default. Will always contain a value from google books API (0 page books are removed)
+        self.maxPages = 0 
+        self.desc = None # Description from the google books API
+        self.rating = 0 # This is google books API rating. Can come in as undefined which gets translated to 0
+        self.userRating = 0 # This is what the user rates the book
+        self.startDate = None # dates are for statistics tracking
         self.endDate = None
-        self.bookID = None
-        self.genre = None
+        self.bookID = None # used as primary key
+        self.genre = None # only stored from OpenLibraryAPI. Google Books API is too unreliable for genre data
         self.shelf = None
         self.email = None
         self.timesRead = 0
         self.cursor = connection.cursor()
 
+    # used in bookDisplay function in viewsSearch.py.
+    # This stores the information for a book when the user selects it from the search page
     def set(self, title, author, publisher, bookImg, pageCount, desc, rating, bookID, email):
         self.title = title
         self.author = author
@@ -35,7 +42,8 @@ class BookModel():
         self.pageCount = pageCount
         self.maxPages = pageCount
         self.desc = desc
-        if rating == "unavailable":
+        if rating == "unavailable": # if rating is undefined from google books API it gets translated to a string
+                                    # This happens in search.js.
             self.rating = 0
         else:
             self.rating = rating
@@ -47,6 +55,8 @@ class BookModel():
         print(rating)
         print(bookImg)
 
+    # this is used in bookSubmission and bookSubmissionToRead in viewsSearch.py.
+    # Normally followed by addBooktoBooksinUserCollection()
     def setInfo(self, startDate, endDate, rating, timesRead, shelf, pagesRead):
         self.shelf = shelf
         self.startDate = startDate
@@ -55,6 +65,8 @@ class BookModel():
         self.timesRead = timesRead
         self.pageCount = pagesRead
 
+    # this selects the title and book image stored in the database for a given book
+    # Used in bookDisplayFromCollection in viewsSearch.py    
     def retrieveBook(self, bookID):
         self.bookID = bookID
         self.cursor.execute('SELECT title, ImageURL FROM Book WHERE APIid = %s', [self.bookID])
@@ -62,7 +74,8 @@ class BookModel():
         self.title = val[0]
         self.bookImg = val[1]
 
-
+    # this is used in bookDisplay in viewsSearch.py.
+    # it is called after set()
     def addBooktoBooks(self):
         self.cursor.execute('SELECT * FROM Book WHERE Book.APIid = %s', [self.bookID])
         val = self.cursor.fetchall()
@@ -81,11 +94,12 @@ class BookModel():
         else: # I'm honestly not sure why this is here but Im scare it will break the program if it isn't
             self.cursor.execute('INSERT INTO Book(APIid, ImageURL, Title, Genre, Pages, Rating) VALUES(%s, %s, %s, %s, %s, %s)', (self.bookID, self.bookImg, self.title, self.genre, self.maxPages, self.rating))
       
-
+    # this is used in bookSubmission and bookSubmissionToRead in viewsSearch.py.
+    # called after setInfo()
     def addBooktoBooksinUserCollection(self):
         start = None
         end = None
-        self.cursor.execute('SELECT * FROM BookInUserCollection WHERE BookInUserCollection.ISBN = %s and Email = %s', [self.bookID, self.email])
+        self.cursor.execute('SELECT * FROM BookInUserCollection WHERE ISBN = %s and Email = %s;', [self.bookID, self.email])
         val = self.cursor.fetchall()
 
         print(self.bookID)
@@ -107,7 +121,7 @@ class BookModel():
         self.cursor.execute("INSERT INTO BookInUserCollection(UserRating, NewestReadingStartDate, NewestReadingEndDate, NumberOfTimesReread, PagesRead, ISBN, Email, shelfName) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", 
                             (int(self.userRating), start, end, int(self.timesRead), int(self.pageCount), self.bookID, self.email, self.shelf))
     
-
+    # This is used in bookInfo in viewsSearch.py
     def checkBookInUserCollection(self, email):
         self.email = email
         self.cursor.execute('SELECT * FROM BookInUserCollection WHERE ISBN = %s and Email = %s;', [self.bookID, self.email])
@@ -121,7 +135,10 @@ class BookModel():
         
         elif self.bookID in val[0]: # the bookID we are about to add already exists in the database therefore we don't need to add it and can return back
             return True
-    
+    # this is used in bookInfo and bookSubmissionFromCollection in viewsSearch.py
+    # This will grab information based on the user and book from a given collection and set the book info
+    # to be transfered into a template for bookInfo.html
+    # basically a data structure setting from information in the database
     def setInfoFromDataBase(self):
         self.cursor.execute('SELECT * FROM BookInUserCollection WHERE BookInUserCollection.ISBN = %s and Email = %s', [self.bookID, self.email])
         val = self.cursor.fetchall()
