@@ -39,9 +39,10 @@ def bookDisplay(request, ):
 
 def bookDisplayFromCollection(request):
     bookID = request.POST.get('bookdisp', '')
+    print("in book display from collection")
     print(bookID)
     book.retrieveBook(bookID)
-
+    print(book.author)
     context = {
         "title": book.title,
         "author": book.author,
@@ -62,8 +63,11 @@ def bookDisplayFromCollection(request):
     # - When the book already exists in the users collection it retrieves the information rather than having empty
     # - This way a user does not need to remember they previously gave
 def bookInfo(request):
-    check = book.checkBookInUserCollection()
+    print("In book info")
+    email = request.session['email']
+    check = book.checkBookInUserCollection(email)
     if check:
+        print("YOOHOO")
         book.setInfoFromDataBase()
 
     dateM = datetime.datetime.now()

@@ -108,14 +108,14 @@ class BookModel():
                             (int(self.userRating), start, end, int(self.timesRead), int(self.pageCount), self.bookID, self.email, self.shelf))
     
 
-    def checkBookInUserCollection(self):
-        self.cursor.execute('SELECT * FROM BookInUserCollection WHERE BookInUserCollection.ISBN = %s and Email = %s', [self.bookID, self.email])
+    def checkBookInUserCollection(self, email):
+        self.email = email
+        self.cursor.execute('SELECT * FROM BookInUserCollection WHERE ISBN = %s and Email = %s;', [self.bookID, self.email])
         val = self.cursor.fetchall()
 
         # Val can be 2 things:
             # 1. A tuple is found and therefore the book exists in the users collection already - A user wants to edit the book information in this case
             # 2. A tuple is not found and therefore does not exist in the database - This means that val = None
-        
         if not val: #if val = None then you can insert
             return False
         
@@ -140,6 +140,7 @@ class BookModel():
         self.userRating = val[0][0]
         self.timesRead = val[0][3]
         self.pageCount = val[0][4]
+        
 
         self.cursor.execute('SELECT ImageURL, Title, Pages FROM Book WHERE Book.APIid = %s', [self.bookID])
         val = self.cursor.fetchall()
