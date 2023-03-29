@@ -1,6 +1,3 @@
-# This page was created by Maitry Rohit
-# Final day of editing was done on March 28, 2023
-
 from django.db import models
 from django.db import connection, transaction
 from django.shortcuts import render, redirect
@@ -135,6 +132,7 @@ class BookModel():
         
         elif self.bookID in val[0]: # the bookID we are about to add already exists in the database therefore we don't need to add it and can return back
             return True
+        
     # this is used in bookInfo and bookSubmissionFromCollection in viewsSearch.py
     # This will grab information based on the user and book from a given collection and set the book info
     # to be transfered into a template for bookInfo.html
