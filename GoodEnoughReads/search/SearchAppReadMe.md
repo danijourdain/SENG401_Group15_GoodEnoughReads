@@ -1,4 +1,4 @@
-# Searh App/Service
+# Search App/Service
 This app/ service is created for the purpose of searching for a specific book, displaying that book, and submitting user related information related to that book. As such the search app deals with not only book information itself, but collections information since each book can be related to a user collection. Through this app a user may search for a book using the Google Books API, view the information for a specifically chosen book, add that book to a collection they wish after submitting the required information.
 
 Classes/files: 
