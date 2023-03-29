@@ -30,18 +30,20 @@ def signup(request):
             pass
 
         login = LoginModel.LoginModel(email)
+        # ensure that the email is unique in both user tables of the database
         uniqueEmail = login.verifyUser()
         if not uniqueEmail:
+            # there exists an account with the inputted email already
             error_message = "That email is already signed up!"
-            # template currently not made
             return render(request, 'ManageAccount/signup.html', {'error_message': error_message})
         elif username is not None:
+            # there exists an account with the inputted username already
             error_message = "That username is already signed up!"
-            # template currently not made
             return render(request, 'ManageAccount/signup.html', {'error_message': error_message})
 
 
         if user is None and pw1 == pw2:
+            # creates a tuple in the Django authenticated user table
             user = User.objects.create_user(username=uname, password=pw1, email=email)
             user.first_name = fname
             user.last_name = lname
@@ -53,7 +55,7 @@ def signup(request):
             request.session['name'] = fname + " " + lname
             request.session['email'] = email
             return redirect('welcome')
-            # if the signup is successful, set the session variables thne go to the homepage
+            # if the signup is successful, set the session variables then go to the homepage
         else:
             error_message = "Invalid login credentials"
             return render(request, 'ManageAccount/signup.html', {'error_message': error_message})
