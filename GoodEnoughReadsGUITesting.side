@@ -1974,6 +1974,19 @@
         ["xpath=//div[2]/input", "xpath:position"]
       ],
       "value": "tom"
+          }, {
+      "id": "b3f9bbf4-4302-476c-8e15-83fa9522da9b",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//form/div[2]/input", "xpath:position"]
+      ],
+      "value": "eee"
     }, {
       "id": "95b64e23-1b51-429c-b332-e52331f67548",
       "comment": "",
@@ -2149,6 +2162,19 @@
         ["xpath=//div[2]/input", "xpath:position"]
       ],
       "value": "lname"
+      }, {
+      "id": "842379bb-3d94-4504-9195-267155d7f4db",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//form/div[2]/input", "xpath:position"]
+      ],
+      "value": "ddd"
     }, {
       "id": "ab52b41e-6ce4-438f-8901-e4c01b16c441",
       "comment": "",
