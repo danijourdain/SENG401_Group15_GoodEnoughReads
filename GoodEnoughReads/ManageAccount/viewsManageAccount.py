@@ -128,7 +128,6 @@ def account(request):
             user.save()
             # update password for the user
     elif request.method == 'POST' and request.POST.get('id') == 'updateAccount':
-        print('updating account')
         username = request.POST.get('username', '')
         fname = request.POST.get('fname', '') 
         lname = request.POST.get('lname', '')

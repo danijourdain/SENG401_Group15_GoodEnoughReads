@@ -48,9 +48,7 @@ class BookModel():
         self.email = email
         self.startDate = None
         self.endDate = None
-        print(bookID)
-        print(rating)
-        print(bookImg)
+       
 
     # this is used in bookSubmission and bookSubmissionToRead in viewsSearch.py.
     # Normally followed by addBooktoBooksinUserCollection()
@@ -76,7 +74,6 @@ class BookModel():
     def addBooktoBooks(self):
         self.cursor.execute('SELECT * FROM Book WHERE Book.APIid = %s', [self.bookID])
         val = self.cursor.fetchall()
-        print(val)
         
         # Val can be 2 things:
             # 1. A tuple is found and therefore the book exists in the database
@@ -99,7 +96,6 @@ class BookModel():
         self.cursor.execute('SELECT * FROM BookInUserCollection WHERE ISBN = %s and Email = %s;', [self.bookID, self.email])
         val = self.cursor.fetchall()
 
-        print(self.bookID)
         # Val can be 2 things:
             # 1. A tuple is found and therefore the book exists in the users collection already - A user wants to edit the book information in this case
             # 2. A tuple is not found and therefore does not exist in the database - This means that val = None
@@ -142,8 +138,6 @@ class BookModel():
         val = self.cursor.fetchall()
 
         self.shelfName = val[0][6]
-        print(self.shelfName)
-        print(val)
         self.startDate = None
         self.endDate = None
         if val[0][1] != None:
